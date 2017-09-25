@@ -2,3 +2,11 @@
     background-image: url("/Images/image1.jpg");
     padding-bottom:25%;
 }
+
+.errorClass {
+    background-image: url("/Images/404img.jpg");
+    padding-bottom: 50%;
+}
+.errorClass>div{
+    color:red;
+}
