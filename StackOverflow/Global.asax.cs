@@ -14,5 +14,12 @@ namespace StackOverflow
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
+
+        //protected void Application_Error(object sender, EventArgs e)
+        //{
+        //    Exception exc = Server.GetLastError();
+        //    Server.ClearError();
+            
+        //}
     }
 }
