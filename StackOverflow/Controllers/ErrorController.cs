@@ -6,17 +6,13 @@ using System.Web.Mvc;
 
 namespace StackOverflow.Controllers
 {
-   
-    public class MainController : Controller
+    public class ErrorController : Controller
     {
-        // GET: Main
-        
+        // GET: Error
         public ActionResult Index()
         {
+            
             return View();
         }
-
-       
-     
     }
 }
