@@ -1,0 +1,26 @@
+﻿using DAL.Initializer;
+using DAL.Interfaces;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Model.Models;
+using Models.Models;
+using System.Data.Entity;
+
+namespace DAL.DBContext
+{
+    public class SOContext: IdentityDbContext<User>, ISOContext
+    {
+        public SOContext() : base()
+        {
+            Database.SetInitializer(new SOInitializer());
+        }
+
+        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<Author> Authors { get; set; }
+        //public DbSet<User> Users { get; set; }
+
+        public override int SaveChanges()
+        {
+            return base.SaveChanges();
+        }
+    }
+}

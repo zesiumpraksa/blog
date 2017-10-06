@@ -9,10 +9,20 @@ namespace StackOverflow.Controllers
     public class ErrorController : Controller
     {
         // GET: Error
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
-            
+            ViewBag.error = id;
             return View();
         }
+
+        //public ActionResult NotFound(string id)
+        //{
+        //    return Content(id);
+        //}
+
+        //public ActionResult BadRequest()
+        //{
+        //    return View();
+        //}
     }
 }

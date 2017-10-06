@@ -22,17 +22,22 @@
                 </button>
                 @Html.ActionLink("Stack overflow", "Index", "Main", new { area = "" }, new { @class = "navbar-brand" })
                 @Html.ActionLink("Blogs", "Index", "Blog", new { area = "" }, new { @class = "navbar-brand" })
-
-
+                @Html.ActionLink("Register User", "Register", "User", new { area = "" }, new { @class = "navbar-brand" })
+                <div style="color:red" class="navbar-brand">@ViewBag.user @ViewBag.error</div>
+                
             </div>
+            
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                   
                 </ul>
             </div>
         </div>
     </div>
 
     <div class="container body-content">
+        
+       
         @RenderBody()
         <hr />
         <footer>

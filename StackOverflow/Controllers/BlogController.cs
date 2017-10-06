@@ -1,37 +1,60 @@
-﻿using StackOverflow.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Business.Interfaces;
+using Model.Models;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Models.Models;
 
 namespace StackOverflow.Controllers
 {
-    
-
+    [Authorize]
     public class BlogController: Controller
     {
-        private List<Blog> blogs;
+        private IBlogService blogService;
+        
+        public BlogController() { }
 
-        public BlogController()
+        public BlogController(IBlogService service)
         {
-            blogs = new List<Blog>()
-            {
-
-                new Blog {Author="Pera",Content="Null reference",Id=1, Titile="C# problem null reference",Date= DateTime.Now },
-                new Blog {Author="Mika",Content="Convert to String",Id=1, Titile="Problem in project",Date= DateTime.Now },
-                new Blog {Author="Laza",Content="JS problem",Id=1, Titile="Java Script problem in project",Date= DateTime.Now }
-            };
+            blogService = service;
         }
 
+  
         public ActionResult Index()
-        {
-            return View(blogs);
+        {                   
+            
+            return View(blogService.GetAllBlogs());
         }
 
         public ActionResult Details(int id)
-        {            
-            return View(blogs.Where(x => x.Id == id).First());
+        {
+            return View(blogService.GetById(id));
+        }
+
+        public ActionResult GetByFirstId()
+        {
+            return View(blogService.GetFirstId());
+        }
+
+        [HttpGet]
+        public ActionResult CreateBlog()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public void CreateBlog(Blog blog)
+        {
+            string blogAuthor = User.Identity.Name;
+            var id = User.Identity.GetUserId();
+
+            blog.Author = new Author
+            {
+                Name = blogAuthor,
+                Id = id
+            };
+           
+
+            blogService.Save(blog);
         }
     }
 }

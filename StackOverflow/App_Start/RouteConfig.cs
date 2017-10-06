@@ -18,6 +18,12 @@ namespace StackOverflow
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Main", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+               name: "Error",
+               url: "{controller}/{action}/{id}",
+               defaults: new { controller = "Error", action = "Index" , id = UrlParameter.Optional }
+           );
         }
     }
 }
