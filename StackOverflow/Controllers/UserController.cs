@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace StackOverflow.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         private IUserService userService;
