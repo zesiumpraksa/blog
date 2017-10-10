@@ -33,8 +33,8 @@ namespace StackOverflow.App_Start
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Author/Login"),
-                
+                //LoginPath = new PathString("/Author/Login"),
+                LoginPath = new PathString("/User/Register"),
             });
         }
 
