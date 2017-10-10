@@ -1,4 +1,5 @@
-﻿using Models.Models;
+﻿using Model.Models;
+using Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,7 @@ namespace Business.Interfaces
         List<Author> getAllAuthors();
         User getAuthor(string user, string pass);
         void CreateAuthor(Author author);
+        Author GetById(Guid id);
+        
     }
 }

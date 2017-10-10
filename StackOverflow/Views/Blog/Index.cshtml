@@ -34,7 +34,7 @@
             @Html.DisplayFor(modelItem => item.Content)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Author)
+            <a href="@Url.Action("Details","Author",new { id = item.Author.Id })">@Html.DisplayFor(modelItem => item.Author.Name)</a>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Date)

@@ -12,7 +12,7 @@ using System.Web.Mvc;
 
 namespace StackOverflow.Controllers
 {
-    [Authorize]
+    
     public class UserController : Controller
     {
         private IUserService userService;
@@ -39,15 +39,10 @@ namespace StackOverflow.Controllers
             if (ModelState.IsValid)
             {
                 var manager = HttpContext.GetOwinContext().GetUserManager<SOUserManager>();
-                //var user = new User() { UserName = author.Name, Id = author.Id, Password = author.Password };
-                //author = new Author() { Name = author.Name, Password = author.Password };              
-
-
                 var m = await manager.CreateAsync(user, user.Password);
                               
                 if (m.Succeeded)
-                {
-                    //userService.addUser(user);                    
+                {                                    
                     return RedirectToAction("Index", "Main");
                 }
 
@@ -65,7 +60,7 @@ namespace StackOverflow.Controllers
             }
         }
 
-        
+       
 
     }
 }

@@ -9,12 +9,12 @@ namespace Model.Models
 {
     public class Blog
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
         public string Titile { get; set; }
         public string Content { get; set; }
         public DateTime Date { get; set; }
 
-        public string AuthorId { get; set; }
+        public Guid AuthorId { get; set; }
         public virtual Author Author { get; set; }
     }
 }

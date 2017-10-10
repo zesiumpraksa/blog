@@ -15,31 +15,40 @@ namespace DAL.Initializer
     {
         protected override void Seed(SOContext context)
         {
+            Author A1 = new Author() { Name = "Pera", Id = Guid.NewGuid(), Password = "A1" };
+            Author A2 = new Author() { Name = "Mika", Id = Guid.NewGuid(), Password = "A2" };
+            Author A3 = new Author() { Name = "Laza", Id = Guid.NewGuid(), Password = "A3" };
+
+            var authors = new List<Author>();
+            authors.Add(A1);
+            authors.Add(A2);
+            authors.Add(A3);
+
+
             var blogs = new List<Blog>()
             {
-                new Blog {Content="Null reference",Id="1", Titile="C# problem null reference1",Date= DateTime.Now, AuthorId ="1"},
-                new Blog {Content="Convert to String",Id="2", Titile="Problem in project2",Date= DateTime.Now, AuthorId ="2" },
-                new Blog {Content="JS problem",Id="3", Titile="Java Script problem in project3",Date= DateTime.Now, AuthorId ="3" },
-                new Blog {Content="Null reference",Id="4", Titile="C# problem null reference4",Date= DateTime.Now , AuthorId ="4"},
-                new Blog {Content="Convert to String",Id="5", Titile="Problem in project5",Date= DateTime.Now, AuthorId ="5" },
-                new Blog {Content="JS problem",Id="6", Titile="Java Script problem in project6",Date= DateTime.Now, AuthorId ="1" },
-                new Blog {Content="Null reference",Id="7", Titile="C# problem null reference1",Date= DateTime.Now, AuthorId ="2" },
-                new Blog {Content="Convert to String",Id="8", Titile="Problem in project2",Date= DateTime.Now, AuthorId ="3" },
-                new Blog {Content="JS problem",Id="9", Titile="Java Script problem in project3",Date= DateTime.Now, AuthorId ="4" },
-                new Blog {Content="Null reference",Id="10", Titile="C# problem null reference4",Date= DateTime.Now, AuthorId ="5" },
-                new Blog {Content="Convert to String",Id="11", Titile="Problem in project5",Date= DateTime.Now, AuthorId ="1" },
-                new Blog {Content="JS problem",Id="12", Titile="Java Script problem in project6",Date= DateTime.Now, AuthorId ="2" }                
+                new Blog {Content="Null reference",Id=Guid.NewGuid(), Titile="C# problem null reference1",Date= DateTime.Now, AuthorId = A1.Id },
+                new Blog {Content="Convert to String",Id=Guid.NewGuid(), Titile="Problem in project2",Date= DateTime.Now, AuthorId =A1.Id },
+                new Blog {Content="JS problem",Id=Guid.NewGuid(), Titile="Java Script problem in project3",Date= DateTime.Now, AuthorId =A1.Id },
+                new Blog {Content="Null reference",Id=Guid.NewGuid(), Titile="C# problem null reference4",Date= DateTime.Now , AuthorId =A3.Id},
+                new Blog {Content="Convert to String",Id=Guid.NewGuid(), Titile="Problem in project5",Date= DateTime.Now, AuthorId =A3.Id },
+                new Blog {Content="JS problem",Id=Guid.NewGuid(), Titile="Java Script problem in project6",Date= DateTime.Now, AuthorId =A3.Id },
+                new Blog {Content="Null reference",Id=Guid.NewGuid(), Titile="C# problem null reference1",Date= DateTime.Now, AuthorId =A2.Id },
+                new Blog {Content="Convert to String",Id=Guid.NewGuid(), Titile="Problem in project2",Date= DateTime.Now, AuthorId =A2.Id },
+                new Blog {Content="JS problem",Id=Guid.NewGuid(), Titile="Java Script problem in project3",Date= DateTime.Now, AuthorId =A1.Id },
+                new Blog {Content="Null reference",Id=Guid.NewGuid(), Titile="C# problem null reference4",Date= DateTime.Now, AuthorId =A2.Id },
+                new Blog {Content="Convert to String",Id=Guid.NewGuid(), Titile="Problem in project5",Date= DateTime.Now, AuthorId =A3.Id },
+                new Blog {Content="JS problem",Id=Guid.NewGuid(), Titile="Java Script problem in project6",Date= DateTime.Now, AuthorId =A2.Id }                
             };
 
-            var authors = new List<Author>()
-            {
-                new Author {Name="Pera",Id="1",Password="A1" },
-                new Author {Name="Mika",Id="2",Password="A2" },
-                new Author {Name="Laza",Id="3",Password="A3" },
-                new Author {Name="Maja",Id="4",Password="A4" },
-                new Author {Name="Jelena",Id="5",Password="A5" }
-            };
-            
+            //var authors = new List<Author>()
+            //{
+            //    new Author {Name="Pera",Id=new Guid(),Password="A1" },
+            //    new Author {Name="Mika",Id=new Guid(),Password="A2" },
+            //    new Author {Name="Laza",Id=new Guid(),Password="A3" },
+            //    new Author {Name="Maja",Id=new Guid(),Password="A4" },
+            //    new Author {Name="Jelena",Id=new Guid(),Password="A5" }
+            //};      
             
             context.Blogs.AddRange(blogs);
             context.Authors.AddRange(authors);

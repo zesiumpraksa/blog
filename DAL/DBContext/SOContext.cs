@@ -4,6 +4,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Model.Models;
 using Models.Models;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 
 namespace DAL.DBContext
 {
@@ -19,8 +21,8 @@ namespace DAL.DBContext
         //public DbSet<User> Users { get; set; }
 
         public override int SaveChanges()
-        {
-            return base.SaveChanges();
+        {            
+             return base.SaveChanges();                      
         }
     }
 }

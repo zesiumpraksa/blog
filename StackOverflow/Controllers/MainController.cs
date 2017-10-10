@@ -47,28 +47,28 @@ namespace StackOverflow.Controllers
             }
             if (result == SignInStatus.Success)
             {
-                return View("Index");
+                //return View("Index");
+               // RedirectToAction("Dashboard", "Author");
             }
             else if(result == SignInStatus.Failure)
             {
                 ViewBag.error = "Bad username or password";
                 ModelState.AddModelError("", "Bad login parameters...");
+                return View("Index");
             }          
 
-            return View("Index");
+            return RedirectToAction("Dashboard", "Author");
         }
 
         public ActionResult LogOut()
         {
             var AuthManager = HttpContext.GetOwinContext().Authentication;
             AuthManager.SignOut();
+
             return RedirectToAction("Index", "Main");
         }
 
-        public ActionResult Test()
-        {   
-            return View();
-        }
-       
+        
+
     }
 }

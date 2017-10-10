@@ -1,4 +1,6 @@
 ﻿using Model.Models;
+using Models.Models;
+using System;
 using System.Collections.Generic;
 
 namespace Business.Interfaces
@@ -8,7 +10,9 @@ namespace Business.Interfaces
     {
         List<Blog> GetAllBlogs();
         Blog GetFirstId();
-        Blog GetById(int id);
+        Blog GetById(Guid id);
         void Save(Blog blog);
+        bool IsNewAuthor(Guid id);
+        List<Blog> GetAllBlogsOfAuthor(Guid id);
     }
 }

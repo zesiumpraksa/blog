@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Models.Models;
 using DAL.Interfaces;
+using Model.Models;
 
 namespace Business.Services
 {
@@ -39,5 +40,12 @@ namespace Business.Services
                 return null;
             }
         }
+
+        public Author GetById(Guid id)
+        {   
+            return db.Authors.Where(x => x.Id == id).FirstOrDefault();
+        }
+
+        
     }
 }

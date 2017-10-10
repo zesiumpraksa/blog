@@ -3,6 +3,7 @@ using Model.Models;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Models.Models;
+using System;
 
 namespace StackOverflow.Controllers
 {
@@ -17,16 +18,15 @@ namespace StackOverflow.Controllers
         {
             blogService = service;
         }
-
   
         public ActionResult Index()
         {                   
             
             return View(blogService.GetAllBlogs());
         }
-
-        public ActionResult Details(int id)
-        {
+        
+        public ActionResult Details(Guid id)
+        {            
             return View(blogService.GetById(id));
         }
 
@@ -42,19 +42,36 @@ namespace StackOverflow.Controllers
         }
 
         [HttpPost]
-        public void CreateBlog(Blog blog)
+        public ActionResult CreateBlog(Blog blog)
         {
+            
             string blogAuthor = User.Identity.Name;
-            var id = User.Identity.GetUserId();
+            //slucajno radi dobro, proveriti!!!
+            
+            var id = new Guid(User.Identity.GetUserId());
+            
+            blog.Date = DateTime.Now;
 
-            blog.Author = new Author
+
+            if (blogService.IsNewAuthor(id))
             {
-                Name = blogAuthor,
-                Id = id
-            };
-           
+                blog.Id = Guid.NewGuid();
+                blog.AuthorId = id;
+                blog.Author = new Author
+                {
+                    Name = blogAuthor,
+                    Id = id
+                };
+            }else
+            {
+                blog.Id = Guid.NewGuid();
+                blog.AuthorId = id;
+            }
+            
 
             blogService.Save(blog);
+
+            return RedirectToAction("Index","Blog");
         }
     }
 }
