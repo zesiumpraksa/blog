@@ -14,6 +14,5 @@ namespace Business.Interfaces
         User getAuthor(string user, string pass);
         void CreateAuthor(Author author);
         Author GetById(Guid id);
-        
     }
 }

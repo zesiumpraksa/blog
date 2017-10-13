@@ -45,7 +45,26 @@
 
     </dl>
 </div>
-<p>
-    
+<div>
+    @using (Html.BeginForm("CreateComment", "Blog", FormMethod.Get, new { id = Model.Id }))
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.BlogComments, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">               
+                @Html.TextAreaFor(x => x.Id, new { style = "display:none;" })
+                @Html.TextBox("commentText", "",new { style="width:600px" })
+                @*@Html.TextAreaFor(model => model.BlogComments, new { style = "width:600px; height:100px;" })*@
+                @*@Html.TextAreaFor(x => x.Content, new { style = "width:600px; height:100px;" })*@
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Comment" class="btn btn-default" style="margin-top: 15px;" />
+                </div>
+            </div>
+        </div>
+    }
+        
+</div>
+<p>    
     @Html.ActionLink("Back to List", "Index")
 </p>

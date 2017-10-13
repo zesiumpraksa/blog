@@ -46,7 +46,8 @@ namespace StackOverflow.App_Start
             container.RegisterType<IAutorService, AuthorService>();
             container.RegisterType<ISOContext, SOContext>();
             container.RegisterType<IUserService, UserService>();
-
+            
+            
 
         }
     }

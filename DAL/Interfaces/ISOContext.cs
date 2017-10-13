@@ -10,7 +10,8 @@ namespace DAL.Interfaces
     {
         DbSet<Blog> Blogs { get; set; }
         DbSet<Author> Authors { get; set; }
-        //DbSet<User> Users { get; set; }
+        DbSet<BlogComment> BlogComments { get; set; }
+        
 
         int SaveChanges();
     }

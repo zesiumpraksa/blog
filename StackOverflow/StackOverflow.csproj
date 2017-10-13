@@ -17,7 +17,7 @@
     <AssemblyName>StackOverflow</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44391</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -230,6 +230,7 @@
     <Content Include="Views\Author\Details.cshtml" />
     <Content Include="Views\Author\Index.cshtml" />
     <Content Include="Views\Author\getBlogsByAuthor.cshtml" />
+    <Content Include="Views\BlogComment\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

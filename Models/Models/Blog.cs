@@ -16,5 +16,7 @@ namespace Model.Models
 
         public Guid AuthorId { get; set; }
         public virtual Author Author { get; set; }
+
+        public virtual List<BlogComment> BlogComments { get; set; }
     }
 }

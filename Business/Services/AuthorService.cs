@@ -45,7 +45,5 @@ namespace Business.Services
         {   
             return db.Authors.Where(x => x.Id == id).FirstOrDefault();
         }
-
-        
     }
 }

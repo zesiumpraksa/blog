@@ -53,10 +53,36 @@ namespace Business.Services
             return newAuthor;
         }
 
+        public bool IsNewCommAuthor(Guid id)
+        {
+            bool newCommAuthor = false;
+            var CommAuthor = db.BlogComments.Where(a => a.Id == id).ToList();
+            if (CommAuthor == null)
+                newCommAuthor = true;
+            return newCommAuthor;
+        }
         public List<Blog> GetAllBlogsOfAuthor(Guid id)
         {
             var a = db.Blogs.Where(x => x.Author.Id == id).ToList();
             return a = db.Blogs.Where(x => x.Author.Id == id).ToList();
+        }
+
+        public List<BlogComment> GetAllComments()
+        {
+            return db.BlogComments.ToList();
+        }
+
+        public  List<BlogComment>getCommentsForBlog(Blog blog)
+        {
+            var a = db.BlogComments.Where(x => x.Blog.Id == x.BlogId).ToList();
+            return db.BlogComments.Where(x => x.Blog.Id == x.BlogId).ToList();
+            
+        }
+
+        public void SaveComment(BlogComment blogComment)
+        {
+             db.BlogComments.Add(blogComment);
+             db.SaveChanges();
         }
     }
 }

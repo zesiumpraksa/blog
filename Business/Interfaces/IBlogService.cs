@@ -14,5 +14,9 @@ namespace Business.Interfaces
         void Save(Blog blog);
         bool IsNewAuthor(Guid id);
         List<Blog> GetAllBlogsOfAuthor(Guid id);
+        List<BlogComment> GetAllComments();
+        List<BlogComment> getCommentsForBlog(Blog blog);
+        void SaveComment(BlogComment blogComment);
+        bool IsNewCommAuthor(Guid id);
     }
 }

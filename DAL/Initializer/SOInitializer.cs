@@ -20,38 +20,37 @@ namespace DAL.Initializer
             Author A3 = new Author() { Name = "Laza", Id = Guid.NewGuid(), Password = "A3" };
 
             var authors = new List<Author>();
+
             authors.Add(A1);
             authors.Add(A2);
             authors.Add(A3);
+          
+
+            Blog B1 = new Blog() { Content = "Null reference", Id = Guid.NewGuid(), Titile = "C# problem null reference1", Date = DateTime.Now, AuthorId = A1.Id, };
+            Blog B2 = new Blog() { Content = "Convert to String", Id = Guid.NewGuid(), Titile = "Problem in project2", Date = DateTime.Now, AuthorId = A1.Id };
+            Blog B3 = new Blog() { Content = "JS problem", Id = Guid.NewGuid(), Titile = "Java Script problem in project3", Date = DateTime.Now, AuthorId = A1.Id };
+            Blog B4 = new Blog() { Content = "Null reference", Id = Guid.NewGuid(), Titile = "C# problem null reference4", Date = DateTime.Now, AuthorId = A3.Id };
+            Blog B5 = new Blog() { Content = "Convert to String", Id = Guid.NewGuid(), Titile = "Problem in project5", Date = DateTime.Now, AuthorId = A3.Id };
+            Blog B6 = new Blog() { Content = "JS problem", Id = Guid.NewGuid(), Titile = "Java Script problem in project6", Date = DateTime.Now, AuthorId = A3.Id };
+            Blog B7 = new Blog() { Content = "Null reference", Id = Guid.NewGuid(), Titile = "C# problem null reference1", Date = DateTime.Now, AuthorId = A2.Id };
 
 
-            var blogs = new List<Blog>()
-            {
-                new Blog {Content="Null reference",Id=Guid.NewGuid(), Titile="C# problem null reference1",Date= DateTime.Now, AuthorId = A1.Id },
-                new Blog {Content="Convert to String",Id=Guid.NewGuid(), Titile="Problem in project2",Date= DateTime.Now, AuthorId =A1.Id },
-                new Blog {Content="JS problem",Id=Guid.NewGuid(), Titile="Java Script problem in project3",Date= DateTime.Now, AuthorId =A1.Id },
-                new Blog {Content="Null reference",Id=Guid.NewGuid(), Titile="C# problem null reference4",Date= DateTime.Now , AuthorId =A3.Id},
-                new Blog {Content="Convert to String",Id=Guid.NewGuid(), Titile="Problem in project5",Date= DateTime.Now, AuthorId =A3.Id },
-                new Blog {Content="JS problem",Id=Guid.NewGuid(), Titile="Java Script problem in project6",Date= DateTime.Now, AuthorId =A3.Id },
-                new Blog {Content="Null reference",Id=Guid.NewGuid(), Titile="C# problem null reference1",Date= DateTime.Now, AuthorId =A2.Id },
-                new Blog {Content="Convert to String",Id=Guid.NewGuid(), Titile="Problem in project2",Date= DateTime.Now, AuthorId =A2.Id },
-                new Blog {Content="JS problem",Id=Guid.NewGuid(), Titile="Java Script problem in project3",Date= DateTime.Now, AuthorId =A1.Id },
-                new Blog {Content="Null reference",Id=Guid.NewGuid(), Titile="C# problem null reference4",Date= DateTime.Now, AuthorId =A2.Id },
-                new Blog {Content="Convert to String",Id=Guid.NewGuid(), Titile="Problem in project5",Date= DateTime.Now, AuthorId =A3.Id },
-                new Blog {Content="JS problem",Id=Guid.NewGuid(), Titile="Java Script problem in project6",Date= DateTime.Now, AuthorId =A2.Id }                
-            };
+            var blogs = new List<Blog>();
+            blogs.Add(B1); blogs.Add(B2); blogs.Add(B3); blogs.Add(B4); blogs.Add(B5); blogs.Add(B6); blogs.Add(B7);
 
-            //var authors = new List<Author>()
-            //{
-            //    new Author {Name="Pera",Id=new Guid(),Password="A1" },
-            //    new Author {Name="Mika",Id=new Guid(),Password="A2" },
-            //    new Author {Name="Laza",Id=new Guid(),Password="A3" },
-            //    new Author {Name="Maja",Id=new Guid(),Password="A4" },
-            //    new Author {Name="Jelena",Id=new Guid(),Password="A5" }
-            //};      
-            
+
+            BlogComment BC1 = new BlogComment() { Id = Guid.NewGuid(), BlogId = B1.Id, Author = A1,Commentar="aaaaa" };
+            BlogComment BC2 = new BlogComment() { Id = Guid.NewGuid(), BlogId = B2.Id, Author = A2, Commentar = "aaaaa" };
+            BlogComment BC3 = new BlogComment() { Id = Guid.NewGuid(), BlogId = B3.Id, Author = A2, Commentar = "aaaaa" };
+            BlogComment BC4 = new BlogComment() { Id = Guid.NewGuid(), BlogId = B3.Id, Author = A1, Commentar = "aaaaa" };
+
+            var commentars = new List<BlogComment>();
+            commentars.Add(BC1);   commentars.Add(BC2);  commentars.Add(BC3);     commentars.Add(BC4);
+
+
             context.Blogs.AddRange(blogs);
             context.Authors.AddRange(authors);
+            context.BlogComments.AddRange(commentars);
             
             base.Seed(context);
             

@@ -43,7 +43,6 @@ namespace StackOverflow.Controllers
             var res = autorService.getAuthor(user.UserName, user.Password);
             if (res != null)
             {
-
                 return View("Dashboard");
             }else
             {

@@ -18,7 +18,7 @@ namespace DAL.DBContext
 
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Author> Authors { get; set; }
-        //public DbSet<User> Users { get; set; }
+        public DbSet<BlogComment> BlogComments { get; set; }
 
         public override int SaveChanges()
         {            
