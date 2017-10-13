@@ -74,8 +74,8 @@ namespace Business.Services
 
         public  List<BlogComment>getCommentsForBlog(Blog blog)
         {
-            var a = db.BlogComments.Where(x => x.Blog.Id == x.BlogId).ToList();
-            return db.BlogComments.Where(x => x.Blog.Id == x.BlogId).ToList();
+            var a = db.BlogComments.Where(x => x.Blog.Id == blog.Id).ToList();
+            return db.BlogComments.Where(x => x.Blog.Id == blog.Id).ToList();
             
         }
 
