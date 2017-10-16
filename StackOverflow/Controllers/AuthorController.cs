@@ -64,6 +64,12 @@ namespace StackOverflow.Controllers
             return View(autorService.GetById(id));
         }
 
+        public ActionResult AuthorDetails(string id)
+        {
+            
+            return View();
+        }
+
         //public ActionResult getBlogsByAuthor(Author author)
         //{
         //    return View(blogService.GetAllBlogsOfAuthor(author).ToList());

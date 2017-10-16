@@ -10,3 +10,29 @@
 .errorClass>div{
     color:red;
 }
+
+.problemClass{
+    color:red;
+}
+
+.commentsArea{        
+    margin-bottom: 15px;    
+}
+
+.detailsHeader{
+    background-color:burlywood;
+}
+
+.detailsTablePosition{
+    margin-left: 204px;
+    width: 935px;
+}
+
+.detailsTablePosition tr:first-child{
+    background-color: antiquewhite;
+}
+
+.inputPosition{
+    margin-top: 15px;
+    margin-bottom:15px;
+}

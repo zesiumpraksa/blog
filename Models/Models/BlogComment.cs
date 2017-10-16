@@ -10,8 +10,9 @@ namespace Models.Models
     public class BlogComment
     {
         public Guid Id { get; set; }
-        public Author Author { get; set; }
+        public string Author { get; set; }
         public string Commentar { get; set; }
+        public DateTime? Date { get; set; }
 
         public Guid BlogId { get; set; }
         public virtual Blog Blog { get; set; }

@@ -1,8 +1,10 @@
-﻿using System;
+﻿using StackOverflow.App_Start;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Optimization;
 using System.Web.Routing;
 
 namespace StackOverflow
@@ -13,6 +15,7 @@ namespace StackOverflow
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
         protected void Application_Error(object sender, EventArgs e)
@@ -24,38 +27,8 @@ namespace StackOverflow
             {
                 //bool notfound;
                 Server.ClearError();
-                Response.Redirect("/Error/Index?id=" + exc.Message);
-
-
-                //switch (httpException.GetHttpCode())
-                //{
-                //    case 400:
-                //        Server.ClearError();
-                //        Response.Redirect("/Error/BadRequest?="+ exc.Message);
-                //        break;
-                //    case 404:
-                //        Server.ClearError();
-                //        Response.Redirect("/Error/NotFound?id=" + exc.Message);
-                //        //Response.RedirectToRoute("Error", new {
-                //        //    controller = "Error",
-                //        //    action = "NotFound" ,
-                //        //    id = exc.Message
-                //        //});                     
-
-                //        break;
-                //    default:
-                //        Server.ClearError();
-                //        Response.Redirect("/Error/Index?id="+ exc.Message);
-                //        break;
-                //}
-                // Server.ClearError();
-                //if (notfound)
-                //    Response.Redirect("/Error/NotFound");
-                //    //this.Response.RedirectToRoute("Default", new { controller = "Error", action = "NotFound" });
-                //else
-                //    this.Response.RedirectToRoute("Default", new { controller = "Error", action = "Error" });
+                Response.Redirect("/Error/Index?id=" + exc.Message);              
             }
-
 
             Server.ClearError();
             //Response.Redirect("/Error/Index");

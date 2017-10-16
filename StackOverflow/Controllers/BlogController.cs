@@ -30,8 +30,16 @@ namespace StackOverflow.Controllers
         
         public ActionResult Details(Guid id)
         {
+            //svi komentari bloga, nigde ga ne koristim
             List<BlogComment>comments = blogService.getCommentsForBlog(blogService.GetById(id));
+
             return View(blogService.GetById(id));
+        }       
+
+        public ActionResult AuthorDetail(Guid id)
+        {
+            var author = autorService.GetById(id);
+            return View();
         }
 
         public ActionResult GetByFirstId()
@@ -80,16 +88,23 @@ namespace StackOverflow.Controllers
         public ActionResult CreateComment(string Id, string commentText)
         {
             var blogId = new Guid(Id);
-            
-            BlogComment bc = new BlogComment() { BlogId = blogId, Commentar = commentText, Id = Guid.NewGuid()};
+            var authorOfComment = User.Identity.Name;
+            DateTime date = DateTime.Now;
+            BlogComment bc = new BlogComment() { BlogId = blogId, Commentar = commentText, Id = Guid.NewGuid(),Author = authorOfComment, Date = DateTime.Now};
 
-            blogService.SaveComment(bc);
+            blogService.SaveComment(bc);            
 
             return RedirectToAction("Index", "Blog");
         }
 
         public ActionResult getCommentsForBlog(Blog blog)
         {
+            return View();
+        }
+
+        public ActionResult AuthorDetails(Author id)
+        {
+            var ID = id.Id;
             return View();
         }
     }
