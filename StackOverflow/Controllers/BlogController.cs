@@ -83,7 +83,7 @@ namespace StackOverflow.Controllers
             var author = autorService.GetById(new Guid(user));
             if (author == null)
             {
-                Author authorComment = new Author() { Id = Guid.NewGuid(), Name = User.Identity.Name  };
+                Author authorComment = new Author() { Id = new Guid(User.Identity.GetUserId()), Name = User.Identity.Name  };
                 BlogComment blogComment = new BlogComment() {
                     BlogId = blogId,
                     Commentar = commentText,
@@ -125,32 +125,44 @@ namespace StackOverflow.Controllers
 
         public ActionResult Votes(Guid IdCommentar, string operation)
         {
-            //var commentar = blogService.getCommentForId(IdCommentar);
-            //var userId = new Guid(User.Identity.GetUserId());
-            //var author = autorService.GetById(userId);
-            //if (commentar.PositiveVoters == null)
-            //    commentar.PositiveVoters = new List<Author>();
+            var commentar = blogService.getCommentForId(IdCommentar);
+            var userId = new Guid(User.Identity.GetUserId());
+            var author = autorService.GetById(userId);
+            if (author != null)
+            {
+                if (operation.Equals("+"))
+                {
+                    if (autorService.IsNewPositiveVote(commentar.Id) && (commentar.IdAuthor!=userId))
+                    {
+                        PositiveVoters vote = new PositiveVoters() { number = commentar.Id, AuthorId = userId, Id = Guid.NewGuid() };
+                        autorService.InsertPositiveVote(vote);
+                        commentar.Raiting++;
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Blog");
+                    }
+                }
+                else
+                {
+                    if (autorService.IsNewNegativeVote(commentar.Id) && (commentar.IdAuthor != userId))
+                    {
+                        NegativeVoters vote = new NegativeVoters() { Number = commentar.Id, AuthorId = userId, Id = Guid.NewGuid() };
+                        autorService.InsertNegativeVote(vote);
+                        commentar.Raiting--;
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Blog");
+                    }
+                }
 
-            //if (operation.Equals("+"))
-            //{
-            //    if (commentar.PositiveVoters.Contains(author))
-            //    {
-            //        Console.WriteLine();
-            //    }
-            //    else
-            //    {
-            //        commentar.Raiting++;
-            //        commentar.PositiveVoters.Add(author);
-            //    }
-            //}
-            //else
-            //{
-            //    commentar.Raiting--;
-            //}
-            //var x = commentar.Raiting;
-
-            //blogService.UpdateBlogComment();
+                blogService.UpdateBlogComment();
+                return RedirectToAction("Index", "Blog");
+            }
             return RedirectToAction("Index", "Blog");
+
+
         }
 
         private bool SaveBlogWithNewAuthor(Blog blog, Guid idAuthor, string blogAuthor)

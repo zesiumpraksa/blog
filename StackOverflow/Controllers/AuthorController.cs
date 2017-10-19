@@ -57,7 +57,7 @@ namespace StackOverflow.Controllers
         {   
             return View(autorService.GetById(new Guid(id)));
         }
-
+        
         
     }
 }

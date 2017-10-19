@@ -11,7 +11,7 @@ using Models.Models;
 
 namespace DAL.Initializer
 {
-    class SOInitializer:DropCreateDatabaseAlways<SOContext>
+    class SOInitializer:DropCreateDatabaseIfModelChanges<SOContext>
     {
         protected override void Seed(SOContext context)
         {
@@ -47,6 +47,7 @@ namespace DAL.Initializer
             var commentars = new List<BlogComment>();
             commentars.Add(BC1);   commentars.Add(BC2);  commentars.Add(BC3);     commentars.Add(BC4);
 
+            
 
             context.Blogs.AddRange(blogs);
             context.Authors.AddRange(authors);

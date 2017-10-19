@@ -34,5 +34,29 @@ namespace Business.Services
         {   
             return db.Authors.FirstOrDefault(x=>x.Id == id);
         }
+
+        public bool IsNewPositiveVote(Guid idBlogCommentar)
+        {
+            var positiveVote = db.PositiveVoters.FirstOrDefault(x => x.number == idBlogCommentar);
+            return (positiveVote==null);
+        }
+
+        public bool IsNewNegativeVote(Guid idBlogCommentar)
+        {
+            var negativeVote = db.PositiveVoters.FirstOrDefault(x => x.number == idBlogCommentar);
+            return (negativeVote == null);
+        }
+
+        public void InsertPositiveVote(PositiveVoters positive)
+        {
+            db.PositiveVoters.Add(positive);
+            var a = db.SaveChanges();
+        }
+
+        public void InsertNegativeVote(NegativeVoters negative)
+        {
+            db.NegativeVoters.Add(negative);
+            var a = db.SaveChanges();
+        }
     }
 }

@@ -13,6 +13,10 @@ namespace Business.Interfaces
         List<Author> getAllAuthors();        
         void CreateAuthor(Author author);
         Author GetById(Guid id);
+        void InsertPositiveVote(PositiveVoters positive);
+        bool IsNewPositiveVote(Guid idBlogCommentar);
+        void InsertNegativeVote(NegativeVoters negative);
+        bool IsNewNegativeVote(Guid idBlogCommentar);
 
     }
 }

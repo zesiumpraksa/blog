@@ -18,5 +18,7 @@ namespace Models.Models
 
         public virtual List<Blog> Blogs { get; set; }
         public virtual List<BlogComment> BlogComments { get; set; }
+        public virtual List<PositiveVoters> PositiveVoters { get; set; }
+        public virtual List<NegativeVoters> NegativeVoters { get; set; }
     }
 }
