@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Claims;
@@ -13,12 +14,17 @@ namespace Models.Models
     public class User: IdentityUser
     {  
         public string FirstName { get; set; }
-        public string LastName { get; set; }
-
+        public string LastName { get; set; }       
+       
+        [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
+
+        [Required(ErrorMessage = "Confirm Password is required")]
         [DataType(DataType.Password)]
+        [Compare("Password")]
+        [DisplayName("Repeat Password")]
         public string RepeatPassword { get; set; }
 
 

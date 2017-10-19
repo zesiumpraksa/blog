@@ -45,7 +45,7 @@ namespace StackOverflow.App_Start
             container.RegisterType<IBlogService, BlogService>();
             container.RegisterType<IAutorService, AuthorService>();
             container.RegisterType<ISOContext, SOContext>();
-            container.RegisterType<IUserService, UserService>();
+          
             
             
 

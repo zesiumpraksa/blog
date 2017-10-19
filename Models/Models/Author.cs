@@ -17,5 +17,6 @@ namespace Models.Models
         public string Password { get; set; }
 
         public virtual List<Blog> Blogs { get; set; }
+        public virtual List<BlogComment> BlogComments { get; set; }
     }
 }

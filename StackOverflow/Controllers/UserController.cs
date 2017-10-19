@@ -15,17 +15,9 @@ namespace StackOverflow.Controllers
     
     public class UserController : Controller
     {
-        private IUserService userService;
 
-        public UserController()
-        {
 
-        }
-
-        public UserController(IUserService service)
-        {
-            userService = service;
-        }
+        public UserController() { }             
 
         [HttpGet]
         public ActionResult Register()
@@ -60,7 +52,6 @@ namespace StackOverflow.Controllers
             }
         }
 
-       
-
+      
     }
 }

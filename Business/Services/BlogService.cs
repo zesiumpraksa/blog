@@ -30,41 +30,34 @@ namespace Business.Services
         }
         
         public Blog GetById(Guid id)
-        {            
-            return db.Blogs.Where(x => x.Id == id).FirstOrDefault();
+        {   
+            return db.Blogs.FirstOrDefault(x => x.Id == id);
         }
 
-        public void Save(Blog blog)
+        public int Save(Blog blog)
         {
             db.Blogs.Add(blog);
-            //db.Blogs.Attach(blog);
-            
-            var r = db.SaveChanges();
+            return db.SaveChanges();
         }
 
         public bool IsNewAuthor(Guid id)
         {
-            bool newAuthor = false;
-
-            var author = db.Authors.Where(a => a.Id == id).FirstOrDefault();
-            if (author == null)
-                newAuthor = true;           
-
-            return newAuthor;
+            var author = db.Authors.FirstOrDefault(a => a.Id == id);
+           
+            return (author == null);
         }
 
         public bool IsNewCommAuthor(Guid id)
-        {
-            bool newCommAuthor = false;
-            var CommAuthor = db.BlogComments.Where(a => a.Id == id).ToList();
-            if (CommAuthor == null)
-                newCommAuthor = true;
-            return newCommAuthor;
+        {           
+            var CommAuthor = db.BlogComments.Where(a => a.Id == id).ToList();          
+                
+            return (CommAuthor==null);
         }
         public List<Blog> GetAllBlogsOfAuthor(Guid id)
         {
-            var a = db.Blogs.Where(x => x.Author.Id == id).ToList();
-            return a = db.Blogs.Where(x => x.Author.Id == id).ToList();
+            var allBlogs = db.Blogs.Where(x => x.Author.Id == id).ToList();
+
+            return allBlogs;
         }
 
         public List<BlogComment> GetAllComments()
@@ -72,11 +65,11 @@ namespace Business.Services
             return db.BlogComments.ToList();
         }
 
-        public  List<BlogComment>getCommentsForBlog(Blog blog)
+        public List<BlogComment>getCommentsForBlog(Blog blog)
         {
-            var a = db.BlogComments.Where(x => x.Blog.Id == blog.Id).ToList();
-            return db.BlogComments.Where(x => x.Blog.Id == blog.Id).ToList();
-            
+            var comments = db.BlogComments.Where(x => x.Blog.Id == blog.Id).ToList();
+
+            return comments;            
         }
 
         public void SaveComment(BlogComment blogComment)
@@ -84,5 +77,17 @@ namespace Business.Services
              db.BlogComments.Add(blogComment);
              db.SaveChanges();
         }
+
+        public BlogComment getCommentForId(Guid Id)
+        {
+            return db.BlogComments.FirstOrDefault(x => x.Id == Id);
+        }
+
+        public void UpdateBlogComment()
+        {
+           var x = db.SaveChanges();
+        }
+
+        
     }
 }

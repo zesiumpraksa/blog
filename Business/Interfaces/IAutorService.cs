@@ -10,8 +10,7 @@ namespace Business.Interfaces
 {
     public interface IAutorService
     {
-        List<Author> getAllAuthors();
-        User getAuthor(string user, string pass);
+        List<Author> getAllAuthors();        
         void CreateAuthor(Author author);
         Author GetById(Guid id);
 

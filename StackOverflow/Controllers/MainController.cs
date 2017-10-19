@@ -33,31 +33,24 @@ namespace StackOverflow.Controllers
 
         [HttpPost]
         public ActionResult Index(User user)
-        {
-            //var manager = HttpContext.GetOwinContext().GetUserManager<SOUserManager>();
+        {            
+            if ((user.UserName==null) || (user.Password==null))
+            {
+                ViewBag.error = "Set username or password";
+                return View("Index");
+            }
 
-            var signInManager = HttpContext.GetOwinContext().Get<SOSignInManager>();            
-           
+            var signInManager = HttpContext.GetOwinContext().Get<SOSignInManager>();
             var result = signInManager.PasswordSignIn(user.UserName, user.Password, isPersistent: true, shouldLockout: true);
-
             var userName = HttpContext.User.Identity.Name;
-            if (!userName.Equals(""))
-            {
-                ViewBag.user = userName;
-            }
-            if (result == SignInStatus.Success)
-            {
-                //return View("Index");
-               // RedirectToAction("Dashboard", "Author");
-            }
-            else if(result == SignInStatus.Failure)
+
+            if(result == SignInStatus.Failure)   
             {
                 ViewBag.error = "Bad username or password";
                 ModelState.AddModelError("", "Bad login parameters...");
                 return View("Index");
-            }          
-
-            return RedirectToAction("Dashboard", "Author");
+            }           
+            return RedirectToAction("Dashboard", "Author");           
         }
 
         public ActionResult LogOut()
@@ -67,8 +60,5 @@ namespace StackOverflow.Controllers
 
             return RedirectToAction("Index", "Main");
         }
-
-        
-
     }
 }

@@ -22,6 +22,7 @@ namespace Business.Services
         public void CreateAuthor(Author author)
         {
             db.Authors.Add(author);
+          var x = db.SaveChanges();
         }
 
         public List<Author> getAllAuthors()
@@ -29,21 +30,9 @@ namespace Business.Services
             return db.Authors.ToList();
         }
 
-        public User getAuthor(string user, string pass)
-        {
-            //User bloger = db.Authors.Where(x => x. == user && x.Password == pass).FirstOrDefault();
-            if (user == "test" && pass == "test")
-            {
-                return new User() { FirstName = "aaaaaa" };
-            }else
-            {
-                return null;
-            }
-        }
-
         public Author GetById(Guid id)
         {   
-            return db.Authors.Where(x => x.Id == id).FirstOrDefault();
+            return db.Authors.FirstOrDefault(x=>x.Id == id);
         }
     }
 }

@@ -11,12 +11,15 @@ namespace Business.Interfaces
         List<Blog> GetAllBlogs();
         Blog GetFirstId();
         Blog GetById(Guid id);
-        void Save(Blog blog);
+        int Save(Blog blog);
         bool IsNewAuthor(Guid id);
         List<Blog> GetAllBlogsOfAuthor(Guid id);
         List<BlogComment> GetAllComments();
         List<BlogComment> getCommentsForBlog(Blog blog);
         void SaveComment(BlogComment blogComment);
         bool IsNewCommAuthor(Guid id);
+        BlogComment getCommentForId(Guid Id);
+        void UpdateBlogComment();
+       
     }
 }

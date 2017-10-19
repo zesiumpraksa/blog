@@ -1,4 +1,5 @@
 ﻿using Business.Interfaces;
+using DAL.DBContext;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Model.Models;
@@ -36,19 +37,7 @@ namespace StackOverflow.Controllers
         {
             return View("LogIn");
         }
-
-        [HttpPost]
-        public ActionResult LogIn(User user)
-        {
-            var res = autorService.getAuthor(user.UserName, user.Password);
-            if (res != null)
-            {
-                return View("Dashboard");
-            }else
-            {
-                return View("Index");
-            }            
-        }
+       
         [Authorize]
         public ActionResult Dashboard()
         {
@@ -64,15 +53,11 @@ namespace StackOverflow.Controllers
             return View(autorService.GetById(id));
         }
 
-        public ActionResult AuthorDetails(string id)
-        {
-            
-            return View();
+        public ActionResult AuthorCommentDetails(string id)
+        {   
+            return View(autorService.GetById(new Guid(id)));
         }
 
-        //public ActionResult getBlogsByAuthor(Author author)
-        //{
-        //    return View(blogService.GetAllBlogsOfAuthor(author).ToList());
-        //}
+        
     }
 }

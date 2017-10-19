@@ -247,6 +247,7 @@
     <Content Include="Views\Author\Index.cshtml" />
     <Content Include="Views\Author\getBlogsByAuthor.cshtml" />
     <Content Include="Views\BlogComment\Index.cshtml" />
+    <Content Include="Views\Author\AuthorCommentDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -78,25 +78,36 @@
             <th>
                 @Html.Label("Date")
             </th>
+            <th>
+                @Html.Label("Raiting")
+            </th>
+
         </tr>
 
         <ul class="list-group commentsArea">
             @foreach (var x in Model.BlogComments)
             {
-                @*<li class="list-group-item list-group-item-danger">@Html.LabelForModel(x.Commentar) @Html.LabelForModel(x.Author) @Html.LabelForModel(x.Date)</li>*@
-
                 <tr>
                     <td>
                         @Html.LabelForModel(x.Commentar)
                     </td>
-                    <td>
-                        <a href="@Url.Action("AuthorDetails","Author",new { id = x.Author  })">  @Html.LabelForModel(x.Author)</a>
-                         @*@Html.LabelForModel(x.Author)*@
+                    <td>                       
+                        <a href="@Url.Action("AuthorCommentDetails", "Author",new { id = x.IdAuthor})">  @Html.LabelForModel(x.AuthorName)</a>        
+                                      
                     </td>
-                    <td>
+                    <td>                       
+                        @Html.Label(x.Date.ToString())                  
                        
-                        @Html.Label(x.Date.ToString())                        
                     </td>
+                    <td>
+                        @Html.Label(x.Raiting.ToString())                        
+                        <a href="@Url.Action("Votes", "Blog",new { IdCommentar = x.Id, operation="+"})">
+                            <span class="glyphicon glyphicon-chevron-up"></span>
+                        </a>
+                        <a href="@Url.Action("Votes", "Blog",new { IdCommentar = x.Id, operation="-"})">
+                            <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>                           
+                     </td>
 
                 </tr>
             }

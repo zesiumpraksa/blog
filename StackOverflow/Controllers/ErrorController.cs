@@ -13,16 +13,6 @@ namespace StackOverflow.Controllers
         {
             ViewBag.error = id;
             return View();
-        }
-
-        //public ActionResult NotFound(string id)
-        //{
-        //    return Content(id);
-        //}
-
-        //public ActionResult BadRequest()
-        //{
-        //    return View();
-        //}
+        }       
     }
 }
