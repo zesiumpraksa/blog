@@ -35,15 +35,16 @@ namespace Business.Services
             return db.Authors.FirstOrDefault(x=>x.Id == id);
         }
 
-        public bool IsNewPositiveVote(Guid idBlogCommentar)
+       
+        public bool IsNewPositiveVote(Guid idBlogCommentar, Guid iDVoteAuthor)
         {
-            var positiveVote = db.PositiveVoters.FirstOrDefault(x => x.number == idBlogCommentar);
+            var positiveVote = db.PositiveVoters.FirstOrDefault(x => x.IdNumberOfComment == idBlogCommentar && x.AuthorId==iDVoteAuthor);
             return (positiveVote==null);
         }
 
-        public bool IsNewNegativeVote(Guid idBlogCommentar)
+        public bool IsNewNegativeVote(Guid idBlogCommentar, Guid iDVoteAuthor)
         {
-            var negativeVote = db.PositiveVoters.FirstOrDefault(x => x.number == idBlogCommentar);
+            var negativeVote = db.NegativeVoters.FirstOrDefault(x => x.IdNumberOfComment == idBlogCommentar && x.AuthorId == iDVoteAuthor);
             return (negativeVote == null);
         }
 

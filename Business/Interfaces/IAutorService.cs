@@ -14,9 +14,9 @@ namespace Business.Interfaces
         void CreateAuthor(Author author);
         Author GetById(Guid id);
         void InsertPositiveVote(PositiveVoters positive);
-        bool IsNewPositiveVote(Guid idBlogCommentar);
+        bool IsNewPositiveVote(Guid idBlogCommentar, Guid iDVoteAuthor);
         void InsertNegativeVote(NegativeVoters negative);
-        bool IsNewNegativeVote(Guid idBlogCommentar);
+        bool IsNewNegativeVote(Guid idBlogCommentar, Guid iDVoteAuthor);
 
     }
 }

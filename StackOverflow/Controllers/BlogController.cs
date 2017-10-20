@@ -122,19 +122,53 @@ namespace StackOverflow.Controllers
             var ID = id.Id;
             return View();
         }
+       
+        public ActionResult VoteUp(Guid IdCommentar)
+        {
+            var commentar = blogService.getCommentForId(IdCommentar);
+            var userId = new Guid(User.Identity.GetUserId());
+            var author = autorService.GetById(userId);
+
+            if (author == null)            
+                return RedirectToAction("Index", "Blog");            
+
+            if (!autorService.IsNewPositiveVote(commentar.Id, userId) || (commentar.IdAuthor == userId))            
+                return RedirectToAction("Index", "Blog");
+            
+            addPositiveVote(commentar, userId);
+            return RedirectToAction("Index", "Blog");
+        }
+
+        public ActionResult VoteDown(Guid IdCommentar)
+        {
+            var commentar = blogService.getCommentForId(IdCommentar);
+            var userId = new Guid(User.Identity.GetUserId());
+            var author = autorService.GetById(userId);
+
+            if (author == null)
+                return RedirectToAction("Index", "Blog");
+
+            if (!autorService.IsNewNegativeVote(commentar.Id, userId) || (commentar.IdAuthor == userId))
+                return RedirectToAction("Index", "Blog");
+
+            addNegativeVote(commentar, userId);
+
+            return RedirectToAction("Index", "Blog");
+        }
 
         public ActionResult Votes(Guid IdCommentar, string operation)
         {
             var commentar = blogService.getCommentForId(IdCommentar);
             var userId = new Guid(User.Identity.GetUserId());
             var author = autorService.GetById(userId);
+
             if (author != null)
             {
                 if (operation.Equals("+"))
                 {
-                    if (autorService.IsNewPositiveVote(commentar.Id) && (commentar.IdAuthor!=userId))
+                    if (autorService.IsNewPositiveVote(commentar.Id, userId) && (commentar.IdAuthor != userId))
                     {
-                        PositiveVoters vote = new PositiveVoters() { number = commentar.Id, AuthorId = userId, Id = Guid.NewGuid() };
+                        PositiveVoters vote = new PositiveVoters() { Id = Guid.NewGuid(), AuthorId = userId, IdNumberOfComment = IdCommentar, AuthorOfComment = commentar.AuthorName };
                         autorService.InsertPositiveVote(vote);
                         commentar.Raiting++;
                     }
@@ -145,9 +179,9 @@ namespace StackOverflow.Controllers
                 }
                 else
                 {
-                    if (autorService.IsNewNegativeVote(commentar.Id) && (commentar.IdAuthor != userId))
+                    if (autorService.IsNewNegativeVote(commentar.Id, userId) && (commentar.IdAuthor != userId))
                     {
-                        NegativeVoters vote = new NegativeVoters() { Number = commentar.Id, AuthorId = userId, Id = Guid.NewGuid() };
+                        NegativeVoters vote = new NegativeVoters() { Id = Guid.NewGuid(), AuthorId = userId, IdNumberOfComment = commentar.Id, AuthorOfComment = commentar.AuthorName };
                         autorService.InsertNegativeVote(vote);
                         commentar.Raiting--;
                     }
@@ -188,6 +222,23 @@ namespace StackOverflow.Controllers
             var numberRows = blogService.Save(blog);
 
             return (numberRows == 1);
+        }
+
+        private void addPositiveVote(BlogComment commentar, Guid userId)
+        {
+            PositiveVoters vote = new PositiveVoters() { Id = Guid.NewGuid(), AuthorId = userId, IdNumberOfComment = commentar.Id, AuthorOfComment = commentar.AuthorName };
+            autorService.InsertPositiveVote(vote);
+            commentar.Raiting++;
+            blogService.UpdateBlogComment();
+        }
+
+        private void addNegativeVote(BlogComment commentar, Guid userId)
+        {
+            NegativeVoters vote = new NegativeVoters() { Id = Guid.NewGuid(), AuthorId = userId, IdNumberOfComment = commentar.Id, AuthorOfComment = commentar.AuthorName };
+            autorService.InsertNegativeVote(vote);
+
+            commentar.Raiting--;
+            blogService.UpdateBlogComment();
         }
     }
 
