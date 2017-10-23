@@ -128,14 +128,25 @@ namespace StackOverflow.Controllers
             var commentar = blogService.getCommentForId(IdCommentar);
             var userId = new Guid(User.Identity.GetUserId());
             var author = autorService.GetById(userId);
+                       
+            if (author == null)
+            {
+                Author newAuthor = new Author() { Id = userId, Name = User.Identity.Name };                
+                autorService.CreateAuthor(newAuthor);                
+                autorService.InsertPositiveVote(commentar, userId);
+                //commentar.Raiting++ nece da radi u author service?????????(mozda zato sto je izvucen iz blogServicea!?)
+                commentar.Raiting++;                            
+            }
+            else
+            {
+                if (!autorService.IsNewPositiveVote(commentar.Id, userId) || (commentar.IdAuthor == userId))
+                    return RedirectToAction("Index", "Blog");
 
-            if (author == null)            
-                return RedirectToAction("Index", "Blog");            
+                autorService.InsertPositiveVote(commentar, userId);
+                commentar.Raiting++;                
+            }
 
-            if (!autorService.IsNewPositiveVote(commentar.Id, userId) || (commentar.IdAuthor == userId))            
-                return RedirectToAction("Index", "Blog");
-            
-            addPositiveVote(commentar, userId);
+            blogService.UpdateBlogComment();
             return RedirectToAction("Index", "Blog");
         }
 
@@ -146,61 +157,69 @@ namespace StackOverflow.Controllers
             var author = autorService.GetById(userId);
 
             if (author == null)
-                return RedirectToAction("Index", "Blog");
-
-            if (!autorService.IsNewNegativeVote(commentar.Id, userId) || (commentar.IdAuthor == userId))
-                return RedirectToAction("Index", "Blog");
-
-            addNegativeVote(commentar, userId);
-
-            return RedirectToAction("Index", "Blog");
-        }
-
-        public ActionResult Votes(Guid IdCommentar, string operation)
-        {
-            var commentar = blogService.getCommentForId(IdCommentar);
-            var userId = new Guid(User.Identity.GetUserId());
-            var author = autorService.GetById(userId);
-
-            if (author != null)
             {
-                if (operation.Equals("+"))
-                {
-                    if (autorService.IsNewPositiveVote(commentar.Id, userId) && (commentar.IdAuthor != userId))
-                    {
-                        PositiveVoters vote = new PositiveVoters() { Id = Guid.NewGuid(), AuthorId = userId, IdNumberOfComment = IdCommentar, AuthorOfComment = commentar.AuthorName };
-                        autorService.InsertPositiveVote(vote);
-                        commentar.Raiting++;
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Blog");
-                    }
-                }
-                else
-                {
-                    if (autorService.IsNewNegativeVote(commentar.Id, userId) && (commentar.IdAuthor != userId))
-                    {
-                        NegativeVoters vote = new NegativeVoters() { Id = Guid.NewGuid(), AuthorId = userId, IdNumberOfComment = commentar.Id, AuthorOfComment = commentar.AuthorName };
-                        autorService.InsertNegativeVote(vote);
-                        commentar.Raiting--;
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Blog");
-                    }
-                }
-
-                blogService.UpdateBlogComment();
-                return RedirectToAction("Index", "Blog");
+                Author newAuthor = new Author() { Id = userId, Name = User.Identity.Name };
+                autorService.CreateAuthor(newAuthor);
+                autorService.InsertNegativeVote(commentar, userId);                
+                commentar.Raiting--;
+            }else
+            {
+                if (!autorService.IsNewNegativeVote(commentar.Id, userId) || (commentar.IdAuthor == userId))
+                    return RedirectToAction("Index", "Blog");
+                autorService.InsertNegativeVote(commentar, userId);
+                commentar.Raiting--;
             }
+
+            blogService.UpdateBlogComment();
             return RedirectToAction("Index", "Blog");
-
-
         }
+
+        //public ActionResult Votes(Guid IdCommentar, string operation)
+        //{
+        //    var commentar = blogService.getCommentForId(IdCommentar);
+        //    var userId = new Guid(User.Identity.GetUserId());
+        //    var author = autorService.GetById(userId);
+
+        //    if (author != null)
+        //    {
+        //        if (operation.Equals("+"))
+        //        {
+        //            if (autorService.IsNewPositiveVote(commentar.Id, userId) && (commentar.IdAuthor != userId))
+        //            {
+        //                PositiveVoters vote = new PositiveVoters() { Id = Guid.NewGuid(), AuthorId = userId, IdNumberOfComment = IdCommentar, AuthorOfComment = commentar.AuthorName };
+        //                autorService.InsertPositiveVote(vote);
+        //                commentar.Raiting++;
+        //            }
+        //            else
+        //            {
+        //                return RedirectToAction("Index", "Blog");
+        //            }
+        //        }
+        //        else
+        //        {
+        //            if (autorService.IsNewNegativeVote(commentar.Id, userId) && (commentar.IdAuthor != userId))
+        //            {
+        //                NegativeVoters vote = new NegativeVoters() { Id = Guid.NewGuid(), AuthorId = userId, IdNumberOfComment = commentar.Id, AuthorOfComment = commentar.AuthorName };
+        //                autorService.InsertNegativeVote(vote);
+        //                commentar.Raiting--;
+        //            }
+        //            else
+        //            {
+        //                return RedirectToAction("Index", "Blog");
+        //            }
+        //        }
+
+        //        blogService.UpdateBlogComment();
+        //        return RedirectToAction("Index", "Blog");
+        //    }
+        //    return RedirectToAction("Index", "Blog");
+
+
+        //}
 
         private bool SaveBlogWithNewAuthor(Blog blog, Guid idAuthor, string blogAuthor)
         {
+
             blog.Id = Guid.NewGuid();
             blog.AuthorId = idAuthor;
             blog.Author = new Author
@@ -223,23 +242,7 @@ namespace StackOverflow.Controllers
 
             return (numberRows == 1);
         }
-
-        private void addPositiveVote(BlogComment commentar, Guid userId)
-        {
-            PositiveVoters vote = new PositiveVoters() { Id = Guid.NewGuid(), AuthorId = userId, IdNumberOfComment = commentar.Id, AuthorOfComment = commentar.AuthorName };
-            autorService.InsertPositiveVote(vote);
-            commentar.Raiting++;
-            blogService.UpdateBlogComment();
-        }
-
-        private void addNegativeVote(BlogComment commentar, Guid userId)
-        {
-            NegativeVoters vote = new NegativeVoters() { Id = Guid.NewGuid(), AuthorId = userId, IdNumberOfComment = commentar.Id, AuthorOfComment = commentar.AuthorName };
-            autorService.InsertNegativeVote(vote);
-
-            commentar.Raiting--;
-            blogService.UpdateBlogComment();
-        }
+       
     }
 
     

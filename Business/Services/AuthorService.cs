@@ -22,7 +22,7 @@ namespace Business.Services
         public void CreateAuthor(Author author)
         {
             db.Authors.Add(author);
-          var x = db.SaveChanges();
+            db.SaveChanges();
         }
 
         public List<Author> getAllAuthors()
@@ -48,16 +48,18 @@ namespace Business.Services
             return (negativeVote == null);
         }
 
-        public void InsertPositiveVote(PositiveVoters positive)
+        public void InsertPositiveVote(BlogComment commentar, Guid userId)
         {
-            db.PositiveVoters.Add(positive);
-            var a = db.SaveChanges();
+            PositiveVoters positive = new PositiveVoters() { Id = Guid.NewGuid(), AuthorId = userId, IdNumberOfComment = commentar.Id, AuthorOfComment = commentar.AuthorName };
+            db.PositiveVoters.Add(positive);            
+            db.SaveChanges();            
         }
 
-        public void InsertNegativeVote(NegativeVoters negative)
+        public void InsertNegativeVote(BlogComment commentar, Guid userId)
         {
+            NegativeVoters negative = new NegativeVoters() { Id = Guid.NewGuid(), AuthorId = userId, IdNumberOfComment = commentar.Id, AuthorOfComment = commentar.AuthorName };
             db.NegativeVoters.Add(negative);
-            var a = db.SaveChanges();
+            db.SaveChanges();
         }
     }
 }
