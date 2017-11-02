@@ -26,7 +26,7 @@
                 @Html.ActionLink("Blogs", "Index", "Blog", new { area = "" }, new { @class = "navbar-brand" })
                 @Html.ActionLink("Register User", "Register", "User", new { area = "" }, new { @class = "navbar-brand" })
                 @Html.ActionLink("Dashboard", "Dashboard", "Author", new { area = "" }, new { @class = "navbar-brand" })
-                <div style="color:red" class="navbar-brand">@ViewBag.user @ViewBag.error</div>
+                <div id="Warning" style="color:red" class="navbar-brand">@ViewBag.warning1 @ViewBag.warning2 @ViewBag.msg  </div>
                 
             </div>
             

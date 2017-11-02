@@ -53,9 +53,7 @@ namespace StackOverflow.App_Start
         public static SOUserManager Create(IdentityFactoryOptions<SOUserManager> options, IOwinContext context)
         {
             var manager = new SOUserManager(new UserStore<User>(context.Get<SOContext>()));
-
-        
-
+            
             manager.PasswordValidator = new PasswordValidator
             {
                 RequireDigit = true,

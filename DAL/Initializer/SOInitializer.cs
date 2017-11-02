@@ -11,7 +11,7 @@ using Models.Models;
 
 namespace DAL.Initializer
 {
-    class SOInitializer:DropCreateDatabaseAlways<SOContext>
+    class SOInitializer:DropCreateDatabaseIfModelChanges<SOContext>
     {
         protected override void Seed(SOContext context)
         {

@@ -25,7 +25,7 @@ namespace StackOverflow.Controllers
             }
             else
             {
-                ViewBag.user = "Not logged in";
+                ViewBag.msg = "Not logged in";
             }
             return View();
         }
@@ -36,7 +36,7 @@ namespace StackOverflow.Controllers
         {            
             if ((user.UserName==null) || (user.Password==null))
             {
-                ViewBag.error = "Set username or password";
+                ViewBag.warning1 = "Set username or password";
                 return View("Index");
             }
 
@@ -46,7 +46,7 @@ namespace StackOverflow.Controllers
 
             if(result == SignInStatus.Failure)   
             {
-                ViewBag.error = "Bad username or password";
+                ViewBag.warning2 = "Bad username or password";
                 ModelState.AddModelError("", "Bad login parameters...");
                 return View("Index");
             }           

@@ -50,9 +50,7 @@ namespace StackOverflow.Controllers
         public ActionResult CreateBlog()
         {
             return View();
-        }      
-
-        
+        }              
 
         [HttpPost]
         public ActionResult CreateBlog(Blog blog)
@@ -123,7 +121,7 @@ namespace StackOverflow.Controllers
             return View();
         }
        
-        public ActionResult VoteUp(Guid IdCommentar)
+        public ActionResult VoteUp(Guid IdCommentar, Guid blogId)
         {
             var commentar = blogService.getCommentForId(IdCommentar);
             var userId = new Guid(User.Identity.GetUserId());
@@ -148,6 +146,7 @@ namespace StackOverflow.Controllers
 
             blogService.UpdateBlogComment();
             return RedirectToAction("Index", "Blog");
+            //return RedirectToAction("Details","Blog", new { id = IdCommentar });
         }
 
         public ActionResult VoteDown(Guid IdCommentar)

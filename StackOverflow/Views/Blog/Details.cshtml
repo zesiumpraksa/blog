@@ -101,7 +101,7 @@
                     </td>
                     <td>
                         @Html.Label(x.Raiting.ToString())                        
-                        <a href="@Url.Action("VoteUp", "Blog",new { IdCommentar = x.Id })">
+                        <a href="@Url.Action("VoteUp", "Blog",new { IdCommentar = x.Id, blogId = x.BlogId })">
                             <span class="glyphicon glyphicon-chevron-up"></span>
                         </a>
                         <a href="@Url.Action("VoteDown", "Blog",new { IdCommentar = x.Id })">

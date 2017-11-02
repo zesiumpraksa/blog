@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Busine
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{DD7F103F-B648-4F9B-9BD2-715C02DF12AA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StackOverflowTest", "StackOverflowTest\StackOverflowTest.csproj", "{DF431D4B-B133-4AC0-BD58-5097845D164F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{DD7F103F-B648-4F9B-9BD2-715C02DF12AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD7F103F-B648-4F9B-9BD2-715C02DF12AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD7F103F-B648-4F9B-9BD2-715C02DF12AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF431D4B-B133-4AC0-BD58-5097845D164F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF431D4B-B133-4AC0-BD58-5097845D164F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF431D4B-B133-4AC0-BD58-5097845D164F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF431D4B-B133-4AC0-BD58-5097845D164F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
