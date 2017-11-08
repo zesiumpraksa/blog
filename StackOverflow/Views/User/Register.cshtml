@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Register</h2>
+<h2 id="Register">Register</h2>
 
 @using (Html.BeginForm()) 
 {
@@ -23,9 +23,6 @@
             </div>
         </div>
 
-   
-
-       
 
         <div class="form-group">
             @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })

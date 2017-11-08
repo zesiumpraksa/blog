@@ -31,14 +31,14 @@ namespace StackOverflow.Controllers
             if (ModelState.IsValid)
             {
                 var manager = HttpContext.GetOwinContext().GetUserManager<SOUserManager>();
-                var m = await manager.CreateAsync(user, user.Password);
-                              
-                if (m.Succeeded)
-                {                                    
+                var userResault = await manager.CreateAsync(user, user.Password);
+                
+                if (userResault.Succeeded)
+                {
                     return RedirectToAction("Index", "Main");
                 }
 
-                AddErrors(m);
+                AddErrors(userResault);
             }
             return View();
 

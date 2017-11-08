@@ -171,50 +171,7 @@ namespace StackOverflow.Controllers
 
             blogService.UpdateBlogComment();
             return RedirectToAction("Index", "Blog");
-        }
-
-        //public ActionResult Votes(Guid IdCommentar, string operation)
-        //{
-        //    var commentar = blogService.getCommentForId(IdCommentar);
-        //    var userId = new Guid(User.Identity.GetUserId());
-        //    var author = autorService.GetById(userId);
-
-        //    if (author != null)
-        //    {
-        //        if (operation.Equals("+"))
-        //        {
-        //            if (autorService.IsNewPositiveVote(commentar.Id, userId) && (commentar.IdAuthor != userId))
-        //            {
-        //                PositiveVoters vote = new PositiveVoters() { Id = Guid.NewGuid(), AuthorId = userId, IdNumberOfComment = IdCommentar, AuthorOfComment = commentar.AuthorName };
-        //                autorService.InsertPositiveVote(vote);
-        //                commentar.Raiting++;
-        //            }
-        //            else
-        //            {
-        //                return RedirectToAction("Index", "Blog");
-        //            }
-        //        }
-        //        else
-        //        {
-        //            if (autorService.IsNewNegativeVote(commentar.Id, userId) && (commentar.IdAuthor != userId))
-        //            {
-        //                NegativeVoters vote = new NegativeVoters() { Id = Guid.NewGuid(), AuthorId = userId, IdNumberOfComment = commentar.Id, AuthorOfComment = commentar.AuthorName };
-        //                autorService.InsertNegativeVote(vote);
-        //                commentar.Raiting--;
-        //            }
-        //            else
-        //            {
-        //                return RedirectToAction("Index", "Blog");
-        //            }
-        //        }
-
-        //        blogService.UpdateBlogComment();
-        //        return RedirectToAction("Index", "Blog");
-        //    }
-        //    return RedirectToAction("Index", "Blog");
-
-
-        //}
+        }       
 
         private bool SaveBlogWithNewAuthor(Blog blog, Guid idAuthor, string blogAuthor)
         {

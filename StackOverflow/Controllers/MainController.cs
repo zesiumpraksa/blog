@@ -49,7 +49,10 @@ namespace StackOverflow.Controllers
                 ViewBag.warning2 = "Bad username or password";
                 ModelState.AddModelError("", "Bad login parameters...");
                 return View("Index");
-            }           
+            }
+
+            Response.Cookies.Add(new HttpCookie("test", "test"));
+                    
             return RedirectToAction("Dashboard", "Author");           
         }
 

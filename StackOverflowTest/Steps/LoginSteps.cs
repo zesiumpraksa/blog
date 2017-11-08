@@ -2,58 +2,92 @@
 using System.Net.Http;
 using TechTalk.SpecFlow;
 using HtmlAgilityPack;
-using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow.Assist;
 using Models.Models;
-using System.Collections.Generic;
 using System.Net;
+using System.IO;
+using System.Collections.Specialized;
+using System;
 
 namespace StackOverflowTest.Login
 {
+    public class CookieAwareWebClient : WebClient
+    {
+        public static CookieAwareWebClient Cooke { get; set; }
+        public CookieAwareWebClient()
+        {
+            Cooke = this;
+            CookieContainer = new CookieContainer();
+            this.ResponseCookies = new CookieCollection();
+
+        }
+
+        public CookieContainer CookieContainer { get; private set; }
+
+        public CookieCollection ResponseCookies { get; set; }
+
+        protected override WebRequest GetWebRequest(Uri address)
+        {
+            var request = (HttpWebRequest)base.GetWebRequest(address);
+            request.CookieContainer = CookieContainer;
+            return request;
+        }
+
+        protected override WebResponse GetWebResponse(WebRequest request)
+        {
+            var response = (HttpWebResponse)base.GetWebResponse(request);
+            this.ResponseCookies = response.Cookies;
+            return response;
+        }
+    }
     [Binding]
     public class LoginSteps
-    {
+    {      
+
         private async Task CheckIndexPage()
         {
             HtmlDocument htmlGlobal = new HtmlDocument();
             var client = new HttpClient();
-           
-            var responseGetMsg = client.GetAsync("http://localhost:49853/Main/Index"); 
-             
+            var responseGetMsg = client.GetAsync("http://localhost:49853/Main/Index");
+
             var responseContent = await responseGetMsg.Result.Content.ReadAsStreamAsync();
-            var responseContentString = await responseGetMsg.Result.Content.ReadAsStringAsync();
+            var responseContentString = await responseGetMsg.Result.Content.ReadAsStringAsync();            
                         
             htmlGlobal.Load(responseContent);
             ScenarioContext.Current["HtmlGet"] = htmlGlobal;
         }
 
-        private async Task CheckLogIn(Table table)
+        private void CheckLogIn(Table table)
         {
+            CookieAwareWebClient.Cooke = new CookieAwareWebClient();
             HtmlDocument htmlGlobal = new HtmlDocument();
             var user = table.CreateInstance<User>();
-            var client = new HttpClient();          
+            
+            NameValueCollection nameValue = new NameValueCollection();
 
-            var dict = new Dictionary<string, string>();
-            dict.Add("username", user.UserName);
-            dict.Add("password", user.Password);
+            nameValue.Add("username", user.UserName);
+            nameValue.Add("password", user.Password);
 
-            FormUrlEncodedContent content = new FormUrlEncodedContent(dict);
-
-            var responsePostMsg = await client.PostAsync("http://localhost:49853/Main/Index", content);
-            var responseContent = await responsePostMsg.Content.ReadAsStreamAsync();
-            var sadrzaj = responsePostMsg.Content.ReadAsStringAsync();
+            Uri uri = new Uri("http://localhost:49853/Main/Index");
+            var res = CookieAwareWebClient.Cooke.UploadValues(uri, "POST", nameValue);
+            //var response = Encoding.UTF8.GetString(res);
+            //var values = CookieAwareWebClient.Cooke.CookieContainer.GetCookies(uri);
+            Stream streamContent = new MemoryStream(res);
            
-            htmlGlobal.Load(responseContent);
+
+            htmlGlobal.Load(streamContent);
             ScenarioContext.Current["HtmlPost"] = htmlGlobal;
         }
 
         [Given(@"User is on Index page")]
         public void GivenUserIsInIndexPage()
         {
-            CheckIndexPage().Wait();
+            CheckIndexPage().Wait();   
+
             var htmlObject = ScenarioContext.Current["HtmlGet"] as HtmlDocument;
-            
+            //var htmlObject1 = FeatureContext.Current["Feature"] as HtmlDocument;       
+
             Assert.IsNotNull(htmlObject.DocumentNode.SelectNodes("//div[@class='imgBackground']"), "imgBackground not found :(");
             Assert.IsNotNull(htmlObject.DocumentNode.SelectNodes("//input[@id='UserName']"), "UserName not found :(");
             Assert.IsNotNull(htmlObject.DocumentNode.SelectNodes("//input[@id='Password']"), "Password not found :(");
@@ -63,8 +97,8 @@ namespace StackOverflowTest.Login
         [When(@"User enter UserName and Password in form and press Login")]
         public void WhenUserEnterUserNameAndPasswordInFormAndPressLogin(Table table)
         {
-            CheckLogIn(table).Wait();            
-            var htmlObject = ScenarioContext.Current["HtmlPost"] as HtmlDocument;
+            CheckLogIn(table);
+            var htmlObject = ScenarioContext.Current["HtmlPost"] as HtmlDocument;            
             Assert.IsNotNull(htmlObject);
         }
 
@@ -82,7 +116,7 @@ namespace StackOverflowTest.Login
         {            
             var htmlObject = ScenarioContext.Current["HtmlPost"] as HtmlDocument;
             var warningMsg = htmlObject.GetElementbyId("warning").InnerText;
-            Assert.AreEqual(" Bad username or password   ", warningMsg);
+            Assert.AreEqual(" Bad username or password  ", warningMsg);
         }
 
         //warning2 scenario
@@ -92,7 +126,7 @@ namespace StackOverflowTest.Login
         {            
             var htmlObject = ScenarioContext.Current["HtmlPost"] as HtmlDocument;
             var warningMsg = htmlObject.GetElementbyId("warning").InnerText;
-            Assert.AreEqual("Set username or password    ", warningMsg);
+            Assert.AreEqual("Set username or password   ", warningMsg);
         }
 
         //LogOut
@@ -110,7 +144,7 @@ namespace StackOverflowTest.Login
         {            
             var htmlObject = ScenarioContext.Current["HtmlGet"] as HtmlDocument;
             var warningMsg = htmlObject.GetElementbyId("warning").InnerText;
-            Assert.AreEqual("  Not logged in  ", warningMsg);
+            Assert.AreEqual("  Not logged in ", warningMsg);
         }
     }
 }

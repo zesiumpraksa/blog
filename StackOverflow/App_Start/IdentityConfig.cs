@@ -24,31 +24,26 @@ namespace StackOverflow.App_Start
             app.CreatePerOwinContext(() => new SOContext());
             app.CreatePerOwinContext<SOUserManager>(SOUserManager.Create);
             app.CreatePerOwinContext<SOSignInManager>(SOSignInManager.Create);
-           
-            //app.CreatePerOwinContext<BlogManager>(BlogManager.Create);
-            /*app.CreatePerOwinContext<RoleManager<AppRole>>((options, context) =>
-                new RoleManager<AppRole>(
-                    new RoleStore<AppRole>(context.Get<MyDbContext>())));*/
-
+         
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 //LoginPath = new PathString("/Author/Login"),
                 LoginPath = new PathString("/User/Register"),
             });
-        }
-
-        /*private void createRolesAndUsers()
-        {
-            SOContext db = new SOContext();
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
-            var userManager = new UserManager<>
-        }*/
+        }        
     }
 
     public class SOUserManager : UserManager<User>
     {
-        public SOUserManager(IUserStore<User> store) : base(store) { }        
+        public SOUserManager(IUserStore<User> store) : base(store) {
+
+            this.UserValidator = new UserValidator<User>(this)
+            {
+                RequireUniqueEmail = true,       
+                AllowOnlyAlphanumericUserNames = true         
+            };
+        }
 
         public static SOUserManager Create(IdentityFactoryOptions<SOUserManager> options, IOwinContext context)
         {
@@ -57,9 +52,10 @@ namespace StackOverflow.App_Start
             manager.PasswordValidator = new PasswordValidator
             {
                 RequireDigit = true,
-                RequireUppercase = true
+                RequireUppercase = true,
+                RequireLowercase = true,
             };
-            
+
             return manager;
         }
     }

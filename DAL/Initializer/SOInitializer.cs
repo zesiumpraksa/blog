@@ -45,9 +45,7 @@ namespace DAL.Initializer
             BlogComment BC4 = new BlogComment() { Id = Guid.NewGuid(), BlogId = B3.Id, Commentar = "aaaaa" , IdAuthor = A1.Id , AuthorName=A1.Name, Date = DateTime.Now };
 
             var commentars = new List<BlogComment>();
-            commentars.Add(BC1);   commentars.Add(BC2);  commentars.Add(BC3);     commentars.Add(BC4);
-
-            
+            commentars.Add(BC1);   commentars.Add(BC2);  commentars.Add(BC3);     commentars.Add(BC4);           
 
             context.Blogs.AddRange(blogs);
             context.Authors.AddRange(authors);

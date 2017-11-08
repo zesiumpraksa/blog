@@ -12,10 +12,18 @@ using System.Threading.Tasks;
 namespace Models.Models
 {
     public class User: IdentityUser
-    {  
+    {
+
+        [Required]
+        [DisplayName("User name")]
+        public override string UserName { get; set; }     
+
+        [DisplayName("First name")]
         public string FirstName { get; set; }
-        public string LastName { get; set; }       
-       
+
+        [DisplayName("Last Name")]
+        public string LastName { get; set; }
+
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
