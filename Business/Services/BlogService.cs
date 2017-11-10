@@ -53,6 +53,7 @@ namespace Business.Services
                 
             return (CommAuthor==null);
         }
+
         public List<Blog> GetAllBlogsOfAuthor(Guid id)
         {
             var allBlogs = db.Blogs.Where(x => x.Author.Id == id).ToList();
@@ -86,6 +87,13 @@ namespace Business.Services
         public void UpdateBlogComment()
         {
            var x = db.SaveChanges();
+        }
+
+        //insert replay comment
+
+        public void InsertReplayComment(Guid id, string replayComment)
+        {
+
         }
 
         

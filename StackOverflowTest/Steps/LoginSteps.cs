@@ -20,7 +20,6 @@ namespace StackOverflowTest.Login
             Cooke = this;
             CookieContainer = new CookieContainer();
             this.ResponseCookies = new CookieCollection();
-
         }
 
         public CookieContainer CookieContainer { get; private set; }

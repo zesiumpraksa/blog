@@ -23,6 +23,8 @@ namespace Models.Models
         public DateTime? Date { get; set; }
 
         public short Raiting { get; set; }
+
+        public List<BlogComment> ReplayComment { get; set; }
         
         public Guid BlogId { get; set; }
         public virtual Blog Blog { get; set; }
