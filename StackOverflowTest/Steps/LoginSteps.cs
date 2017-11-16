@@ -54,7 +54,7 @@ namespace StackOverflowTest.Login
         }
 
 
-
+        
         [When(@"Client enter UserName and Password in form and press Login")]
         public void WhenClientEnterUserNameAndPasswordInFormAndPressLogin(Table table)
         {
