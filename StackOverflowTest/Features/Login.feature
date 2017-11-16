@@ -3,11 +3,11 @@
 
 @mytag
 Scenario: Successful Login with valid credintials
-	Given User is on Index page
-	When User enter UserName and Password in form and press Login	
+	Given Client is on Index page
+	When Client enter UserName and Password in form and press Login	
 	| Username | Password |
-	| Test     | Test1   |	
-	Then User is on his Dashboard
+	| Proba     | Proba1   |	
+	Then Proba is on his Dashboard
 
 Scenario: Login with invalid credintials
 	Given User is on Index page

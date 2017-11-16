@@ -3,17 +3,19 @@
 
 @mytag
 Scenario:  Successful create new blog comment
-	Given User is on Index page
-	When User enter UserName and Password in form and press Login	
+	Given Client is on Index page
+	When Client enter UserName and Password in form and press Login	
 	| Username | Password |
-	| Test     | Test1   |	
-	Then User is on his Dashboard
-	When Test go to Blog Index page
-	Then Test clicks on blog details
+	| Proba     | Proba1   |	
+	Then  Proba is on his Dashboard
+	When Proba click on Blogs
+	Then Proba is on Blog page
+	When Proba clicks on blog details
 	| BlogId								   |
-	| CBC48C18-47A6-46D3-B8FA-01334B07C406     | 	
-	When Test insert new Blog Comment
+	| 477C17A6-071D-4387-A191-46005304D35E     | 	
+	Then Proba is Blog Details page
+	When Proba insert new Blog Comment
 	| Commentar               | BlogId                           |
-	| Ovo je test komentart | CBC48C18-47A6-46D3-B8FA-01334B07C406 |
+	| Ovo je test komentart | 477C17A6-071D-4387-A191-46005304D35E |
 	Then User is on Blog Index page 
 	

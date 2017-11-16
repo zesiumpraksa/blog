@@ -87,7 +87,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlogComentSteps.cs" />
+    <Compile Include="Steps\BlogComentSteps.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Features\Blog.feature.cs">
       <AutoGen>True</AutoGen>
@@ -105,9 +105,10 @@
       <DependentUpon>Login.feature</DependentUpon>
     </Compile>
     <Compile Include="Steps\BlogSteps.cs" />
-    <Compile Include="Steps\LoginSteps.cs">
+    <Compile Include="Steps\CookieAwareWebClient.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Steps\LoginSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Features\Registration.feature.cs">
       <AutoGen>True</AutoGen>

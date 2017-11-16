@@ -75,20 +75,20 @@ namespace StackOverflowTest.Features
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 9
- testRunner.Given("User is on Index page");
+ testRunner.Given("Client is on Index page");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Username",
                         "Password"});
             table1.AddRow(new string[] {
-                        "Test",
-                        "Test1"});
+                        "Proba",
+                        "Proba1"});
 #line 10
- testRunner.When("User enter UserName and Password in form and press Login", ((string)(null)), table1);
+ testRunner.When("Client enter UserName and Password in form and press Login", ((string)(null)), table1);
 #line 13
- testRunner.Then("User is on his Dashboard");
+ testRunner.Then("Proba is on his Dashboard");
 #line 14
- testRunner.When("User Test click Create new blog");
+ testRunner.When("User Proba click Create new blog");
 #line 15
  testRunner.Then("User is on CreateNewBlogPage");
 #line hidden

@@ -3,7 +3,8 @@
 
 @mytag
 Scenario: Succesful registration
-	Given Client is on Register page
+	Given Client is on Index page
+	Then Client go on Register page
 	When Client enter valid values and press Create
 	| Email     | UserName | FirstName | LastName | Password | RepeatPassword |
 	| test@test5 | Test55     | Test55      | Test55     | Test55    | Test55          |
