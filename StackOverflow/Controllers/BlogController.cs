@@ -32,7 +32,13 @@ namespace StackOverflow.Controllers
         public ActionResult Details(Guid id)
         {           
             return View(blogService.GetById(id));
-        }       
+        }
+
+        [HttpGet]
+        public ActionResult Details(string id)
+        {
+            return View(blogService.GetById(new Guid(id)));
+        }
 
         public ActionResult AuthorDetail(Guid id)
         {

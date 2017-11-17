@@ -92,9 +92,6 @@
         </tr>           
             @foreach (var BlogComment in Model.BlogComments)
             {
-
-               
-
                 <tr>
                     @{
                         if (BlogComment.ParentCommentId == null)
@@ -137,11 +134,7 @@
                             </td>
                         }
                     }
-                        @foreach (var Replay in BlogComment.ReplayComment)
-                        {
-
-                            @Html.LabelForModel(Replay.Commentar)
-                        }
+                       
                     }  
                 </tr>
                 

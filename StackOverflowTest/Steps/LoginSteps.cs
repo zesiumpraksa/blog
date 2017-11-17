@@ -31,7 +31,7 @@ namespace StackOverflowTest.Login
             nameValue.Add("UserName", testUser.UserName);
             nameValue.Add("Password", testUser.Password);
 
-            var res = CookieAwareWebClient.Cooke.UploadValues(uri, "POST", nameValue);
+            var res = CookieAwareWebClient.InstanceCookie.UploadValues(uri, "POST", nameValue);
             Stream streamContent = new MemoryStream(res);
             htmlIndexPage.Load(streamContent);
 

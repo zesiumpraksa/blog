@@ -23,7 +23,7 @@ namespace StackOverflowTest.Registration
             
             Uri uri = new Uri("http://localhost:49853/"+ Controler + "/"+ Action);
 
-            var res = CookieAwareWebClient.Cooke.OpenRead(uri);
+            var res = CookieAwareWebClient.InstanceCookie.OpenRead(uri);
             //var res = CookieAwareWebClient.InstanceCookie.OpenRead(uri);
             htmlGet.Load(res);
             return htmlGet;
@@ -45,7 +45,9 @@ namespace StackOverflowTest.Registration
             nameValue.Add("RepeatPassword", testUser.RepeatPassword);
 
 
-            var res = CookieAwareWebClient.Cooke.UploadValues(uri, "POST", nameValue);
+            //var res = CookieAwareWebClient.Cooke.UploadValues(uri, "POST", nameValue);
+            //Stream streamContent = new MemoryStream(res);
+            var res = CookieAwareWebClient.InstanceCookie.UploadValues(uri, "POST", nameValue);
             Stream streamContent = new MemoryStream(res);
             htmlIndexPage.Load(streamContent);
 
@@ -56,7 +58,6 @@ namespace StackOverflowTest.Registration
         public void GivenClientIsOnIndexPage()
         {
             
-            CookieAwareWebClient.Cooke = new CookieAwareWebClient();
           
             var htmlIndexPage = GetRequest("Main","Index");         
             

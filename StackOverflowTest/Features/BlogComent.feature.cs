@@ -94,7 +94,7 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "BlogId"});
             table2.AddRow(new string[] {
-                        "477C17A6-071D-4387-A191-46005304D35E"});
+                        "ABF501EA-8A6C-4A69-A5A6-0E235E0CECFC"});
 #line 13
  testRunner.When("Proba clicks on blog details", ((string)(null)), table2);
 #line 16
@@ -105,7 +105,7 @@ this.ScenarioSetup(scenarioInfo);
                         "BlogId"});
             table3.AddRow(new string[] {
                         "Ovo je test komentart",
-                        "477C17A6-071D-4387-A191-46005304D35E"});
+                        "ABF501EA-8A6C-4A69-A5A6-0E235E0CECFC"});
 #line 17
  testRunner.When("Proba insert new Blog Comment", ((string)(null)), table3);
 #line 20

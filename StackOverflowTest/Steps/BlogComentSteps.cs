@@ -21,7 +21,7 @@ namespace StackOverflowTest
             HtmlDocument htmlBlogIndex = new HtmlDocument();
             Uri uri = new Uri("http://localhost:49853/Blog/Index");
 
-            var res = CookieAwareWebClient.Cooke.OpenRead(uri);
+            var res = CookieAwareWebClient.InstanceCookie.OpenRead(uri);
 
             htmlBlogIndex.Load(res);
 
@@ -56,7 +56,7 @@ namespace StackOverflowTest
             blogId.Add("id", comment.BlogId.ToString());
 
             //blogId
-            var res = CookieAwareWebClient.Cooke.UploadValues(uri, "POST", blogId);
+            var res = CookieAwareWebClient.InstanceCookie.UploadValues(uri, "POST", blogId);
             Stream streamContent = new MemoryStream(res);
             htmlDetailsBlog.Load(streamContent);
 
@@ -88,7 +88,7 @@ namespace StackOverflowTest
             blogCommentContent.Add("commentText", BlogComment.Commentar);
             blogCommentContent.Add("Id", BlogComment.BlogId.ToString());
 
-            var arryValues = CookieAwareWebClient.Cooke.UploadValues(uri, "POST", blogCommentContent);
+            var arryValues = CookieAwareWebClient.InstanceCookie.UploadValues(uri, "POST", blogCommentContent);
             Stream streamContent = new MemoryStream(arryValues);
 
             htmlAddCommentResponse.Load(streamContent);

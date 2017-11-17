@@ -25,7 +25,7 @@ namespace StackOverflowTest.Steps
 
             Uri uri = new Uri("http://localhost:49853/Blog/CreateBlog");
 
-            var res = CookieAwareWebClient.Cooke.OpenRead(uri);
+            var res = CookieAwareWebClient.InstanceCookie.OpenRead(uri);
             htmlNewBlog.Load(res);
 
             ScenarioContext.Current["Blog"] = htmlNewBlog;
@@ -55,7 +55,7 @@ namespace StackOverflowTest.Steps
             nameValue.Add("Titile", blog.Titile);
             nameValue.Add("Content", blog.Content);
 
-            var res = CookieAwareWebClient.Cooke.UploadValues(uri, "POST", nameValue);
+            var res = CookieAwareWebClient.InstanceCookie.UploadValues(uri, "POST", nameValue);
             Stream streamContent = new MemoryStream(res);
 
             htmlNewBlog.Load(streamContent);
