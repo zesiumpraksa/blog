@@ -18,62 +18,60 @@ namespace StackOverflowTest.Steps
     [Binding]
     public class BlogSteps
     {
-        [When(@"User Test click Create new blog")]
+        [When(@"User Proba click Create new blog")]
         public void WhenUserTestClickCreateNewBlog()
         {
-            HtmlDocument htmlGlobal = new HtmlDocument();
-            Uri uri = new Uri("http://localhost:49853/Blog/CreateBlog");
-            NameValueCollection nameValue = new NameValueCollection();           
-            var res = CookieAwareWebClient.Cooke.OpenRead(uri);
-            htmlGlobal.Load(res);
-            
-            ScenarioContext.Current["HtmlGet"] = htmlGlobal;
-            ScenarioContext.Current["uri"] = uri;          
+            HtmlDocument htmlNewBlog = new HtmlDocument();
 
-            Assert.NotNull(res, "values are empty");
-            
+            Uri uri = new Uri("http://localhost:49853/Blog/CreateBlog");
+
+            var res = CookieAwareWebClient.Cooke.OpenRead(uri);
+            htmlNewBlog.Load(res);
+
+            ScenarioContext.Current["Blog"] = htmlNewBlog;
+
+            Assert.NotNull(res, "New Blog is null");
+
         }
         [Then(@"User is on CreateNewBlogPage")]
         public void ThenUserIsOnCreateNewBlogPage()
         {
-            
-            var htmlGlobal = ScenarioContext.Current["HtmlGet"] as HtmlDocument ;
-            var uri = ScenarioContext.Current["uri"] as Uri;
-           // var res = CookieAwareWebClient.Cooke.OpenRead(uri);
-            
-            Assert.IsNotNull(htmlGlobal.DocumentNode.SelectNodes("//input[@id='Titile']"), "Ttile not found :(");
-            Assert.IsNotNull(htmlGlobal.DocumentNode.SelectNodes("//label [@for='Content']"), "Content not found :(");
-            Assert.IsNotNull(htmlGlobal.DocumentNode.SelectNodes("//input[@value='Create']"), "Submit create not found :(");
+            var htmlNewBlog = ScenarioContext.Current["Blog"] as HtmlDocument;
+
+            Assert.IsNotNull(htmlNewBlog.DocumentNode.SelectNodes("//input[@id='Titile']"), "Ttile not found :(");
+            Assert.IsNotNull(htmlNewBlog.DocumentNode.SelectNodes("//label [@for='Content']"), "Content not found :(");
+            Assert.IsNotNull(htmlNewBlog.DocumentNode.SelectNodes("//input[@value='Create']"), "Submit create not found :(");
         }
 
         [When(@"Test insert values for new blogs and press Create")]
         public void WhenUsernameInsertValuesForNewBlogs(Table table)
         {
-            var htmlGlobal = ScenarioContext.Current["HtmlGet"] as HtmlDocument;
-            var uri = ScenarioContext.Current["uri"] as Uri;
-            Blog blog = table.CreateInstance<Blog>();
-            NameValueCollection newBlogValues = new NameValueCollection();
+            var blog = table.CreateInstance<Blog>();
+            HtmlDocument htmlNewBlog = new HtmlDocument();
 
-            newBlogValues.Add("Titile", blog.Titile);
-            newBlogValues.Add("Content", blog.Content);
+            Uri uri = new Uri("http://localhost:49853/Blog/CreateBlog");
+            NameValueCollection nameValue = new NameValueCollection();
 
-            var values = CookieAwareWebClient.Cooke.UploadValues(uri, "POST", newBlogValues);
-            Stream streamNewBlogContent = new MemoryStream(values);
-            htmlGlobal.Load(streamNewBlogContent);
-            ScenarioContext.Current["HtmlBlogsPost"] = htmlGlobal;
-            Assert.NotNull(values, "values are null");          
+            nameValue.Add("Titile", blog.Titile);
+            nameValue.Add("Content", blog.Content);
+
+            var res = CookieAwareWebClient.Cooke.UploadValues(uri, "POST", nameValue);
+            Stream streamContent = new MemoryStream(res);
+
+            htmlNewBlog.Load(streamContent);
+            Assert.IsNotNull(res);
+
+            FeatureContext.Current["newBlog"] = htmlNewBlog;
         }
 
         [Then(@"User is on Blog Index page")]
         public void ThenUserIsOnBlogIndexPageWithNewBlogInformations()
         {
-            var htmlBlogs = ScenarioContext.Current["HtmlBlogsPost"] as HtmlDocument;          
-            
+            var htmlNewBlog = FeatureContext.Current["newBlog"] as HtmlDocument;
+            //var index = FeatureContext.Current["Index"] as HtmlDocument;
             //var Title = ScenarioContext.Current["Titile"] as string;
             //var Content = ScenarioContext.Current["Content"] as string;
-
-            //HtmlNodeCollection table = htmlBlogs.DocumentNode.SelectNodes("//table[@class='table']");            
-            Assert.IsNotNull(htmlBlogs.DocumentNode.SelectNodes("//table[@class='table']"), "Ttile not found :(");
+            Assert.IsNotNull(htmlNewBlog.DocumentNode.SelectNodes("//table[@class='table']"), "table not found :(");
         }
 
     }

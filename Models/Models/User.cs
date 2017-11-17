@@ -18,6 +18,8 @@ namespace Models.Models
         [DisplayName("User name")]
         public override string UserName { get; set; }     
 
+        public override string Email { get; set; }
+
         [DisplayName("First name")]
         public string FirstName { get; set; }
 
