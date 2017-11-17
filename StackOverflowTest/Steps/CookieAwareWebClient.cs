@@ -12,12 +12,7 @@ namespace StackOverflowTest.Steps
         //pokusaj singletona
         private static CookieAwareWebClient instanceCookie = null;
         private CookieContainer  cookieContainer= new CookieContainer();
-        private CookieCollection responseCookies = new CookieCollection();
-
-        //private CookieAwareWebClient()
-        //{
-
-        //}
+        private CookieCollection responseCookies = new CookieCollection();      
 
         public static CookieAwareWebClient InstanceCookie
         {
@@ -26,23 +21,12 @@ namespace StackOverflowTest.Steps
                 if (instanceCookie == null)
                 {
                     instanceCookie = new CookieAwareWebClient();
-
-
                 }
                 return instanceCookie;
             }
         }
 
-       // public static CookieAwareWebClient Cooke { get; set; }
-
-        private CookieAwareWebClient()
-        {  
-        }
-
-
-        //public CookieContainer CookieContainer { get; private set; }
-
-        //public CookieCollection ResponseCookies { get; set; }
+        private CookieAwareWebClient() { }
 
         protected override WebRequest GetWebRequest(Uri address)
         {
@@ -54,7 +38,7 @@ namespace StackOverflowTest.Steps
         protected override WebResponse GetWebResponse(WebRequest request)
         {
             var response = (HttpWebResponse)base.GetWebResponse(request);
-            
+
             responseCookies = response.Cookies;
             return response;
         }

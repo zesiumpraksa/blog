@@ -92,10 +92,12 @@
         </tr>           
             @foreach (var BlogComment in Model.BlogComments)
             {
+               
                 <tr>
                     @{
                         if (BlogComment.ParentCommentId == null)
                         {
+
                             <td>
                                 @Html.LabelForModel(BlogComment.Commentar)
 
@@ -111,10 +113,16 @@
                                         <input type="submit" value="Enter comment" />
                                     }
                                 </div>
+                                @foreach (var x in BlogComment.ReplayComment)
+                                {
+
+                                    <li>@x.Commentar</li>
+                                }
                             </td>
                             <td>
-                                <a href="@Url.Action("AuthorCommentDetails", "Author", new { blog = BlogComment.IdAuthor })">  @Html.LabelForModel(BlogComment.AuthorName)</a>
+                                <a href="@Url.Action("AuthorCommentDetails", "Author", new { blog = BlogComment.IdAuthor })">  @Html.LabelForModel(BlogComment.AuthorName)</a>   
                             </td>
+                                
                             <td>
                                 @Html.Label(BlogComment.Date.ToString())
                             </td>
@@ -132,15 +140,19 @@
                                     Replay
                                 </button>
                             </td>
-                        }
+                                    }
+                           
                     }
-                       
-                    }  
+                    @*@foreach (var x in BlogComment.ReplayComment)
+                    {
+                        <ul>
+                            <li>@x.Commentar</li>
+                        </ul>
+                    }*@
                 </tr>
-                
-                }
-      
 
+
+              }
     </table>
 </div>
 
