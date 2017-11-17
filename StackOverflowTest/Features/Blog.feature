@@ -6,12 +6,12 @@
 @mytag
 Scenario: Successful create new blog
 	
-	Given User is on Index page
-	When User enter UserName and Password in form and press Login	
+	Given Client is on Index page
+	When Client enter UserName and Password in form and press Login	
 	| Username | Password |
-	| Test     | Test1   |	
-	Then User is on his Dashboard	
-	When User Test click Create new blog
+	| Proba     | Proba1   |	
+	Then Proba is on his Dashboard	
+	When User Proba click Create new blog
 	Then User is on CreateNewBlogPage
 	When Test insert values for new blogs and press Create
 	| Titile     | Content      |

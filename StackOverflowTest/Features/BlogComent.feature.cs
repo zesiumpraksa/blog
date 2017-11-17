@@ -74,37 +74,41 @@ namespace StackOverflowTest.Features
 #line 5
 this.ScenarioSetup(scenarioInfo);
 #line 6
- testRunner.Given("User is on Index page");
+ testRunner.Given("Client is on Index page");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Username",
                         "Password"});
             table1.AddRow(new string[] {
-                        "Test",
-                        "Test1"});
+                        "Proba",
+                        "Proba1"});
 #line 7
- testRunner.When("User enter UserName and Password in form and press Login", ((string)(null)), table1);
+ testRunner.When("Client enter UserName and Password in form and press Login", ((string)(null)), table1);
 #line 10
- testRunner.Then("User is on his Dashboard");
+ testRunner.Then("Proba is on his Dashboard");
 #line 11
- testRunner.When("Test go to Blog Index page");
+ testRunner.When("Proba click on Blogs");
+#line 12
+ testRunner.Then("Proba is on Blog page");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "BlogId"});
             table2.AddRow(new string[] {
-                        "CBC48C18-47A6-46D3-B8FA-01334B07C406"});
-#line 12
- testRunner.Then("Test clicks on blog details", ((string)(null)), table2);
+                        "477C17A6-071D-4387-A191-46005304D35E"});
+#line 13
+ testRunner.When("Proba clicks on blog details", ((string)(null)), table2);
+#line 16
+ testRunner.Then("Proba is Blog Details page");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "Commentar",
                         "BlogId"});
             table3.AddRow(new string[] {
                         "Ovo je test komentart",
-                        "CBC48C18-47A6-46D3-B8FA-01334B07C406"});
-#line 15
- testRunner.When("Test insert new Blog Comment", ((string)(null)), table3);
-#line 18
+                        "477C17A6-071D-4387-A191-46005304D35E"});
+#line 17
+ testRunner.When("Proba insert new Blog Comment", ((string)(null)), table3);
+#line 20
  testRunner.Then("User is on Blog Index page");
 #line hidden
             this.ScenarioCleanup();

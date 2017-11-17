@@ -28,7 +28,7 @@ namespace StackOverflow.Controllers
             
             return View(blogService.GetAllBlogs());
         }
-        
+        [HttpPost]
         public ActionResult Details(Guid id)
         {           
             return View(blogService.GetById(id));

@@ -74,7 +74,9 @@ namespace StackOverflowTest.Features
 #line 5
 this.ScenarioSetup(scenarioInfo);
 #line 6
- testRunner.Given("Client is on Register page");
+ testRunner.Given("Client is on Index page");
+#line 7
+ testRunner.Then("Client go on Register page");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Email",
@@ -84,15 +86,15 @@ this.ScenarioSetup(scenarioInfo);
                         "Password",
                         "RepeatPassword"});
             table1.AddRow(new string[] {
-                        "test@test5",
-                        "Test55",
-                        "Test55",
-                        "Test55",
-                        "Test55",
-                        "Test55"});
-#line 7
+                        "test@test5311",
+                        "Test55311",
+                        "Test55311",
+                        "Test55311",
+                        "Test55311",
+                        "Test55311"});
+#line 8
  testRunner.When("Client enter valid values and press Create", ((string)(null)), table1);
-#line 10
+#line 11
  testRunner.Then("Client is on Index page");
 #line hidden
             this.ScenarioCleanup();
@@ -103,10 +105,12 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void UnsuccesfulRegistrationWithBadPasswordInput()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Unsuccesful registration with bad Password input", ((string[])(null)));
-#line 14
-this.ScenarioSetup(scenarioInfo);
 #line 15
- testRunner.Given("Client is on Register page");
+this.ScenarioSetup(scenarioInfo);
+#line 16
+ testRunner.Given("Client is on Index page");
+#line 17
+ testRunner.Then("Client go on Register page");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Email",
@@ -122,9 +126,9 @@ this.ScenarioSetup(scenarioInfo);
                         "test",
                         "test",
                         "test"});
-#line 16
+#line 18
  testRunner.When("Client enter invalid values and press Create", ((string)(null)), table2);
-#line 19
+#line 21
  testRunner.Then("Client get Password warning message");
 #line hidden
             this.ScenarioCleanup();
@@ -135,10 +139,12 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void UnsuccesfulRegistrationWithBadEmailInput()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Unsuccesful registration with bad Email input", ((string[])(null)));
-#line 22
+#line 24
 this.ScenarioSetup(scenarioInfo);
-#line 23
- testRunner.Given("Client is on Register page");
+#line 25
+ testRunner.Given("Client is on Index page");
+#line 26
+ testRunner.Then("Client go on Register page");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "Email",
@@ -154,9 +160,9 @@ this.ScenarioSetup(scenarioInfo);
                         "test4",
                         "Test4",
                         "Test4"});
-#line 24
- testRunner.When("Client enter invalid values and press Create", ((string)(null)), table3);
 #line 27
+ testRunner.When("Client enter invalid values and press Create", ((string)(null)), table3);
+#line 30
  testRunner.Then("Client get another  warning message");
 #line hidden
             this.ScenarioCleanup();
@@ -167,10 +173,12 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void UnsuccesfulRegistrationWithoutInputs()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Unsuccesful registration without inputs", ((string[])(null)));
-#line 30
+#line 33
 this.ScenarioSetup(scenarioInfo);
-#line 31
- testRunner.Given("Client is on Register page");
+#line 34
+ testRunner.Given("Client is on Index page");
+#line 35
+ testRunner.Then("Client go on Register page");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Email",
@@ -186,9 +194,9 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         "",
                         ""});
-#line 32
+#line 36
  testRunner.When("Client enter invalid values and press Create", ((string)(null)), table4);
-#line 35
+#line 39
  testRunner.Then("Client get warning message for required fields");
 #line hidden
             this.ScenarioCleanup();
