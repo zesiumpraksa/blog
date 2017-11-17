@@ -20,7 +20,7 @@ namespace StackOverflowTest.Steps
     {
         [When(@"User Proba click Create new blog")]
         public void WhenUserTestClickCreateNewBlog()
-        {           
+        {
             HtmlDocument htmlNewBlog = new HtmlDocument();
 
             Uri uri = new Uri("http://localhost:49853/Blog/CreateBlog");
@@ -36,7 +36,7 @@ namespace StackOverflowTest.Steps
         [Then(@"User is on CreateNewBlogPage")]
         public void ThenUserIsOnCreateNewBlogPage()
         {
-            var htmlNewBlog = ScenarioContext.Current["Blog"] as HtmlDocument;           
+            var htmlNewBlog = ScenarioContext.Current["Blog"] as HtmlDocument;
 
             Assert.IsNotNull(htmlNewBlog.DocumentNode.SelectNodes("//input[@id='Titile']"), "Ttile not found :(");
             Assert.IsNotNull(htmlNewBlog.DocumentNode.SelectNodes("//label [@for='Content']"), "Content not found :(");

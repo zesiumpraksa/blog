@@ -10,6 +10,7 @@ using System.IO;
 using System.Collections.Specialized;
 using System;
 using StackOverflowTest.Steps;
+using StackOverflowTest.Registration;
 
 namespace StackOverflowTest.Login
 {
@@ -18,110 +19,90 @@ namespace StackOverflowTest.Login
     public class LoginSteps
     {
 
-        private async Task CheckIndexPage()
-        {
-            HtmlDocument htmlGlobal = new HtmlDocument();
-            var client = new HttpClient();
-            var responseGetMsg = client.GetAsync("http://localhost:49853/Main/Index");
-
-            var responseContent = await responseGetMsg.Result.Content.ReadAsStreamAsync();
-            var responseContentString = await responseGetMsg.Result.Content.ReadAsStringAsync();
-
-            htmlGlobal.Load(responseContent);
-            ScenarioContext.Current["HtmlGet"] = htmlGlobal;
-        }
-
-        private void CheckLogIn(Table table)
-        {
-            CookieAwareWebClient.Cooke = new CookieAwareWebClient();
-            HtmlDocument htmlGlobal = new HtmlDocument();
-            var user = table.CreateInstance<User>();
-
-            NameValueCollection nameValue = new NameValueCollection();
-
-            nameValue.Add("username", user.UserName);
-            nameValue.Add("password", user.Password);
-
-            Uri uri = new Uri("http://localhost:49853/Main/Index");
-            var res = CookieAwareWebClient.Cooke.UploadValues(uri, "POST", nameValue);
-            //var response = Encoding.UTF8.GetString(res);
-            //var values = CookieAwareWebClient.Cooke.CookieContainer.GetCookies(uri);
-            Stream streamContent = new MemoryStream(res);
-
-
-            htmlGlobal.Load(streamContent);
-            ScenarioContext.Current["HtmlPost"] = htmlGlobal;
-        }
-
-
-        
-        [When(@"Client enter UserName and Password in form and press Login")]
-        public void WhenClientEnterUserNameAndPasswordInFormAndPressLogin(Table table)
+        private HtmlDocument PostLogin(Table table)
         {
             var testUser = table.CreateInstance<User>();
-             
-            HtmlDocument htmlDashboardPage = new HtmlDocument();
+
+            HtmlDocument htmlIndexPage = new HtmlDocument();
 
             Uri uri = new Uri("http://localhost:49853/Main/Index");
             NameValueCollection nameValue = new NameValueCollection();
-           
+
             nameValue.Add("UserName", testUser.UserName);
             nameValue.Add("Password", testUser.Password);
 
             var res = CookieAwareWebClient.Cooke.UploadValues(uri, "POST", nameValue);
             Stream streamContent = new MemoryStream(res);
-            htmlDashboardPage.Load(streamContent);
-            // CheckLogIn(table);
+            htmlIndexPage.Load(streamContent);
 
-            ScenarioContext.Current["htmlDashboard"] = htmlDashboardPage; 
-            Assert.IsNotNull(htmlDashboardPage);
+            return htmlIndexPage;
+        }
+
+
+
+        [When(@"Client enter UserName and Password in form and press Login")]
+        public void WhenClientEnterUserNameAndPasswordInFormAndPressLogin(Table table)
+        {
+            HtmlDocument htmlIndexPage = PostLogin(table);          
+
+            ScenarioContext.Current["html"] = htmlIndexPage;
+            Assert.IsNotNull(htmlIndexPage);
         }
 
         [Then(@"Proba is on his Dashboard")]
         public void ThenUserIsOnHisDashboard()
         {
-            var htmlDashboard = ScenarioContext.Current["htmlDashboard"] as HtmlDocument;
-            //FeatureContext.Current["htmlDashboard"] = htmlDashboard;
-            Assert.IsNotNull(htmlDashboard.DocumentNode.SelectNodes("//h2[@id='Dashboard']"), "Dashboard not found :(");
+            var html = ScenarioContext.Current["html"] as HtmlDocument;
+            
+            Assert.IsNotNull(html.DocumentNode.SelectNodes("//h2[@id='Dashboard']"), "Dashboard not found :(");
         }
 
         //    //warning1 scenario
 
-        //    [Then(@"User is on Index page with first warning information")]
-        //    public void ThenUserIsOnIndexPageWithWarningInformation()
-        //    {
-        //        var htmlObject = ScenarioContext.Current["HtmlPost"] as HtmlDocument;
-        //        var warningMsg = htmlObject.GetElementbyId("warning").InnerText;
-        //        Assert.AreEqual(" Bad username or password  ", warningMsg);
-        //    }
+        [Then(@"User is on Index page with first warning information")]
+        public void ThenUserIsOnIndexPageWithWarningInformation()
+        {
+            var html = ScenarioContext.Current["html"] as HtmlDocument;
+            var warningMsg = html.GetElementbyId("warning").InnerText;
+            Assert.AreEqual(" Bad username or password  ", warningMsg);
+        }
 
         //    //warning2 scenario
 
-        //    [Then(@"User is on Index page with second warning information")]
-        //    public void ThenUserIsOnIndexPageWithSecondWarningInformation()
-        //    {
-        //        var htmlObject = ScenarioContext.Current["HtmlPost"] as HtmlDocument;
-        //        var warningMsg = htmlObject.GetElementbyId("warning").InnerText;
-        //        Assert.AreEqual("Set username or password   ", warningMsg);
-        //    }
+        [Then(@"User is on Index page with second warning information")]
+        public void ThenUserIsOnIndexPageWithSecondWarningInformation()
+        {
+            var htmlObject = ScenarioContext.Current["html"] as HtmlDocument;
+            var warningMsg = htmlObject.GetElementbyId("warning").InnerText;
+            Assert.AreEqual("Set username or password   ", warningMsg);
+        }
 
         //    //LogOut
 
-        //    [When(@"User click on Logout")]
-        //    public void WhenUserClickOnLogout()
-        //    {
-        //        CheckIndexPage().Wait();
-        //        var htmlObject = ScenarioContext.Current["HtmlGet"] as HtmlDocument;
-        //        Assert.IsNotNull(htmlObject.DocumentNode.SelectNodes("//input[@value='Logout']"), "submit button for log out is not found :(");
-        //    }
+        [When(@"User click on Logout")]
+        public void WhenUserClickOnLogout()
+        {
 
-        //    [Then(@"User is on on Index page and have message to log in")]
-        //    public void ThenUserIsOnOnIndexPageAndHaveMessageToLogIn()
-        //    {
-        //        var htmlObject = ScenarioContext.Current["HtmlGet"] as HtmlDocument;
-        //        var warningMsg = htmlObject.GetElementbyId("warning").InnerText;
-        //        Assert.AreEqual("  Not logged in ", warningMsg);
-        //    }
-        //}
+            // Assert.IsNotNull(html.DocumentNode.SelectNodes("//input[@value='Logout']"), "submit button for log out is not found :(");
+
+            var htmlIndexPage = RegistrationSteps.GetRequest("Main", "LogOut");
+            Assert.IsNotNull(htmlIndexPage);
+            ScenarioContext.Current["htmlIndex"] = htmlIndexPage;
+        }
+
+        [Then(@"User is on on Index page and have message to log in")]
+        public void ThenUserIsOnOnIndexPageAndHaveMessageToLogIn()
+        {
+            var htmlIndex = ScenarioContext.Current["htmlIndex"] as HtmlDocument;
+            var warningMsg = htmlIndex.GetElementbyId("warning").InnerText;
+
+            Assert.IsNotNull(htmlIndex.DocumentNode.SelectNodes("//div[@class='imgBackground']"), "imgBackground not found :(");
+            Assert.IsNotNull(htmlIndex.DocumentNode.SelectNodes("//input[@id='UserName']"), "UserName not found :(");
+            Assert.IsNotNull(htmlIndex.DocumentNode.SelectNodes("//input[@id='Password']"), "Password not found :(");
+            Assert.IsNotNull(htmlIndex.DocumentNode.SelectNodes("//input[@type='submit']"), "submit button not found :(");
+
+            Assert.AreEqual("  Not logged in ", warningMsg);
+        }
     }
 }
+

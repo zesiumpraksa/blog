@@ -9,13 +9,36 @@ namespace StackOverflowTest.Steps
 {
     class CookieAwareWebClient: WebClient
     {
+        //pokusaj singletona
+        //private static CookieAwareWebClient instanceCookie = null;
+
+        //private CookieAwareWebClient()
+        //{
+
+        //}
+
+        //public static CookieAwareWebClient InstanceCookie
+        //{
+        //    get
+        //    {
+        //        if (instanceCookie == null)
+        //        {
+        //            instanceCookie = new CookieAwareWebClient();
+
+        //            var CookieContainer = new CookieContainer();
+        //            var ResponseCookies = new CookieCollection();
+        //        }
+        //        return InstanceCookie;
+        //    }
+        //}
+
         public static CookieAwareWebClient Cooke { get; set; }
 
         public CookieAwareWebClient()
         {            
             Cooke = this;
             CookieContainer = new CookieContainer();
-            this.ResponseCookies = new CookieCollection();
+            ResponseCookies = new CookieCollection();
         }
 
 

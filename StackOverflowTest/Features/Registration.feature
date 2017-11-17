@@ -7,13 +7,14 @@ Scenario: Succesful registration
 	Then Client go on Register page
 	When Client enter valid values and press Create
 	| Email     | UserName | FirstName | LastName | Password | RepeatPassword |
-	| test@test5 | Test55     | Test55      | Test55     | Test55    | Test55          |
+	| test@test5311 | Test55311     | Test55311      | Test55311     | Test55311    | Test55311          |
 	Then Client is on Index page
 	
 
 
 Scenario: Unsuccesful registration with bad Password input
-	Given Client is on Register page
+	Given Client is on Index page
+	Then Client go on Register page
 	When Client enter invalid values and press Create
 	| Email     | UserName | FirstName | LastName | Password | RepeatPassword |
 	| testMail | test     | test      | test   | test    | test          |
@@ -21,7 +22,8 @@ Scenario: Unsuccesful registration with bad Password input
 
 
 Scenario: Unsuccesful registration with bad Email input
-	Given Client is on Register page
+	Given Client is on Index page
+	Then Client go on Register page
 	When Client enter invalid values and press Create
 	| Email | UserName | FirstName | LastName | Password | RepeatPassword |
 	|   testMail    |     test4     |  test4         |    test4      |   Test4       |     Test4      |  
@@ -29,11 +31,13 @@ Scenario: Unsuccesful registration with bad Email input
 
 
 Scenario: Unsuccesful registration without inputs
-	Given Client is on Register page
+	Given Client is on Index page
+	Then Client go on Register page
 	When Client enter invalid values and press Create
 	| Email | UserName | FirstName | LastName | Password | RepeatPassword |
 	|                |          |           |          |          |                |	
 	Then Client get warning message for required fields
+
 
 
 

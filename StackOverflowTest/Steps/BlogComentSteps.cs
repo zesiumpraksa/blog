@@ -28,7 +28,7 @@ namespace StackOverflowTest
             Assert.IsNotNull(res);
 
             ScenarioContext.Current["htmlBlogIndex"] = htmlBlogIndex;
-           
+
         }
 
         [Then(@"Proba is on Blog page")]
@@ -36,11 +36,11 @@ namespace StackOverflowTest
         {
             var htmlBlogIndex = ScenarioContext.Current["htmlBlogIndex"] as HtmlDocument;
             var tableNode = htmlBlogIndex.DocumentNode.SelectSingleNode("//table[@class='table']");
-            IEnumerable<HtmlNode> lista = tableNode.ChildNodes.Nodes();           
+            IEnumerable<HtmlNode> lista = tableNode.ChildNodes.Nodes();
 
             //potrebna je kvalitetnija provera
-            Assert.IsNotNull(htmlBlogIndex.DocumentNode.SelectNodes("//table[@class='table']"),"Table is not found:(");
-            
+            Assert.IsNotNull(htmlBlogIndex.DocumentNode.SelectNodes("//table[@class='table']"), "Table is not found:(");
+
         }
 
         [When(@"Proba clicks on blog details")]
@@ -52,7 +52,7 @@ namespace StackOverflowTest
             Uri uri = new Uri("http://localhost:49853/Blog/Details");
 
             NameValueCollection blogId = new NameValueCollection();
-            
+
             blogId.Add("id", comment.BlogId.ToString());
 
             //blogId
