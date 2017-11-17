@@ -4,7 +4,7 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<link href="~/Content/Blog/BlogDetails.css" rel="stylesheet" />
 <h2>Details</h2>
 
 <div class="detailsHeader">    
@@ -47,7 +47,7 @@
 
 <div class="detailsTablePosition">
     <div>
-        @using (Html.BeginForm("CreateComment", "Blog", FormMethod.Get, new { id = Model.Id }))
+        @using (Html.BeginForm("CreateComment", "Blog", FormMethod.Get))
         {
             <div class="form-group">
                 @Html.LabelFor(model => model.BlogComments, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -67,6 +67,10 @@
         }
     </div>
 
+    
+    
+            @*odgovori bloga*@
+
     <table class="table">
         <tr>
             <th>
@@ -82,41 +86,73 @@
                 @Html.Label("Raiting")
             </th>
             <th>
-                @Html.Label("Replay")
+                @Html.Label("")
             </th>
 
-        </tr>
-
-        <ul class="list-group commentsArea">
-            @foreach (var x in Model.BlogComments)
+        </tr>           
+            @foreach (var BlogComment in Model.BlogComments)
             {
+
+               
+
                 <tr>
-                    <td>
-                        @Html.LabelForModel(x.Commentar)
-                    </td>
-                    <td>                       
-                        <a href="@Url.Action("AuthorCommentDetails", "Author",new { id = x.IdAuthor})">  @Html.LabelForModel(x.AuthorName)</a>        
-                                      
-                    </td>
-                    <td>                       
-                        @Html.Label(x.Date.ToString())                  
-                       
-                    </td>
-                    <td>
-                        @Html.Label(x.Raiting.ToString())                        
-                        <a href="@Url.Action("VoteUp", "Blog",new { IdCommentar = x.Id, blogId = x.BlogId })">
-                            <span class="glyphicon glyphicon-chevron-up"></span>
-                        </a>
-                        <a href="@Url.Action("VoteDown", "Blog",new { IdCommentar = x.Id })">
-                            <span class="glyphicon glyphicon-chevron-down"></span>
-                        </a>                           
-                     </td>
+                    @{
+                        if (BlogComment.ParentCommentId == null)
+                        {
+                            <td>
+                                @Html.LabelForModel(BlogComment.Commentar)
+
+                                @{var BlogCommId = BlogComment.Id; }
+
+
+                                <div id=@BlogComment.Id class="collapse">
+                                    @using (Html.BeginForm("CreateReplayComment", "Blog", FormMethod.Post))
+                                    {
+                                        @Html.TextArea("ReplyComment", null, new { @class = "form-control" })
+                                        @Html.TextAreaFor(b => BlogCommId, new { style = "display:none;" })
+                                        @Html.TextAreaFor(blog => blog.Id, new { style = "display:none;" })
+                                        <input type="submit" value="Enter comment" />
+                                    }
+                                </div>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("AuthorCommentDetails", "Author", new { blog = BlogComment.IdAuthor })">  @Html.LabelForModel(BlogComment.AuthorName)</a>
+                            </td>
+                            <td>
+                                @Html.Label(BlogComment.Date.ToString())
+                            </td>
+                            <td>
+                                @Html.Label(BlogComment.Raiting.ToString())
+                                <a href="@Url.Action("VoteUp", "Blog", new { IdCommentar = BlogComment.Id, blogId = BlogComment.BlogId })">
+                                    <span class="glyphicon glyphicon-chevron-up"></span>
+                                </a>
+                                <a href="@Url.Action("VoteDown", "Blog", new { IdCommentar = BlogComment.Id })">
+                                    <span class="glyphicon glyphicon-chevron-down"></span>
+                                </a>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-info" data-toggle="collapse" data-target="@("#" + BlogComment.Id)">
+                                    Replay
+                                </button>
+                            </td>
+                        }
+                    }
+                        @foreach (var Replay in BlogComment.ReplayComment)
+                        {
+
+                            @Html.LabelForModel(Replay.Commentar)
+                        }
+                    }  
                 </tr>
-            }
-        </ul>
+                
+                }
+      
+
     </table>
 </div>
 
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>
+@Scripts.Render("~/bundles/jquery")
+<script src="~/Content/BlogJs/BlogCommentReplay.js"></script>

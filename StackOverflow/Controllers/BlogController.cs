@@ -30,8 +30,7 @@ namespace StackOverflow.Controllers
         }
         
         public ActionResult Details(Guid id)
-        {
-           
+        {           
             return View(blogService.GetById(id));
         }       
 
@@ -172,6 +171,29 @@ namespace StackOverflow.Controllers
             blogService.UpdateBlogComment();
             return RedirectToAction("Index", "Blog");
         }       
+
+        [HttpPost]
+        public ActionResult CreateReplayComment(Guid BlogCommId, string ReplyComment, Guid Id)
+        {
+            BlogComment ParentCommentar = blogService.getCommentForId(BlogCommId);
+
+            BlogComment replayComment = new BlogComment() {
+                Id = Guid.NewGuid(),
+                Commentar = ReplyComment,
+                AuthorName = User.Identity.Name,
+                IdAuthor = new Guid(User.Identity.GetUserId()),
+                ParentCommentId = ParentCommentar.Id,
+                BlogId = ParentCommentar.BlogId
+            };
+
+
+            ParentCommentar.ReplayComment.Add(replayComment);
+
+            blogService.SaveComment(replayComment);
+           
+
+            return RedirectToAction("Details", new {Id = Id });
+        }
 
         private bool SaveBlogWithNewAuthor(Blog blog, Guid idAuthor, string blogAuthor)
         {

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,8 +25,12 @@ namespace Models.Models
 
         public short Raiting { get; set; }
 
-        public List<BlogComment> ReplayComment { get; set; }
-        
+        public List<BlogComment> ReplayComment { get; set; } = new List<BlogComment>();
+
+        [ForeignKey("ParentComment")]
+        public Guid? ParentCommentId { get; set; }        
+        public virtual BlogComment ParentComment { get; set; }
+
         public Guid BlogId { get; set; }
         public virtual Blog Blog { get; set; }
 
