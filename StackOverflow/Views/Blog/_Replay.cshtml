@@ -1,0 +1,36 @@
+﻿@model Models.Models.BlogComment
+
+<div style="margin-left:10px">
+
+   @Html.LabelFor(item=>item.Commentar)
+
+
+
+    @
+<div id=@ class="collapse">
+    @using (Html.BeginForm("CreateReplayComment", "Blog", FormMethod.Post))
+    {
+        @Html.TextArea("ReplyComment", null, new { @class = "form-control" })
+        @Html.TextAreaFor(b => b.Id, new { style = "display:none;" })
+        @Html.TextAreaFor(blog => blog.Id, new { style = "display:none;" })
+        <input type="submit" value="Enter comment" />
+    }
+</div>
+
+@foreach (var x in Comment.ReplayComment)
+{
+    @Html.Partial("_ReplayComment", x)
+    <div id=@x.Id class="collapse">
+        @using (Html.BeginForm("CreateReplayComment1", "Blog", FormMethod.Post))
+        {
+            var ParentId = x.Id;
+            @Html.TextArea("ReplyComment", null, new { @class = "form-control" })
+            @Html.TextAreaFor(b => ParentId, new { style = "display:none;" })
+            @Html.TextAreaFor(blog => blog.Id, new { style = "display:none;" })
+            <input type="submit" value="Enter comment" />
+        }
+    </div>
+
+}
+
+</div>

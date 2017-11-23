@@ -296,6 +296,9 @@
     <Content Include="Views\Author\getBlogsByAuthor.cshtml" />
     <Content Include="Views\BlogComment\Index.cshtml" />
     <Content Include="Views\Author\AuthorCommentDetails.cshtml" />
+    <Content Include="Views\Blog\_ReplayComment.cshtml" />
+    <Content Include="Views\Blog\_AuthorReplay.cshtml" />
+    <Content Include="Views\Blog\_Replay.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

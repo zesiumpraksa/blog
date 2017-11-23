@@ -40,6 +40,35 @@ namespace StackOverflow.Controllers
             return View(blogService.GetById(new Guid(id)));
         }
 
+        //pokusaj1
+
+        public string RenderPartial(List<BlogComment> comments )
+        {
+            foreach (BlogComment comm in comments)
+            {
+                if (comm.ReplayComment.Count == 0)
+                {
+                    return comm.Commentar;                    
+                }
+                else
+                {
+                    RenderPartial(comm.ReplayComment);
+                }
+            }
+            return "";
+        }
+
+        [HttpGet]
+        public ActionResult Details1(string id)
+        {
+            Blog blog = blogService.GetById(new Guid(id));
+            
+            
+            return View();
+        }
+
+
+
         public ActionResult AuthorDetail(Guid id)
         {
             var author = autorService.GetById(id);
@@ -200,6 +229,32 @@ namespace StackOverflow.Controllers
 
             return RedirectToAction("Details", new {Id = Id });
         }
+
+        [HttpPost]
+        public ActionResult CreateReplayComment1(Guid ParentId, string ReplyComment, Guid Id)
+        {
+            BlogComment ParentCommentar = blogService.getCommentForId(ParentId);
+
+            BlogComment replayComment = new BlogComment()
+            {
+                Id = Guid.NewGuid(),
+                Commentar = ReplyComment,
+                AuthorName = User.Identity.Name,
+                IdAuthor = new Guid(User.Identity.GetUserId()),
+                ParentCommentId = ParentCommentar.Id,
+                BlogId = ParentCommentar.BlogId
+            };
+
+
+            ParentCommentar.ReplayComment.Add(replayComment);
+
+            blogService.SaveComment(replayComment);
+
+
+            return RedirectToAction("Details", new { Id = Id });
+        }
+
+
 
         private bool SaveBlogWithNewAuthor(Blog blog, Guid idAuthor, string blogAuthor)
         {
