@@ -218,7 +218,8 @@ namespace StackOverflow.Controllers
                 AuthorName = User.Identity.Name,
                 IdAuthor = new Guid(User.Identity.GetUserId()),
                 ParentCommentId = ParentCommentar.Id,
-                BlogId = ParentCommentar.BlogId
+                BlogId = ParentCommentar.BlogId,
+                Date = DateTime.Now
             };
 
 
@@ -231,9 +232,9 @@ namespace StackOverflow.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateReplayComment1(Guid ParentId, string ReplyComment, Guid Id)
+        public ActionResult CreateReplayComment1(Guid idReplayComment, string ReplyComment, Guid Id)
         {
-            BlogComment ParentCommentar = blogService.getCommentForId(ParentId);
+            BlogComment ParentCommentar = blogService.getCommentForId(idReplayComment);
 
             BlogComment replayComment = new BlogComment()
             {
@@ -242,7 +243,8 @@ namespace StackOverflow.Controllers
                 AuthorName = User.Identity.Name,
                 IdAuthor = new Guid(User.Identity.GetUserId()),
                 ParentCommentId = ParentCommentar.Id,
-                BlogId = ParentCommentar.BlogId
+                BlogId = ParentCommentar.BlogId,
+                Date = DateTime.Now
             };
 
 

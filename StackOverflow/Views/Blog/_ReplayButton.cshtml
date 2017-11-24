@@ -1,0 +1,12 @@
+﻿
+@model Models.Models.BlogComment
+<div class="replayShift">
+    <button   type="button" class="btn btn-info replayCommentButton" data-toggle="collapse" data-target="@("#" + Model.Id)">
+        Replay
+    </button>
+    <br />
+    @foreach (var x in Model.ReplayComment)
+    {
+        @Html.Partial("_ReplayButton", x)
+    }
+</div>

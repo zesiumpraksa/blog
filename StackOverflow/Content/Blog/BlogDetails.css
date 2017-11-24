@@ -7,3 +7,12 @@ tr>td::after(2){
 .problemClass{
     color:red;
 }
+
+.replayCommentButton{
+    padding:unset;
+    font-size:11px;
+}
+
+.replayShift{
+    margin-left:10px;
+}

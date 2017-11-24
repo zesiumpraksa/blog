@@ -298,7 +298,9 @@
     <Content Include="Views\Author\AuthorCommentDetails.cshtml" />
     <Content Include="Views\Blog\_ReplayComment.cshtml" />
     <Content Include="Views\Blog\_AuthorReplay.cshtml" />
-    <Content Include="Views\Blog\_Replay.cshtml" />
+    <Content Include="Views\Blog\_ReplayButton.cshtml" />
+    <Content Include="Views\Blog\_RaitingReplay.cshtml" />
+    <Content Include="Views\Blog\_ReplayDate.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

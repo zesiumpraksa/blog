@@ -1,0 +1,16 @@
+﻿@model Models.Models.BlogComment
+<div class="replayShift">
+    <span >@Model.Raiting</span>
+
+    <a href="@Url.Action("VoteUp", "Blog", new { IdCommentar = Model.Id, blogId = Model.BlogId })">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+    </a>
+    <a href="@Url.Action("VoteDown", "Blog", new { IdCommentar = Model.Id })">
+        <span class="glyphicon glyphicon-chevron-down"></span>
+    </a>
+
+    @foreach (var x in Model.ReplayComment)
+    {
+        @Html.Partial("_RaitingReplay", x)
+    }
+</div>

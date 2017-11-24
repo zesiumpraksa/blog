@@ -4,10 +4,10 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link href="~/Content/Blog/BlogDetails.css" rel="stylesheet" />
+
 <h2>Details</h2>
 
-<div class="detailsHeader">    
+<div class="detailsHeader">
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -67,137 +67,128 @@
         }
     </div>
 
-    
-    
-            @*odgovori bloga*@
 
-    <table class="table">
-        <tr>
-            <th>
-                @Html.Label("Comment")
-            </th>
-            <th>
-                @Html.Label("Author")
-            </th>
-            <th>
-                @Html.Label("Date")
-            </th>
-            <th>
-                @Html.Label("Raiting")
-            </th>
-            <th>
-                @Html.Label("")
-            </th>
 
-        </tr>           
+    @*odgovori bloga*@
+    <div class="container">
+
+        <table class="table">
+            <tr>
+                <th class="col-xs-4">
+                    @Html.Label("Comment")
+                </th>
+                <th>
+                    @Html.Label("Author")
+                </th>
+                <th>
+                    @Html.Label("Date")
+                </th>
+                <th>
+                    @Html.Label("Raiting")
+                </th>
+                <th>
+                    @Html.Label("")
+                </th>
+
+            </tr>
             @foreach (var Comment in Model.BlogComments)
             {
 
                 <tr>
-                    @{
-                        if (Comment.ParentCommentId == null)
-                        {
-                            //Comment
-                            <td>
-
-                                @functions
-                                {
-                                    public void Replay(string comment)
-                                    {
-                                        
-                                    }
-
-                                }
-
-
-
-
-                                @Html.LabelForModel(Comment.Commentar)
-
-                                @{var BlogCommId = Comment.Id; }
-
-
-                                <div id=@Comment.Id class="collapse">
-                                    @using (Html.BeginForm("CreateReplayComment", "Blog", FormMethod.Post))
-                                    {
-                                        @Html.TextArea("ReplyComment", null, new { @class = "form-control" })
-                                        @Html.TextAreaFor(b => BlogCommId, new { style = "display:none;" })
-                                        @Html.TextAreaFor(blog => blog.Id, new { style = "display:none;" })
-                                        <input type="submit" value="Enter comment" />
-                                    }
-                                </div>
+                    
+                        @{
+                            if (Comment.ParentCommentId == null)
+                            {
                                 
-                                @foreach (var x in Comment.ReplayComment)
-                                {
-                                    @Html.Partial("_ReplayComment",x)
-                                    <div id=@x.Id class="collapse">
-                                        @using (Html.BeginForm("CreateReplayComment1", "Blog", FormMethod.Post))
+                                    //Comment
+                                    <td>
+
+                                        @Html.LabelForModel(Comment.Commentar)
+
+                                        @{var BlogCommId = Comment.Id; }
+
+
+                                        <div id=@Comment.Id class="collapse row">
+                                            @using (Html.BeginForm("CreateReplayComment", "Blog", FormMethod.Post))
+                                            {
+                                                <div class="col-6">
+                                                    @Html.TextArea("ReplyComment", null, new { @class = "form-control" })
+                                                    @Html.TextAreaFor(b => BlogCommId, new { style = "display:none;" })
+                                                </div>
+                                                <div class="col-6">
+                                                    @Html.TextAreaFor(blog => blog.Id, new { style = "display:none;" })
+                                                </div>
+
+                                                <input type="submit" value="Enter comment" />
+                                            }
+                                        </div>
+
+
+                                        @foreach (var comment in Comment.ReplayComment)
                                         {
-                                            var ParentId = x.Id;
-                                            @Html.TextArea("ReplyComment", null, new { @class = "form-control" })
-                                            @Html.TextAreaFor(b => ParentId, new { style = "display:none;" })
-                                            @Html.TextAreaFor(blog => blog.Id, new { style = "display:none;" })
-                                            <input type="submit" value="Enter comment" />
+                                            @Html.Partial("_ReplayComment", comment)
                                         }
-                                    </div>
-                                }
-                            </td>
-                            //Author
-                            <td>
-                                <a href="@Url.Action("AuthorCommentDetails", "Author", new { blog = Comment.IdAuthor })">  @Html.LabelForModel(Comment.AuthorName)</a>                                  
-                                @foreach (var x in Comment.ReplayComment)
-                                {
-                                    @Html.Partial("_AuthorReplay", x)
-                                }
-                            </td>
-                            //Date                                
-                            <td>
-                                @Html.Label(Comment.Date.ToString())
-                                @foreach (var x in Comment.ReplayComment)
-                                {
-                                    @x.Date
-                                }
-                            </td>
-                            //Raiting
-                            <td>
-                                @Html.Label(Comment.Raiting.ToString())
-                                <a href="@Url.Action("VoteUp", "Blog", new { IdCommentar = Comment.Id, blogId = Comment.BlogId })">
-                                    <span class="glyphicon glyphicon-chevron-up"></span>
-                                </a>
-                                <a href="@Url.Action("VoteDown", "Blog", new { IdCommentar = Comment.Id })">
-                                    <span class="glyphicon glyphicon-chevron-down"></span>
-                                </a>
-                                @foreach (var x in Comment.ReplayComment)
-                                {
-                                    <span style="margin-left:10px">@x.Raiting</span><br />
-                                }
-                            </td>
-                            //Button
-                            <td>
-                                <button type="button" class="btn btn-info" data-toggle="collapse" data-target="@("#" + Comment.Id)">
-                                    Replay
-                                </button>
-                                @foreach (var x in Comment.ReplayComment)
-                                {
-                                    <br />
-                                    <button style="margin-left:10px" type="button" class="btn btn-info" data-toggle="collapse" data-target="@("#" + x.Id)">
-                                        Replay
-                                    </button>
-                                }
-                            </td>
-                         }
-                           
-                    }
-                   
+
+                                    </td>
+                               
+                                            //Author
+                                        <td>
+                                            <a href="@Url.Action("AuthorCommentDetails", "Author", new { blog = Comment.IdAuthor })">  @Html.LabelForModel(Comment.AuthorName)</a>
+                                            @foreach (var x in Comment.ReplayComment)
+                                            {
+                                                @Html.Partial("_AuthorReplay", x)
+                                            }
+                                        </td>
+                                        //Date
+                                        <td>
+                                            @Html.Label(Comment.Date.ToString())
+                                            @foreach (var x in Comment.ReplayComment)
+                                            {
+                                                @Html.Partial("_ReplayDate",x)
+                                            }
+                                        </td>
+                                        //Raiting
+                                        <td>
+                                            @Html.Label(Comment.Raiting.ToString())
+                                            <a href="@Url.Action("VoteUp", "Blog", new { IdCommentar = Comment.Id, blogId = Comment.BlogId })">
+                                                <span class="glyphicon glyphicon-chevron-up"></span>
+                                            </a>
+                                            <a href="@Url.Action("VoteDown", "Blog", new { IdCommentar = Comment.Id })">
+                                                <span class="glyphicon glyphicon-chevron-down"></span>
+                                            </a>
+                                            @foreach (var x in Comment.ReplayComment)
+                                            {
+                                                @Html.Partial("_RaitingReplay", x)
+                                            }
+                                        </td>
+                                        //Button
+                                        <td>
+                                            <button type="button" class="btn btn-info replayCommentButton" data-toggle="collapse" data-target="@("#" + Comment.Id)">
+                                                Replay
+                                            </button>
+
+                                            <br />
+
+                                            @foreach (var x in Comment.ReplayComment)
+                                            {
+                                                @Html.Partial("_ReplayButton", x)
+                                            }
+                                        </td>
+                                        }
+
+                        }
+                  
                 </tr>
-
-
-              }
-    </table>
+            }
+        </table>
+    </div>
 </div>
 
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+
+
 @Scripts.Render("~/bundles/jquery")
 <script src="~/Content/BlogJs/BlogCommentReplay.js"></script>
