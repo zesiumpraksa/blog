@@ -1,0 +1,14 @@
+﻿
+@model Models.Models.BlogComment
+
+<div class="replayShift">
+    
+
+    <span>@Html.DisplayFor(model => model.AuthorName)</span>
+
+    @foreach (var comment in Model.ReplayComment)
+    {
+        @Html.Partial("_AuthorReplay", comment)
+    }
+
+</div>

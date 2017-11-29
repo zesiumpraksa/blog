@@ -86,12 +86,12 @@ this.ScenarioSetup(scenarioInfo);
                         "Password",
                         "RepeatPassword"});
             table1.AddRow(new string[] {
-                        "test@test5311",
-                        "Test55311",
-                        "Test55311",
-                        "Test55311",
-                        "Test55311",
-                        "Test55311"});
+                        "Proba@gmail",
+                        "Proba",
+                        "Proba",
+                        "Proba",
+                        "Proba1",
+                        "Proba1"});
 #line 8
  testRunner.When("Client enter valid values and press Create", ((string)(null)), table1);
 #line 11

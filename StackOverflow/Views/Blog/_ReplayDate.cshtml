@@ -1,0 +1,12 @@
+﻿@model Models.Models.BlogComment
+
+
+
+<div class="replayShift">
+    @Html.Label(Model.Date.ToString())
+   <br />
+    @foreach (var DateTime in Model.ReplayComment)
+    {
+        @DateTime.Date
+    }
+</div>

@@ -30,10 +30,44 @@ namespace StackOverflow.Controllers
         }
         [HttpPost]
         public ActionResult Details(Guid id)
-        {
-           
+        {           
             return View(blogService.GetById(id));
-        }       
+        }
+
+        [HttpGet]
+        public ActionResult Details(string id)
+        {
+            return View(blogService.GetById(new Guid(id)));
+        }
+
+        //pokusaj1
+
+        public string RenderPartial(List<BlogComment> comments )
+        {
+            foreach (BlogComment comm in comments)
+            {
+                if (comm.ReplayComment.Count == 0)
+                {
+                    return comm.Commentar;                    
+                }
+                else
+                {
+                    RenderPartial(comm.ReplayComment);
+                }
+            }
+            return "";
+        }
+
+        [HttpGet]
+        public ActionResult Details1(string id)
+        {
+            Blog blog = blogService.GetById(new Guid(id));
+            
+            
+            return View();
+        }
+
+
 
         public ActionResult AuthorDetail(Guid id)
         {
@@ -172,6 +206,57 @@ namespace StackOverflow.Controllers
             blogService.UpdateBlogComment();
             return RedirectToAction("Index", "Blog");
         }       
+
+        [HttpPost]
+        public ActionResult CreateReplayComment(Guid BlogCommId, string ReplyComment, Guid Id)
+        {
+            BlogComment ParentCommentar = blogService.getCommentForId(BlogCommId);
+
+            BlogComment replayComment = new BlogComment() {
+                Id = Guid.NewGuid(),
+                Commentar = ReplyComment,
+                AuthorName = User.Identity.Name,
+                IdAuthor = new Guid(User.Identity.GetUserId()),
+                ParentCommentId = ParentCommentar.Id,
+                BlogId = ParentCommentar.BlogId,
+                Date = DateTime.Now
+            };
+
+
+            ParentCommentar.ReplayComment.Add(replayComment);
+
+            blogService.SaveComment(replayComment);
+           
+
+            return RedirectToAction("Details", new {Id = Id });
+        }
+
+        [HttpPost]
+        public ActionResult CreateReplayComment1(Guid idReplayComment, string ReplyComment, Guid Id)
+        {
+            BlogComment ParentCommentar = blogService.getCommentForId(idReplayComment);
+
+            BlogComment replayComment = new BlogComment()
+            {
+                Id = Guid.NewGuid(),
+                Commentar = ReplyComment,
+                AuthorName = User.Identity.Name,
+                IdAuthor = new Guid(User.Identity.GetUserId()),
+                ParentCommentId = ParentCommentar.Id,
+                BlogId = ParentCommentar.BlogId,
+                Date = DateTime.Now
+            };
+
+
+            ParentCommentar.ReplayComment.Add(replayComment);
+
+            blogService.SaveComment(replayComment);
+
+
+            return RedirectToAction("Details", new { Id = Id });
+        }
+
+
 
         private bool SaveBlogWithNewAuthor(Blog blog, Guid idAuthor, string blogAuthor)
         {

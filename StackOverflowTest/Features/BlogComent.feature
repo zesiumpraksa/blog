@@ -12,10 +12,10 @@ Scenario:  Successful create new blog comment
 	Then Proba is on Blog page
 	When Proba clicks on blog details
 	| BlogId								   |
-	| 477C17A6-071D-4387-A191-46005304D35E     | 	
+	| ABF501EA-8A6C-4A69-A5A6-0E235E0CECFC     | 	
 	Then Proba is Blog Details page
 	When Proba insert new Blog Comment
 	| Commentar               | BlogId                           |
-	| Ovo je test komentart | 477C17A6-071D-4387-A191-46005304D35E |
+	| Ovo je test komentart | ABF501EA-8A6C-4A69-A5A6-0E235E0CECFC |
 	Then User is on Blog Index page 
 	

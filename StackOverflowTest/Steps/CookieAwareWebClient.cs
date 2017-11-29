@@ -10,53 +10,36 @@ namespace StackOverflowTest.Steps
     class CookieAwareWebClient: WebClient
     {
         //pokusaj singletona
-        //private static CookieAwareWebClient instanceCookie = null;
+        private static CookieAwareWebClient instanceCookie = null;
+        private CookieContainer  cookieContainer= new CookieContainer();
+        private CookieCollection responseCookies = new CookieCollection();      
 
-        //private CookieAwareWebClient()
-        //{
-
-        //}
-
-        //public static CookieAwareWebClient InstanceCookie
-        //{
-        //    get
-        //    {
-        //        if (instanceCookie == null)
-        //        {
-        //            instanceCookie = new CookieAwareWebClient();
-
-        //            var CookieContainer = new CookieContainer();
-        //            var ResponseCookies = new CookieCollection();
-        //        }
-        //        return InstanceCookie;
-        //    }
-        //}
-
-        public static CookieAwareWebClient Cooke { get; set; }
-
-        public CookieAwareWebClient()
-        {            
-            Cooke = this;
-            CookieContainer = new CookieContainer();
-            ResponseCookies = new CookieCollection();
+        public static CookieAwareWebClient InstanceCookie
+        {
+            get
+            {
+                if (instanceCookie == null)
+                {
+                    instanceCookie = new CookieAwareWebClient();
+                }
+                return instanceCookie;
+            }
         }
 
-
-        public CookieContainer CookieContainer { get; private set; }
-
-        public CookieCollection ResponseCookies { get; set; }
+        private CookieAwareWebClient() { }
 
         protected override WebRequest GetWebRequest(Uri address)
         {
             var request = (HttpWebRequest)base.GetWebRequest(address);
-            request.CookieContainer = CookieContainer;
+            request.CookieContainer = cookieContainer;
             return request;
         }
 
         protected override WebResponse GetWebResponse(WebRequest request)
         {
             var response = (HttpWebResponse)base.GetWebResponse(request);
-            this.ResponseCookies = response.Cookies;
+
+            responseCookies = response.Cookies;
             return response;
         }
     }

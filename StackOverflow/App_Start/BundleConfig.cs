@@ -17,7 +17,7 @@ namespace StackOverflow.App_Start
                       "~/Content/bootstrap.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                       "~/Scripts/modernizr-*"));
+                        "~/Scripts/modernizr-*"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
