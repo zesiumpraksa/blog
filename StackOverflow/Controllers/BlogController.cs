@@ -11,26 +11,25 @@ namespace StackOverflow.Controllers
     [Authorize]
     public class BlogController: Controller
     {
-       
+
+        WcfService.BlogWcfServiceClient service = new WcfService.BlogWcfServiceClient();
+        WcfService.TestServiceClient t = new WcfService.TestServiceClient();
         private IBlogService blogService;
         private IAutorService autorService;
 
         public BlogController() { }
-
-        public BlogController(IBlogService service, IAutorService autorService)
-        {
-            this.autorService = autorService;
-            blogService = service;
-        }
   
         public ActionResult Index()
-        {                   
+        {
+            t.DoWork();
             
-            return View(blogService.GetAllBlogs());
+            return View(service.GetAllBlogs());
+            //return View(blogService.GetAllBlogs());
         }
         [HttpPost]
         public ActionResult Details(Guid id)
-        {           
+        {
+            //return View(service.GetById(id));
             return View(blogService.GetById(id));
         }
 

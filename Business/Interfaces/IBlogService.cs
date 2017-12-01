@@ -2,15 +2,16 @@
 using Models.Models;
 using System;
 using System.Collections.Generic;
+using System.ServiceModel;
 
 namespace Business.Interfaces
 {
-
+    [ServiceContract]
     public interface IBlogService
-    {
-        List<Blog> GetAllBlogs();
-        Blog GetFirstId();
-        Blog GetById(Guid id);
+    {        
+        List<Blog> GetAllBlogs();//
+        Blog GetFirstId();        
+        Blog GetById(Guid id);//
         int Save(Blog blog);
         bool IsNewAuthor(Guid id);
         List<Blog> GetAllBlogsOfAuthor(Guid id);
