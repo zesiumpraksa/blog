@@ -13,7 +13,9 @@ namespace DAL.DBContext
     {
         public SOContext() : base()
         {
+            this.Configuration.LazyLoadingEnabled = false;
             Database.SetInitializer(new SOInitializer());
+         
         }
 
         public DbSet<Blog> Blogs { get; set; }

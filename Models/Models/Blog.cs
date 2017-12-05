@@ -14,17 +14,23 @@ namespace Model.Models
     {
         [DataMember]
         public Guid Id { get; set; }
+
         [DataMember]
         public string Titile { get; set; }
+
         [DataMember]
         public string Content { get; set; }
+
         [DataMember]
         public DateTime Date { get; set; }
+
         [DataMember]
         public Guid AuthorId { get; set; }
+
         [DataMember]
-        public virtual Author Author { get; set; }
+        public  Author Author { get; set; }
+
         [DataMember]
-        public virtual List<BlogComment> BlogComments { get; set; }
+        public  List<BlogComment> BlogComments { get; set; }
     }
 }

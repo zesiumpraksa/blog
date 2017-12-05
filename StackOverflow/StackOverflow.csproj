@@ -238,6 +238,7 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <Content Include="Properties\DataSources\Model.Models.Blog.datasource" />
     <None Include="Connected Services\WcfService\item.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -250,8 +251,7 @@
     <None Include="Connected Services\WcfService\item3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\WcfService\TestService.wsdl" />
-    <Content Include="Properties\DataSources\Model.Models.Blog.datasource" />
+    <None Include="Connected Services\WcfService\WcfService.wsdl" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

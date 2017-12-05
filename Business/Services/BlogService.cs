@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Models.Models;
+using System.Data.Entity;
 
 namespace Business.Services
 {
@@ -21,18 +22,31 @@ namespace Business.Services
 
         public List<Blog> GetAllBlogs()
         {
-            return db.Blogs.OrderBy(x => x.Titile).ToList();
+            var blogs = db.Blogs
+                 .Include(x => x.Author)
+                 .OrderBy(x => x.Titile)
+                 .ToList();
+            return blogs;
+            //return db.Blogs.OrderBy(x => x.Titile).ToList();
+        }
+
+        public Blog GetById(Guid id)
+        {
+            var a = db.Blogs
+                .Include(x => x.Author)   
+                .Include(x=>x.BlogComments)           
+                .FirstOrDefault(x => x.Id == id);
+            return a;
+            //return db.Blogs.FirstOrDefault(x => x.Id == id);
         }
 
         public Blog GetFirstId()
-        {           
-            return db.Blogs.FirstOrDefault();
+        {
+            return db.Blogs.Include(x => x.Author).FirstOrDefault();
+            //return db.Blogs.FirstOrDefault();
         }
         
-        public Blog GetById(Guid id)
-        {   
-            return db.Blogs.FirstOrDefault(x => x.Id == id);
-        }
+        
 
         public int Save(Blog blog)
         {
@@ -75,8 +89,15 @@ namespace Business.Services
 
         public void SaveComment(BlogComment blogComment)
         {
-             db.BlogComments.Add(blogComment);
-             db.SaveChanges();
+
+            //var a = db.Blogs
+            //  .Include(x => x.Author)
+            //  .Include(x => x.BlogComments)
+            //  .FirstOrDefault(x => x.Id == id);
+
+
+            db.BlogComments.Add(blogComment);
+            db.SaveChanges();
         }
 
         public BlogComment getCommentForId(Guid Id)
@@ -88,14 +109,7 @@ namespace Business.Services
         {
            var x = db.SaveChanges();
         }
-
-        //insert replay comment
-
-        public void InsertReplayComment(Guid id, string replayComment)
-        {
-            
-        }
-
+        
         
     }
 }

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WcfService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8800/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8800/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8800/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Model.Models" />
+      <xsd:import schemaLocation="http://localhost:8800/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Models.Models" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IWcfService_DoWork_InputMessage">
+    <wsdl:part name="parameters" element="tns:DoWork" />
+  </wsdl:message>
+  <wsdl:message name="IWcfService_DoWork_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DoWorkResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogWcfService_GetAllBlogs_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllBlogs" />
+  </wsdl:message>
+  <wsdl:message name="IBlogWcfService_GetAllBlogs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllBlogsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogWcfService_GetBlogById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBlogById" />
+  </wsdl:message>
+  <wsdl:message name="IBlogWcfService_GetBlogById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBlogByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogWcfService_SaveComment_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveComment" />
+  </wsdl:message>
+  <wsdl:message name="IBlogWcfService_SaveComment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveCommentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogWcfService_CreateAuthor1_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateAuthor1" />
+  </wsdl:message>
+  <wsdl:message name="IBlogWcfService_CreateAuthor1_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateAuthor1Response" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorWcfService_CreateAuthor_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateAuthor" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorWcfService_CreateAuthor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateAuthorResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IWcfService">
+    <wsdl:operation name="DoWork">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWcfService/DoWork" message="tns:IWcfService_DoWork_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWcfService/DoWorkResponse" message="tns:IWcfService_DoWork_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IBlogWcfService">
+    <wsdl:operation name="GetAllBlogs">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogWcfService/GetAllBlogs" message="tns:IBlogWcfService_GetAllBlogs_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogWcfService/GetAllBlogsResponse" message="tns:IBlogWcfService_GetAllBlogs_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBlogById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogWcfService/GetBlogById" message="tns:IBlogWcfService_GetBlogById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogWcfService/GetBlogByIdResponse" message="tns:IBlogWcfService_GetBlogById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveComment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogWcfService/SaveComment" message="tns:IBlogWcfService_SaveComment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogWcfService/SaveCommentResponse" message="tns:IBlogWcfService_SaveComment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateAuthor1">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogWcfService/CreateAuthor1" message="tns:IBlogWcfService_CreateAuthor1_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogWcfService/CreateAuthor1Response" message="tns:IBlogWcfService_CreateAuthor1_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IAuthorWcfService">
+    <wsdl:operation name="CreateAuthor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorWcfService/CreateAuthor" message="tns:IAuthorWcfService_CreateAuthor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorWcfService/CreateAuthorResponse" message="tns:IAuthorWcfService_CreateAuthor_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IWcfService" type="tns:IWcfService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DoWork">
+      <soap:operation soapAction="http://tempuri.org/IWcfService/DoWork" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IBlogWcfService" type="tns:IBlogWcfService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllBlogs">
+      <soap:operation soapAction="http://tempuri.org/IBlogWcfService/GetAllBlogs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBlogById">
+      <soap:operation soapAction="http://tempuri.org/IBlogWcfService/GetBlogById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveComment">
+      <soap:operation soapAction="http://tempuri.org/IBlogWcfService/SaveComment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateAuthor1">
+      <soap:operation soapAction="http://tempuri.org/IBlogWcfService/CreateAuthor1" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IAuthorWcfService" type="tns:IAuthorWcfService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateAuthor">
+      <soap:operation soapAction="http://tempuri.org/IAuthorWcfService/CreateAuthor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WcfService">
+    <wsdl:port name="BasicHttpBinding_IWcfService" binding="tns:BasicHttpBinding_IWcfService">
+      <soap:address location="http://localhost:8800/WcfService" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IBlogWcfService" binding="tns:BasicHttpBinding_IBlogWcfService">
+      <soap:address location="http://localhost:8800/WcfService" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IAuthorWcfService" binding="tns:BasicHttpBinding_IAuthorWcfService">
+      <soap:address location="http://localhost:8800/WcfService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

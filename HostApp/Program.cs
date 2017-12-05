@@ -2,15 +2,10 @@
 using Business.Services;
 using DAL.DBContext;
 using DAL.Interfaces;
+using Microsoft.Practices.Unity;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
-using Unity;
-using Unity.Injection;
-using Unity.Resolution;
+using Unity.Wcf;
+using WcfService;
 
 namespace HostApp
 {
@@ -24,12 +19,11 @@ namespace HostApp
             objContainer.RegisterType<IBlogService, BlogService>();
             objContainer.RegisterType<IAutorService, AuthorService>();
             objContainer.RegisterType<ISOContext, SOContext>();
-            objContainer.RegisterType<ServiceHost>(new InjectionConstructor(typeof(object), typeof(Uri[])));
+            objContainer.RegisterType<IWcfService, WcfService.WcfService>();
+            objContainer.RegisterType<IBlogWcfService, WcfService.WcfService>();
+            objContainer.RegisterType<IAuthorWcfService, WcfService.WcfService>();
 
-
-
-            using (ServiceHost host = new ServiceHost(typeof(WcfService.TestService)))
-            //using (ServiceHost host = objContainer.Resolve<ServiceHost>(new ParameterOverride("serviceType", typeof(WcfService.TestService))))
+            using (UnityServiceHost host = new UnityServiceHost(objContainer, typeof(WcfService.WcfService)))
             {
                 //raad configuration file(endpoint parameters)
                 //and open communication chanel for clients

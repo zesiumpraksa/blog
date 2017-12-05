@@ -5,37 +5,53 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Models.Models
 {
+    [DataContract]
     public class BlogComment
     {
+        [DataMember]
         public Guid Id { get; set; }
 
+        [DataMember]
         [DisplayName("Author of comment")]
         public string AuthorName { get; set; }
 
+        [DataMember]
         [Required]
-        public string Commentar { get; set; } 
+        public string Commentar { get; set; }
 
+        [DataMember]
         [DataType(DataType.DateTime)]
         public DateTime? Date { get; set; }
 
+        [DataMember]
         public short Raiting { get; set; }
 
+        [DataMember]
         public List<BlogComment> ReplayComment { get; set; } = new List<BlogComment>();
 
+        [DataMember]
         [ForeignKey("ParentComment")]
-        public Guid? ParentCommentId { get; set; }        
-        public virtual BlogComment ParentComment { get; set; }
+        public Guid? ParentCommentId { get; set; }
 
+        [DataMember]
+        public  BlogComment ParentComment { get; set; }
+
+        [DataMember]
         public Guid BlogId { get; set; }
-        public virtual Blog Blog { get; set; }
+        [DataMember]
+        public  Blog Blog { get; set; }
 
+        [DataMember]
         public Guid IdAuthor { get; set; }
-        public virtual Author Author { get; set; }
+
+        [DataMember]
+        public  Author Author { get; set; }
 
     }
 }

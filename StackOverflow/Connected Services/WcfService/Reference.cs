@@ -12,40 +12,40 @@ namespace StackOverflow.WcfService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="WcfService.ITestService")]
-    public interface ITestService {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="WcfService.IWcfService")]
+    public interface IWcfService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestService/DoWork", ReplyAction="http://tempuri.org/ITestService/DoWorkResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWcfService/DoWork", ReplyAction="http://tempuri.org/IWcfService/DoWorkResponse")]
         void DoWork();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestService/DoWork", ReplyAction="http://tempuri.org/ITestService/DoWorkResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWcfService/DoWork", ReplyAction="http://tempuri.org/IWcfService/DoWorkResponse")]
         System.Threading.Tasks.Task DoWorkAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ITestServiceChannel : StackOverflow.WcfService.ITestService, System.ServiceModel.IClientChannel {
+    public interface IWcfServiceChannel : StackOverflow.WcfService.IWcfService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class TestServiceClient : System.ServiceModel.ClientBase<StackOverflow.WcfService.ITestService>, StackOverflow.WcfService.ITestService {
+    public partial class WcfServiceClient : System.ServiceModel.ClientBase<StackOverflow.WcfService.IWcfService>, StackOverflow.WcfService.IWcfService {
         
-        public TestServiceClient() {
+        public WcfServiceClient() {
         }
         
-        public TestServiceClient(string endpointConfigurationName) : 
+        public WcfServiceClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public TestServiceClient(string endpointConfigurationName, string remoteAddress) : 
+        public WcfServiceClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public TestServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public WcfServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public TestServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public WcfServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
@@ -68,11 +68,23 @@ namespace StackOverflow.WcfService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/GetAllBlogs", ReplyAction="http://tempuri.org/IBlogWcfService/GetAllBlogsResponse")]
         System.Threading.Tasks.Task<Model.Models.Blog[]> GetAllBlogsAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/GetById", ReplyAction="http://tempuri.org/IBlogWcfService/GetByIdResponse")]
-        Model.Models.Blog GetById(System.Guid id);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/GetBlogById", ReplyAction="http://tempuri.org/IBlogWcfService/GetBlogByIdResponse")]
+        string GetBlogById(System.Guid id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/GetById", ReplyAction="http://tempuri.org/IBlogWcfService/GetByIdResponse")]
-        System.Threading.Tasks.Task<Model.Models.Blog> GetByIdAsync(System.Guid id);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/GetBlogById", ReplyAction="http://tempuri.org/IBlogWcfService/GetBlogByIdResponse")]
+        System.Threading.Tasks.Task<string> GetBlogByIdAsync(System.Guid id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/SaveComment", ReplyAction="http://tempuri.org/IBlogWcfService/SaveCommentResponse")]
+        void SaveComment(Models.Models.BlogComment blogComment);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/SaveComment", ReplyAction="http://tempuri.org/IBlogWcfService/SaveCommentResponse")]
+        System.Threading.Tasks.Task SaveCommentAsync(Models.Models.BlogComment blogComment);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/CreateAuthor1", ReplyAction="http://tempuri.org/IBlogWcfService/CreateAuthor1Response")]
+        void CreateAuthor1(Models.Models.Author authorComment);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/CreateAuthor1", ReplyAction="http://tempuri.org/IBlogWcfService/CreateAuthor1Response")]
+        System.Threading.Tasks.Task CreateAuthor1Async(Models.Models.Author authorComment);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -110,12 +122,75 @@ namespace StackOverflow.WcfService {
             return base.Channel.GetAllBlogsAsync();
         }
         
-        public Model.Models.Blog GetById(System.Guid id) {
-            return base.Channel.GetById(id);
+        public string GetBlogById(System.Guid id) {
+            return base.Channel.GetBlogById(id);
         }
         
-        public System.Threading.Tasks.Task<Model.Models.Blog> GetByIdAsync(System.Guid id) {
-            return base.Channel.GetByIdAsync(id);
+        public System.Threading.Tasks.Task<string> GetBlogByIdAsync(System.Guid id) {
+            return base.Channel.GetBlogByIdAsync(id);
+        }
+        
+        public void SaveComment(Models.Models.BlogComment blogComment) {
+            base.Channel.SaveComment(blogComment);
+        }
+        
+        public System.Threading.Tasks.Task SaveCommentAsync(Models.Models.BlogComment blogComment) {
+            return base.Channel.SaveCommentAsync(blogComment);
+        }
+        
+        public void CreateAuthor1(Models.Models.Author authorComment) {
+            base.Channel.CreateAuthor1(authorComment);
+        }
+        
+        public System.Threading.Tasks.Task CreateAuthor1Async(Models.Models.Author authorComment) {
+            return base.Channel.CreateAuthor1Async(authorComment);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="WcfService.IAuthorWcfService")]
+    public interface IAuthorWcfService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorWcfService/CreateAuthor", ReplyAction="http://tempuri.org/IAuthorWcfService/CreateAuthorResponse")]
+        void CreateAuthor(Models.Models.Author authorComment);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorWcfService/CreateAuthor", ReplyAction="http://tempuri.org/IAuthorWcfService/CreateAuthorResponse")]
+        System.Threading.Tasks.Task CreateAuthorAsync(Models.Models.Author authorComment);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IAuthorWcfServiceChannel : StackOverflow.WcfService.IAuthorWcfService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class AuthorWcfServiceClient : System.ServiceModel.ClientBase<StackOverflow.WcfService.IAuthorWcfService>, StackOverflow.WcfService.IAuthorWcfService {
+        
+        public AuthorWcfServiceClient() {
+        }
+        
+        public AuthorWcfServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public AuthorWcfServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public AuthorWcfServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public AuthorWcfServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public void CreateAuthor(Models.Models.Author authorComment) {
+            base.Channel.CreateAuthor(authorComment);
+        }
+        
+        public System.Threading.Tasks.Task CreateAuthorAsync(Models.Models.Author authorComment) {
+            return base.Channel.CreateAuthorAsync(authorComment);
         }
     }
 }

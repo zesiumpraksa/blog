@@ -2,6 +2,7 @@
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:8800/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Model.Models" />
   <xs:import schemaLocation="http://localhost:8800/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://localhost:8800/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Models.Models" />
   <xs:element name="DoWork">
     <xs:complexType>
       <xs:sequence />
@@ -24,18 +25,54 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetById">
+  <xs:element name="GetBlogById">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q2:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetByIdResponse">
+  <xs:element name="GetBlogByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Model.Models" minOccurs="0" name="GetByIdResult" nillable="true" type="q3:Blog" />
+        <xs:element minOccurs="0" name="GetBlogByIdResult" nillable="true" type="xs:string" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveComment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Models.Models" minOccurs="0" name="blogComment" nillable="true" type="q3:BlogComment" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveCommentResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateAuthor1">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Models.Models" minOccurs="0" name="authorComment" nillable="true" type="q4:Author" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateAuthor1Response">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateAuthor">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Models.Models" minOccurs="0" name="authorComment" nillable="true" type="q5:Author" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateAuthorResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

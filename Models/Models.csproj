@@ -63,7 +63,6 @@
     <Compile Include="Models\BlogComment.cs" />
     <Compile Include="Models\NegativeVoters.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Models\PositiveVoters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
