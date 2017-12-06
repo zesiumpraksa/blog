@@ -17,20 +17,17 @@ namespace StackOverflow.Controllers
     
     public class AuthorController : Controller
     {
-        IAutorService autorService;
-        IBlogService blogService;
+        WcfService.BlogWcfServiceClient wcfBlogservice = new WcfService.BlogWcfServiceClient();
+        WcfService.AuthorWcfServiceClient wcfAuthorService = new WcfService.AuthorWcfServiceClient();        
 
         public AuthorController() { }
 
-        public AuthorController(IAutorService service, IBlogService blgService)
-        {            
-            autorService = service;
-            blogService = blgService;
-        }
+       
         // GET: User
         public ActionResult Index()
         {
-            return View(autorService.getAllAuthors());
+            //return View(autorService.getAllAuthors());
+            return View(wcfAuthorService.GetAllAuthors());
         }
                
         public ActionResult LogIn()
@@ -42,20 +39,20 @@ namespace StackOverflow.Controllers
         public ActionResult Dashboard()
         {
             ViewBag.name = User.Identity.Name;
-            string user = User.Identity.GetUserId();
-            Guid g = new Guid(user);
-           
-            return View(blogService.GetAllBlogsOfAuthor(g));
+            Guid userId = new Guid(User.Identity.GetUserId());
+            
+            return View(wcfBlogservice.GetAllBlogsOfAuthor(userId));
+            
         }
 
         public ActionResult Details(Guid id)
         {
-            return View(autorService.GetById(id));
+            return View(wcfAuthorService.GetById(id));
         }
 
         public ActionResult AuthorCommentDetails(string id)
         {   
-            return View(autorService.GetById(new Guid(id)));
+            return View(wcfAuthorService.GetById(new Guid(id)));
         }
         
         

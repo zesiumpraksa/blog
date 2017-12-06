@@ -14,5 +14,23 @@ namespace WcfService
     {
         [OperationContract]
         void CreateAuthor(Author authorComment);
+
+        [OperationContract]
+        Author GetById(Guid userId);
+
+        [OperationContract]
+        void InsertPositiveVote(BlogComment commentar, Guid userId);
+
+        [OperationContract]
+        void InsertNegativeVote(BlogComment commentar, Guid userId);
+
+        [OperationContract]
+        bool IsNewPositiveVote(Guid idBlogCommentar, Guid iDVoteAuthor);
+
+        [OperationContract]
+        bool IsNewNegativeVote(Guid idBlogCommentar, Guid iDVoteAuthor);
+
+        [OperationContract]
+        List<Author> GetAllAuthors();
     }
 }

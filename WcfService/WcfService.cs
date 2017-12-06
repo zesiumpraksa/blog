@@ -29,43 +29,4 @@ namespace WcfService
         }
     }
 
-
-    /// <summary>
-    /// ////////////////////////////////
-    /// </summary>
-    public partial class WcfService: IBlogWcfService
-    {
-        public List<Blog> GetAllBlogs()
-        {
-            return (blogService.GetAllBlogs());
-        }
-
-        public string GetBlogById(Guid id)
-        {
-            var blog = blogService.GetById(id);
-            return JsonConvert.SerializeObject(blog, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
-        }
-
-        public void SaveComment(BlogComment blogComment)
-        {
-            blogService.SaveComment(blogComment);
-        }
-
-        public List<BlogComment> getCommentsForBlog(Blog blog)
-        {
-            return blogService.getCommentsForBlog(blog);
-        }
-    }
-
-    /// <summary>
-    /// //////////////////////////////////
-    /// </summary>
-
-    public partial class WcfService : IAuthorWcfService
-    {
-        public void CreateAuthor(Author authorComment)
-        {
-            authorService.CreateAuthor(authorComment);
-        }
-    }
 }

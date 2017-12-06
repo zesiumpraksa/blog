@@ -14,24 +14,19 @@ namespace StackOverflow.Controllers
     {
         WcfService.BlogWcfServiceClient wcfBlogservice = new WcfService.BlogWcfServiceClient();
         WcfService.AuthorWcfServiceClient wcfAuthorService = new WcfService.AuthorWcfServiceClient();
-        
-        private IBlogService blogService;
-        private IAutorService autorService;
+
 
         public BlogController() { }
 
-
         [HttpGet]
         public ActionResult Index()
-        {
-            
+        {            
             return View(wcfBlogservice.GetAllBlogs());
         }
         [HttpPost]
         public ActionResult Details(Guid id)
         {
-            return View(wcfBlogservice.GetBlogById(id));
-            //return View(blogService.GetById(id));
+            return View(wcfBlogservice.GetBlogById(id));        
         }
 
         [HttpGet]
@@ -40,46 +35,18 @@ namespace StackOverflow.Controllers
             string details = wcfBlogservice.GetBlogById(new Guid(id));
             var detailsBlog = JsonConvert.DeserializeObject<Blog>(details);
             return View(detailsBlog);
+
             //return View(blogService.GetById(new Guid(id)));
-       }
-
-        //pokusaj1
-
-        public string RenderPartial(List<BlogComment> comments)
-        {
-            foreach (BlogComment comm in comments)
-            {
-                if (comm.ReplayComment.Count == 0)
-                {
-                    return comm.Commentar;
-                }
-                else
-                {
-                    RenderPartial(comm.ReplayComment);
-                }
-            }
-            return "";
         }
 
-        [HttpGet]
-        public ActionResult Details1(string id)
-        {
-            Blog blog = blogService.GetById(new Guid(id));
-
-            return View();
-        }
+     
 
         public ActionResult AuthorDetail(Guid id)
         {
-            var author = autorService.GetById(id);
+            var author = wcfAuthorService.GetById(id);
             return View();
         }
-
-        public ActionResult GetByFirstId()
-        {
-            return View(blogService.GetFirstId());
-        }
-
+        
         [HttpGet]
         public ActionResult CreateBlog()
         {
@@ -92,8 +59,8 @@ namespace StackOverflow.Controllers
             string blogAuthor = User.Identity.Name;
             var idAuthor = new Guid(User.Identity.GetUserId());
             bool executeQuery;
-
-            if (blogService.IsNewAuthor(idAuthor))
+            
+            if (wcfBlogservice.IsNewAuthor(idAuthor))
             {
                 executeQuery = SaveBlogWithNewAuthor(blog, idAuthor, blogAuthor);
             }
@@ -166,61 +133,62 @@ namespace StackOverflow.Controllers
 
         public ActionResult VoteUp(Guid IdCommentar, Guid blogId)
         {
-            var commentar = blogService.getCommentForId(IdCommentar);
+            
+            var commentar = wcfBlogservice.GetCommentForId(IdCommentar);
+
             var userId = new Guid(User.Identity.GetUserId());
-            var author = autorService.GetById(userId);
+            
+            Author author = wcfAuthorService.GetById(userId);
 
             if (author == null)
             {
                 Author newAuthor = new Author() { Id = userId, Name = User.Identity.Name };
-                autorService.CreateAuthor(newAuthor);
-                autorService.InsertPositiveVote(commentar, userId);
-                //commentar.Raiting++ nece da radi u author service?????????(mozda zato sto je izvucen iz blogServicea!?)
-                commentar.Raiting++;
+                wcfAuthorService.CreateAuthor(newAuthor);
+                wcfAuthorService.InsertPositiveVote(commentar, userId);                
             }
             else
             {
-                if (!autorService.IsNewPositiveVote(commentar.Id, userId) || (commentar.IdAuthor == userId))
-                    return RedirectToAction("Index", "Blog");
-
-                autorService.InsertPositiveVote(commentar, userId);
-                commentar.Raiting++;
+                if (!wcfAuthorService.IsNewPositiveVote(commentar.Id, userId) || (commentar.IdAuthor == userId))
+                    return RedirectToAction("Index", "Blog");                
+                wcfAuthorService.InsertPositiveVote(commentar, userId);                
             }
+            
+            wcfBlogservice.PositiveVote(IdCommentar);
 
-            blogService.UpdateBlogComment();
-            return RedirectToAction("Index", "Blog");
-            //return RedirectToAction("Details","Blog", new { id = IdCommentar });
+            return RedirectToAction("Index", "Blog");            
         }
 
         public ActionResult VoteDown(Guid IdCommentar)
-        {
-            var commentar = blogService.getCommentForId(IdCommentar);
-            var userId = new Guid(User.Identity.GetUserId());
-            var author = autorService.GetById(userId);
+        {            
+            var commentar = wcfBlogservice.GetCommentForId(IdCommentar);
+
+            var userId = new Guid(User.Identity.GetUserId());         
+            Author author = wcfAuthorService.GetById(userId);
 
             if (author == null)
             {
-                Author newAuthor = new Author() { Id = userId, Name = User.Identity.Name };
-                autorService.CreateAuthor(newAuthor);
-                autorService.InsertNegativeVote(commentar, userId);
-                commentar.Raiting--;
+                Author newAuthor = new Author() { Id = userId, Name = User.Identity.Name };                
+                wcfAuthorService.CreateAuthor(newAuthor);                
+                wcfAuthorService.InsertNegativeVoteAsync(commentar, userId);
             }
             else
             {
-                if (!autorService.IsNewNegativeVote(commentar.Id, userId) || (commentar.IdAuthor == userId))
-                    return RedirectToAction("Index", "Blog");
-                autorService.InsertNegativeVote(commentar, userId);
-                commentar.Raiting--;
+                if (!wcfAuthorService.IsNewNegativeVote(commentar.Id, userId) || (commentar.IdAuthor == userId))
+                    return RedirectToAction("Index", "Blog");                
+                wcfAuthorService.InsertNegativeVote(commentar, userId);                
             }
+            
+            wcfBlogservice.NegativeVote(IdCommentar);
 
-            blogService.UpdateBlogComment();
             return RedirectToAction("Index", "Blog");
         }
 
+        //iste funkcije razlikuju se samo u prvom argumentu zbog bindinga-(verovatno refaktorisati)
         [HttpPost]
         public ActionResult CreateReplayComment(Guid BlogCommId, string ReplyComment, Guid Id)
         {
-            BlogComment ParentCommentar = blogService.getCommentForId(BlogCommId);
+            
+            BlogComment ParentCommentar = wcfBlogservice.GetCommentForId(BlogCommId);
 
             BlogComment replayComment = new BlogComment()
             {
@@ -233,19 +201,16 @@ namespace StackOverflow.Controllers
                 Date = DateTime.Now
             };
 
-
-            ParentCommentar.ReplayComment.Add(replayComment);
-
-            blogService.SaveComment(replayComment);
-
+            ParentCommentar.ReplayComment.Add(replayComment);            
+            wcfBlogservice.SaveComment(replayComment);
 
             return RedirectToAction("Details", new { Id = Id });
         }
 
         [HttpPost]
         public ActionResult CreateReplayComment1(Guid idReplayComment, string ReplyComment, Guid Id)
-        {
-            BlogComment ParentCommentar = blogService.getCommentForId(idReplayComment);
+        {            
+            BlogComment ParentCommentar = wcfBlogservice.GetCommentForId(idReplayComment);
 
             BlogComment replayComment = new BlogComment()
             {
@@ -258,16 +223,12 @@ namespace StackOverflow.Controllers
                 Date = DateTime.Now
             };
 
-
             ParentCommentar.ReplayComment.Add(replayComment);
-
-            blogService.SaveComment(replayComment);
-
+          
+            wcfBlogservice.SaveComment(replayComment);
 
             return RedirectToAction("Details", new { Id = Id });
         }
-
-
 
         private bool SaveBlogWithNewAuthor(Blog blog, Guid idAuthor, string blogAuthor)
         {
@@ -280,7 +241,7 @@ namespace StackOverflow.Controllers
                 Id = idAuthor
             };
             blog.Date = DateTime.Now;
-            var numberRows = blogService.Save(blog);
+            var numberRows = wcfBlogservice.Save(blog);
 
             return (numberRows == 2);
         }
@@ -290,7 +251,7 @@ namespace StackOverflow.Controllers
             blog.Id = Guid.NewGuid();
             blog.AuthorId = idAuthor;
             blog.Date = DateTime.Now;
-            var numberRows = blogService.Save(blog);
+            var numberRows = wcfBlogservice.Save(blog);
 
             return (numberRows == 1);
         }

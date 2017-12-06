@@ -105,11 +105,25 @@ namespace Business.Services
             return db.BlogComments.FirstOrDefault(x => x.Id == Id);
         }
 
-        public void UpdateBlogComment()
+        public BlogComment GetCommentForId(Guid commId)
         {
-           var x = db.SaveChanges();
+            return db.BlogComments.FirstOrDefault(a => a.Id == commId);
         }
-        
+
+        public void NegativeVote(Guid CommentId)
+        {
+            BlogComment commentar = GetCommentForId(CommentId);
+            commentar.Raiting--;
+            var x = db.SaveChanges();
+        }
+
+        public void PositiveVote(Guid CommentId)
+        {
+            BlogComment commentar = GetCommentForId(CommentId);
+            commentar.Raiting++;
+            var x = db.SaveChanges();
+        }
+
         
     }
 }

@@ -13,9 +13,9 @@ namespace DAL.DBContext
     {
         public SOContext() : base()
         {
-            this.Configuration.LazyLoadingEnabled = false;
-            Database.SetInitializer(new SOInitializer());
-         
+            //Configuration.LazyLoadingEnabled = false;
+            
+            Database.SetInitializer(new SOInitializer());         
         }
 
         public DbSet<Blog> Blogs { get; set; }
@@ -25,8 +25,9 @@ namespace DAL.DBContext
         public DbSet<NegativeVoters> NegativeVoters { get; set; }
 
         public override int SaveChanges()
-        {           
-             return base.SaveChanges();  
+        {
+            var res = base.SaveChanges();
+            return res;  
         }
     }
 }

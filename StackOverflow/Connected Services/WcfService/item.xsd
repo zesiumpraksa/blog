@@ -4,9 +4,12 @@
   <xs:import schemaLocation="http://localhost:8800/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Model.Models" />
   <xs:complexType name="Author">
     <xs:sequence>
+      <xs:element minOccurs="0" name="BlogComments" nillable="true" type="tns:ArrayOfBlogComment" />
       <xs:element minOccurs="0" name="Id" type="ser:guid" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NegativeVoters" nillable="true" type="tns:ArrayOfNegativeVoters" />
       <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PositiveVoters" nillable="true" type="tns:ArrayOfPositiveVoters" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Author" nillable="true" type="tns:Author" />
@@ -33,4 +36,42 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="BlogComment" nillable="true" type="tns:BlogComment" />
+  <xs:complexType name="ArrayOfNegativeVoters">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NegativeVoters" nillable="true" type="tns:NegativeVoters" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfNegativeVoters" nillable="true" type="tns:ArrayOfNegativeVoters" />
+  <xs:complexType name="NegativeVoters">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Author" nillable="true" type="tns:Author" />
+      <xs:element minOccurs="0" name="AuthorId" type="ser:guid" />
+      <xs:element minOccurs="0" name="AuthorOfComment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="IdNumberOfComment" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NegativeVoters" nillable="true" type="tns:NegativeVoters" />
+  <xs:complexType name="ArrayOfPositiveVoters">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PositiveVoters" nillable="true" type="tns:PositiveVoters" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPositiveVoters" nillable="true" type="tns:ArrayOfPositiveVoters" />
+  <xs:complexType name="PositiveVoters">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Author" nillable="true" type="tns:Author" />
+      <xs:element minOccurs="0" name="AuthorId" type="ser:guid" />
+      <xs:element minOccurs="0" name="AuthorOfComment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="IdNumberOfComment" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PositiveVoters" nillable="true" type="tns:PositiveVoters" />
+  <xs:complexType name="ArrayOfAuthor">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Author" nillable="true" type="tns:Author" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAuthor" nillable="true" type="tns:ArrayOfAuthor" />
 </xs:schema>

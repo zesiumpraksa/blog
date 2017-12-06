@@ -32,17 +32,95 @@
   <wsdl:message name="IBlogWcfService_SaveComment_OutputMessage">
     <wsdl:part name="parameters" element="tns:SaveCommentResponse" />
   </wsdl:message>
-  <wsdl:message name="IBlogWcfService_CreateAuthor1_InputMessage">
-    <wsdl:part name="parameters" element="tns:CreateAuthor1" />
+  <wsdl:message name="IBlogWcfService_GetCommentsForBlog_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCommentsForBlog" />
   </wsdl:message>
-  <wsdl:message name="IBlogWcfService_CreateAuthor1_OutputMessage">
-    <wsdl:part name="parameters" element="tns:CreateAuthor1Response" />
+  <wsdl:message name="IBlogWcfService_GetCommentsForBlog_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCommentsForBlogResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogWcfService_GetCommentForId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCommentForId" />
+  </wsdl:message>
+  <wsdl:message name="IBlogWcfService_GetCommentForId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCommentForIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogWcfService_NegativeVote_InputMessage">
+    <wsdl:part name="parameters" element="tns:NegativeVote" />
+  </wsdl:message>
+  <wsdl:message name="IBlogWcfService_NegativeVote_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NegativeVoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogWcfService_PositiveVote_InputMessage">
+    <wsdl:part name="parameters" element="tns:PositiveVote" />
+  </wsdl:message>
+  <wsdl:message name="IBlogWcfService_PositiveVote_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PositiveVoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogWcfService_IsNewAuthor_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsNewAuthor" />
+  </wsdl:message>
+  <wsdl:message name="IBlogWcfService_IsNewAuthor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsNewAuthorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogWcfService_Save_InputMessage">
+    <wsdl:part name="parameters" element="tns:Save" />
+  </wsdl:message>
+  <wsdl:message name="IBlogWcfService_Save_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogWcfService_GetBlogByIdd_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBlogByIdd" />
+  </wsdl:message>
+  <wsdl:message name="IBlogWcfService_GetBlogByIdd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBlogByIddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogWcfService_GetAllBlogsOfAuthor_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllBlogsOfAuthor" />
+  </wsdl:message>
+  <wsdl:message name="IBlogWcfService_GetAllBlogsOfAuthor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllBlogsOfAuthorResponse" />
   </wsdl:message>
   <wsdl:message name="IAuthorWcfService_CreateAuthor_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateAuthor" />
   </wsdl:message>
   <wsdl:message name="IAuthorWcfService_CreateAuthor_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateAuthorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorWcfService_GetById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetById" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorWcfService_GetById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorWcfService_InsertPositiveVote_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertPositiveVote" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorWcfService_InsertPositiveVote_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertPositiveVoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorWcfService_InsertNegativeVote_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertNegativeVote" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorWcfService_InsertNegativeVote_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertNegativeVoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorWcfService_IsNewPositiveVote_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsNewPositiveVote" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorWcfService_IsNewPositiveVote_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsNewPositiveVoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorWcfService_IsNewNegativeVote_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsNewNegativeVote" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorWcfService_IsNewNegativeVote_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsNewNegativeVoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorWcfService_GetAllAuthors_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllAuthors" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorWcfService_GetAllAuthors_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllAuthorsResponse" />
   </wsdl:message>
   <wsdl:portType name="IWcfService">
     <wsdl:operation name="DoWork">
@@ -63,15 +141,67 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IBlogWcfService/SaveComment" message="tns:IBlogWcfService_SaveComment_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBlogWcfService/SaveCommentResponse" message="tns:IBlogWcfService_SaveComment_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="CreateAuthor1">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBlogWcfService/CreateAuthor1" message="tns:IBlogWcfService_CreateAuthor1_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBlogWcfService/CreateAuthor1Response" message="tns:IBlogWcfService_CreateAuthor1_OutputMessage" />
+    <wsdl:operation name="GetCommentsForBlog">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogWcfService/GetCommentsForBlog" message="tns:IBlogWcfService_GetCommentsForBlog_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogWcfService/GetCommentsForBlogResponse" message="tns:IBlogWcfService_GetCommentsForBlog_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCommentForId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogWcfService/GetCommentForId" message="tns:IBlogWcfService_GetCommentForId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogWcfService/GetCommentForIdResponse" message="tns:IBlogWcfService_GetCommentForId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NegativeVote">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogWcfService/NegativeVote" message="tns:IBlogWcfService_NegativeVote_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogWcfService/NegativeVoteResponse" message="tns:IBlogWcfService_NegativeVote_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PositiveVote">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogWcfService/PositiveVote" message="tns:IBlogWcfService_PositiveVote_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogWcfService/PositiveVoteResponse" message="tns:IBlogWcfService_PositiveVote_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsNewAuthor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogWcfService/IsNewAuthor" message="tns:IBlogWcfService_IsNewAuthor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogWcfService/IsNewAuthorResponse" message="tns:IBlogWcfService_IsNewAuthor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Save">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogWcfService/Save" message="tns:IBlogWcfService_Save_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogWcfService/SaveResponse" message="tns:IBlogWcfService_Save_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBlogByIdd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogWcfService/GetBlogByIdd" message="tns:IBlogWcfService_GetBlogByIdd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogWcfService/GetBlogByIddResponse" message="tns:IBlogWcfService_GetBlogByIdd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBlogsOfAuthor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogWcfService/GetAllBlogsOfAuthor" message="tns:IBlogWcfService_GetAllBlogsOfAuthor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogWcfService/GetAllBlogsOfAuthorResponse" message="tns:IBlogWcfService_GetAllBlogsOfAuthor_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IAuthorWcfService">
     <wsdl:operation name="CreateAuthor">
       <wsdl:input wsaw:Action="http://tempuri.org/IAuthorWcfService/CreateAuthor" message="tns:IAuthorWcfService_CreateAuthor_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAuthorWcfService/CreateAuthorResponse" message="tns:IAuthorWcfService_CreateAuthor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorWcfService/GetById" message="tns:IAuthorWcfService_GetById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorWcfService/GetByIdResponse" message="tns:IAuthorWcfService_GetById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertPositiveVote">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorWcfService/InsertPositiveVote" message="tns:IAuthorWcfService_InsertPositiveVote_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorWcfService/InsertPositiveVoteResponse" message="tns:IAuthorWcfService_InsertPositiveVote_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertNegativeVote">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorWcfService/InsertNegativeVote" message="tns:IAuthorWcfService_InsertNegativeVote_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorWcfService/InsertNegativeVoteResponse" message="tns:IAuthorWcfService_InsertNegativeVote_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsNewPositiveVote">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorWcfService/IsNewPositiveVote" message="tns:IAuthorWcfService_IsNewPositiveVote_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorWcfService/IsNewPositiveVoteResponse" message="tns:IAuthorWcfService_IsNewPositiveVote_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsNewNegativeVote">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorWcfService/IsNewNegativeVote" message="tns:IAuthorWcfService_IsNewNegativeVote_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorWcfService/IsNewNegativeVoteResponse" message="tns:IAuthorWcfService_IsNewNegativeVote_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAuthors">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorWcfService/GetAllAuthors" message="tns:IAuthorWcfService_GetAllAuthors_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorWcfService/GetAllAuthorsResponse" message="tns:IAuthorWcfService_GetAllAuthors_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IWcfService" type="tns:IWcfService">
@@ -115,8 +245,71 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="CreateAuthor1">
-      <soap:operation soapAction="http://tempuri.org/IBlogWcfService/CreateAuthor1" style="document" />
+    <wsdl:operation name="GetCommentsForBlog">
+      <soap:operation soapAction="http://tempuri.org/IBlogWcfService/GetCommentsForBlog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCommentForId">
+      <soap:operation soapAction="http://tempuri.org/IBlogWcfService/GetCommentForId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NegativeVote">
+      <soap:operation soapAction="http://tempuri.org/IBlogWcfService/NegativeVote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PositiveVote">
+      <soap:operation soapAction="http://tempuri.org/IBlogWcfService/PositiveVote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsNewAuthor">
+      <soap:operation soapAction="http://tempuri.org/IBlogWcfService/IsNewAuthor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Save">
+      <soap:operation soapAction="http://tempuri.org/IBlogWcfService/Save" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBlogByIdd">
+      <soap:operation soapAction="http://tempuri.org/IBlogWcfService/GetBlogByIdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBlogsOfAuthor">
+      <soap:operation soapAction="http://tempuri.org/IBlogWcfService/GetAllBlogsOfAuthor" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -129,6 +322,60 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="CreateAuthor">
       <soap:operation soapAction="http://tempuri.org/IAuthorWcfService/CreateAuthor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetById">
+      <soap:operation soapAction="http://tempuri.org/IAuthorWcfService/GetById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertPositiveVote">
+      <soap:operation soapAction="http://tempuri.org/IAuthorWcfService/InsertPositiveVote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertNegativeVote">
+      <soap:operation soapAction="http://tempuri.org/IAuthorWcfService/InsertNegativeVote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsNewPositiveVote">
+      <soap:operation soapAction="http://tempuri.org/IAuthorWcfService/IsNewPositiveVote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsNewNegativeVote">
+      <soap:operation soapAction="http://tempuri.org/IAuthorWcfService/IsNewNegativeVote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAuthors">
+      <soap:operation soapAction="http://tempuri.org/IAuthorWcfService/GetAllAuthors" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -20,7 +20,9 @@ namespace Business.Interfaces
         void SaveComment(BlogComment blogComment);
         bool IsNewCommAuthor(Guid id);
         BlogComment getCommentForId(Guid Id);
-        void UpdateBlogComment();
+        BlogComment GetCommentForId(Guid commId);
+        void NegativeVote(Guid CommentId);
+        void PositiveVote(Guid CommentId);
        
     }
 }

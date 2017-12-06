@@ -21,13 +21,13 @@ namespace Models.Models
         [DataMember]
         public string Password { get; set; }
 
-        //[DataMember]
+        
         public  List<Blog> Blogs { get; set; }
-        //[DataMember]
+        [DataMember]
         public  List<BlogComment> BlogComments { get; set; }
-        //[DataMember]
+        [DataMember]
         public  List<PositiveVoters> PositiveVoters { get; set; }
-        //[DataMember]
+        [DataMember]
         public  List<NegativeVoters> NegativeVoters { get; set; }
     }
 }

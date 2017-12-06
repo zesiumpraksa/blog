@@ -80,11 +80,53 @@ namespace StackOverflow.WcfService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/SaveComment", ReplyAction="http://tempuri.org/IBlogWcfService/SaveCommentResponse")]
         System.Threading.Tasks.Task SaveCommentAsync(Models.Models.BlogComment blogComment);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/CreateAuthor1", ReplyAction="http://tempuri.org/IBlogWcfService/CreateAuthor1Response")]
-        void CreateAuthor1(Models.Models.Author authorComment);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/GetCommentsForBlog", ReplyAction="http://tempuri.org/IBlogWcfService/GetCommentsForBlogResponse")]
+        Models.Models.BlogComment[] GetCommentsForBlog(Model.Models.Blog blog);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/CreateAuthor1", ReplyAction="http://tempuri.org/IBlogWcfService/CreateAuthor1Response")]
-        System.Threading.Tasks.Task CreateAuthor1Async(Models.Models.Author authorComment);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/GetCommentsForBlog", ReplyAction="http://tempuri.org/IBlogWcfService/GetCommentsForBlogResponse")]
+        System.Threading.Tasks.Task<Models.Models.BlogComment[]> GetCommentsForBlogAsync(Model.Models.Blog blog);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/GetCommentForId", ReplyAction="http://tempuri.org/IBlogWcfService/GetCommentForIdResponse")]
+        Models.Models.BlogComment GetCommentForId(System.Guid id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/GetCommentForId", ReplyAction="http://tempuri.org/IBlogWcfService/GetCommentForIdResponse")]
+        System.Threading.Tasks.Task<Models.Models.BlogComment> GetCommentForIdAsync(System.Guid id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/NegativeVote", ReplyAction="http://tempuri.org/IBlogWcfService/NegativeVoteResponse")]
+        void NegativeVote(System.Guid CommentId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/NegativeVote", ReplyAction="http://tempuri.org/IBlogWcfService/NegativeVoteResponse")]
+        System.Threading.Tasks.Task NegativeVoteAsync(System.Guid CommentId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/PositiveVote", ReplyAction="http://tempuri.org/IBlogWcfService/PositiveVoteResponse")]
+        void PositiveVote(System.Guid CommentId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/PositiveVote", ReplyAction="http://tempuri.org/IBlogWcfService/PositiveVoteResponse")]
+        System.Threading.Tasks.Task PositiveVoteAsync(System.Guid CommentId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/IsNewAuthor", ReplyAction="http://tempuri.org/IBlogWcfService/IsNewAuthorResponse")]
+        bool IsNewAuthor(System.Guid id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/IsNewAuthor", ReplyAction="http://tempuri.org/IBlogWcfService/IsNewAuthorResponse")]
+        System.Threading.Tasks.Task<bool> IsNewAuthorAsync(System.Guid id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/Save", ReplyAction="http://tempuri.org/IBlogWcfService/SaveResponse")]
+        int Save(Model.Models.Blog blog);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/Save", ReplyAction="http://tempuri.org/IBlogWcfService/SaveResponse")]
+        System.Threading.Tasks.Task<int> SaveAsync(Model.Models.Blog blog);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/GetBlogByIdd", ReplyAction="http://tempuri.org/IBlogWcfService/GetBlogByIddResponse")]
+        Model.Models.Blog GetBlogByIdd(System.Guid id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/GetBlogByIdd", ReplyAction="http://tempuri.org/IBlogWcfService/GetBlogByIddResponse")]
+        System.Threading.Tasks.Task<Model.Models.Blog> GetBlogByIddAsync(System.Guid id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/GetAllBlogsOfAuthor", ReplyAction="http://tempuri.org/IBlogWcfService/GetAllBlogsOfAuthorResponse")]
+        Model.Models.Blog[] GetAllBlogsOfAuthor(System.Guid authorId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/GetAllBlogsOfAuthor", ReplyAction="http://tempuri.org/IBlogWcfService/GetAllBlogsOfAuthorResponse")]
+        System.Threading.Tasks.Task<Model.Models.Blog[]> GetAllBlogsOfAuthorAsync(System.Guid authorId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -138,12 +180,68 @@ namespace StackOverflow.WcfService {
             return base.Channel.SaveCommentAsync(blogComment);
         }
         
-        public void CreateAuthor1(Models.Models.Author authorComment) {
-            base.Channel.CreateAuthor1(authorComment);
+        public Models.Models.BlogComment[] GetCommentsForBlog(Model.Models.Blog blog) {
+            return base.Channel.GetCommentsForBlog(blog);
         }
         
-        public System.Threading.Tasks.Task CreateAuthor1Async(Models.Models.Author authorComment) {
-            return base.Channel.CreateAuthor1Async(authorComment);
+        public System.Threading.Tasks.Task<Models.Models.BlogComment[]> GetCommentsForBlogAsync(Model.Models.Blog blog) {
+            return base.Channel.GetCommentsForBlogAsync(blog);
+        }
+        
+        public Models.Models.BlogComment GetCommentForId(System.Guid id) {
+            return base.Channel.GetCommentForId(id);
+        }
+        
+        public System.Threading.Tasks.Task<Models.Models.BlogComment> GetCommentForIdAsync(System.Guid id) {
+            return base.Channel.GetCommentForIdAsync(id);
+        }
+        
+        public void NegativeVote(System.Guid CommentId) {
+            base.Channel.NegativeVote(CommentId);
+        }
+        
+        public System.Threading.Tasks.Task NegativeVoteAsync(System.Guid CommentId) {
+            return base.Channel.NegativeVoteAsync(CommentId);
+        }
+        
+        public void PositiveVote(System.Guid CommentId) {
+            base.Channel.PositiveVote(CommentId);
+        }
+        
+        public System.Threading.Tasks.Task PositiveVoteAsync(System.Guid CommentId) {
+            return base.Channel.PositiveVoteAsync(CommentId);
+        }
+        
+        public bool IsNewAuthor(System.Guid id) {
+            return base.Channel.IsNewAuthor(id);
+        }
+        
+        public System.Threading.Tasks.Task<bool> IsNewAuthorAsync(System.Guid id) {
+            return base.Channel.IsNewAuthorAsync(id);
+        }
+        
+        public int Save(Model.Models.Blog blog) {
+            return base.Channel.Save(blog);
+        }
+        
+        public System.Threading.Tasks.Task<int> SaveAsync(Model.Models.Blog blog) {
+            return base.Channel.SaveAsync(blog);
+        }
+        
+        public Model.Models.Blog GetBlogByIdd(System.Guid id) {
+            return base.Channel.GetBlogByIdd(id);
+        }
+        
+        public System.Threading.Tasks.Task<Model.Models.Blog> GetBlogByIddAsync(System.Guid id) {
+            return base.Channel.GetBlogByIddAsync(id);
+        }
+        
+        public Model.Models.Blog[] GetAllBlogsOfAuthor(System.Guid authorId) {
+            return base.Channel.GetAllBlogsOfAuthor(authorId);
+        }
+        
+        public System.Threading.Tasks.Task<Model.Models.Blog[]> GetAllBlogsOfAuthorAsync(System.Guid authorId) {
+            return base.Channel.GetAllBlogsOfAuthorAsync(authorId);
         }
     }
     
@@ -156,6 +254,42 @@ namespace StackOverflow.WcfService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorWcfService/CreateAuthor", ReplyAction="http://tempuri.org/IAuthorWcfService/CreateAuthorResponse")]
         System.Threading.Tasks.Task CreateAuthorAsync(Models.Models.Author authorComment);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorWcfService/GetById", ReplyAction="http://tempuri.org/IAuthorWcfService/GetByIdResponse")]
+        Models.Models.Author GetById(System.Guid userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorWcfService/GetById", ReplyAction="http://tempuri.org/IAuthorWcfService/GetByIdResponse")]
+        System.Threading.Tasks.Task<Models.Models.Author> GetByIdAsync(System.Guid userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorWcfService/InsertPositiveVote", ReplyAction="http://tempuri.org/IAuthorWcfService/InsertPositiveVoteResponse")]
+        void InsertPositiveVote(Models.Models.BlogComment commentar, System.Guid userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorWcfService/InsertPositiveVote", ReplyAction="http://tempuri.org/IAuthorWcfService/InsertPositiveVoteResponse")]
+        System.Threading.Tasks.Task InsertPositiveVoteAsync(Models.Models.BlogComment commentar, System.Guid userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorWcfService/InsertNegativeVote", ReplyAction="http://tempuri.org/IAuthorWcfService/InsertNegativeVoteResponse")]
+        void InsertNegativeVote(Models.Models.BlogComment commentar, System.Guid userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorWcfService/InsertNegativeVote", ReplyAction="http://tempuri.org/IAuthorWcfService/InsertNegativeVoteResponse")]
+        System.Threading.Tasks.Task InsertNegativeVoteAsync(Models.Models.BlogComment commentar, System.Guid userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorWcfService/IsNewPositiveVote", ReplyAction="http://tempuri.org/IAuthorWcfService/IsNewPositiveVoteResponse")]
+        bool IsNewPositiveVote(System.Guid idBlogCommentar, System.Guid iDVoteAuthor);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorWcfService/IsNewPositiveVote", ReplyAction="http://tempuri.org/IAuthorWcfService/IsNewPositiveVoteResponse")]
+        System.Threading.Tasks.Task<bool> IsNewPositiveVoteAsync(System.Guid idBlogCommentar, System.Guid iDVoteAuthor);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorWcfService/IsNewNegativeVote", ReplyAction="http://tempuri.org/IAuthorWcfService/IsNewNegativeVoteResponse")]
+        bool IsNewNegativeVote(System.Guid idBlogCommentar, System.Guid iDVoteAuthor);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorWcfService/IsNewNegativeVote", ReplyAction="http://tempuri.org/IAuthorWcfService/IsNewNegativeVoteResponse")]
+        System.Threading.Tasks.Task<bool> IsNewNegativeVoteAsync(System.Guid idBlogCommentar, System.Guid iDVoteAuthor);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorWcfService/GetAllAuthors", ReplyAction="http://tempuri.org/IAuthorWcfService/GetAllAuthorsResponse")]
+        Models.Models.Author[] GetAllAuthors();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorWcfService/GetAllAuthors", ReplyAction="http://tempuri.org/IAuthorWcfService/GetAllAuthorsResponse")]
+        System.Threading.Tasks.Task<Models.Models.Author[]> GetAllAuthorsAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -191,6 +325,54 @@ namespace StackOverflow.WcfService {
         
         public System.Threading.Tasks.Task CreateAuthorAsync(Models.Models.Author authorComment) {
             return base.Channel.CreateAuthorAsync(authorComment);
+        }
+        
+        public Models.Models.Author GetById(System.Guid userId) {
+            return base.Channel.GetById(userId);
+        }
+        
+        public System.Threading.Tasks.Task<Models.Models.Author> GetByIdAsync(System.Guid userId) {
+            return base.Channel.GetByIdAsync(userId);
+        }
+        
+        public void InsertPositiveVote(Models.Models.BlogComment commentar, System.Guid userId) {
+            base.Channel.InsertPositiveVote(commentar, userId);
+        }
+        
+        public System.Threading.Tasks.Task InsertPositiveVoteAsync(Models.Models.BlogComment commentar, System.Guid userId) {
+            return base.Channel.InsertPositiveVoteAsync(commentar, userId);
+        }
+        
+        public void InsertNegativeVote(Models.Models.BlogComment commentar, System.Guid userId) {
+            base.Channel.InsertNegativeVote(commentar, userId);
+        }
+        
+        public System.Threading.Tasks.Task InsertNegativeVoteAsync(Models.Models.BlogComment commentar, System.Guid userId) {
+            return base.Channel.InsertNegativeVoteAsync(commentar, userId);
+        }
+        
+        public bool IsNewPositiveVote(System.Guid idBlogCommentar, System.Guid iDVoteAuthor) {
+            return base.Channel.IsNewPositiveVote(idBlogCommentar, iDVoteAuthor);
+        }
+        
+        public System.Threading.Tasks.Task<bool> IsNewPositiveVoteAsync(System.Guid idBlogCommentar, System.Guid iDVoteAuthor) {
+            return base.Channel.IsNewPositiveVoteAsync(idBlogCommentar, iDVoteAuthor);
+        }
+        
+        public bool IsNewNegativeVote(System.Guid idBlogCommentar, System.Guid iDVoteAuthor) {
+            return base.Channel.IsNewNegativeVote(idBlogCommentar, iDVoteAuthor);
+        }
+        
+        public System.Threading.Tasks.Task<bool> IsNewNegativeVoteAsync(System.Guid idBlogCommentar, System.Guid iDVoteAuthor) {
+            return base.Channel.IsNewNegativeVoteAsync(idBlogCommentar, iDVoteAuthor);
+        }
+        
+        public Models.Models.Author[] GetAllAuthors() {
+            return base.Channel.GetAllAuthors();
+        }
+        
+        public System.Threading.Tasks.Task<Models.Models.Author[]> GetAllAuthorsAsync() {
+            return base.Channel.GetAllAuthorsAsync();
         }
     }
 }

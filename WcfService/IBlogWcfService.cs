@@ -13,8 +13,7 @@ namespace WcfService
     
     [ServiceContract]
     public interface IBlogWcfService
-    {
-        
+    {        
         [OperationContract]
         List<Blog> GetAllBlogs();
 
@@ -25,8 +24,28 @@ namespace WcfService
         void SaveComment(BlogComment blogComment);
 
         [OperationContract]
-        List<BlogComment> getCommentsForBlog(Blog blog);
+        List<BlogComment> GetCommentsForBlog(Blog blog);
 
-       
+        [OperationContract]
+        BlogComment GetCommentForId(Guid id);
+
+        [OperationContract]
+        void NegativeVote(Guid CommentId);
+
+        [OperationContract]
+        void PositiveVote(Guid CommentId);
+
+        [OperationContract]
+        bool IsNewAuthor(Guid id);
+
+        [OperationContract]
+        int Save(Blog blog);
+
+        [OperationContract]
+        Blog GetBlogByIdd(Guid id);
+
+        [OperationContract]
+        List<Blog> GetAllBlogsOfAuthor(Guid authorId);      
+
     }
 }
