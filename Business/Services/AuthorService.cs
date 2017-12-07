@@ -32,6 +32,7 @@ namespace Business.Services
 
         public Author GetById(Guid id)
         {   
+            var z = db.Authors.FirstOrDefault(x => x.Id == id); 
             return db.Authors.FirstOrDefault(x=>x.Id == id);
         }
 

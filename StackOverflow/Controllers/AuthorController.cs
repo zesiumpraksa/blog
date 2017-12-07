@@ -52,6 +52,7 @@ namespace StackOverflow.Controllers
 
         public ActionResult Details(Guid id)
         {
+            var z = wcfAuthorService.GetById(id);
             return View(wcfAuthorService.GetById(id));
         }
 

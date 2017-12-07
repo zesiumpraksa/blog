@@ -21,6 +21,7 @@ namespace WcfService
 
         public Author GetById(Guid userId)
         {
+            var z = authorService.GetById(userId);
             return authorService.GetById(userId);
         }
 
