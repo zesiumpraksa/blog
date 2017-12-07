@@ -3,20 +3,19 @@
 <div class="replayShift">
         <span> @Html.DisplayFor(model => model.Commentar)</span>
 
-        @{var idReplayComment = Model.Id; }
+        @{var BlogCommId = Model.Id; }
 
-        <div id=@idReplayComment class="collapse row">
-            @using (Html.BeginForm("CreateReplayComment1", "Blog", FormMethod.Post))
+        <div id=@BlogCommId class="collapse row">
+            @using (Html.BeginForm("CreateReplayComment", "Blog", FormMethod.Post))
             {                
                 <div class="col-6">
                     @Html.TextArea("ReplyComment", null, new { @class = "form-control" })
-                    @Html.TextAreaFor(input => idReplayComment, new { style = "display:none;" })
+                    @Html.TextAreaFor(input => BlogCommId, new { style = "display:none;" })
                 </div>
                 <div class="col-6">
                     @Html.TextAreaFor(blog => blog.Id, new { style = "display:none;" })
                 </div>
-                
-                
+
                 <input type="submit" value="Enter comment" />
             }
         </div>

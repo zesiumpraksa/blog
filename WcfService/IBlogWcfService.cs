@@ -13,9 +13,9 @@ namespace WcfService
     
     [ServiceContract]
     public interface IBlogWcfService
-    {        
+    {
         [OperationContract]
-        List<Blog> GetAllBlogs();
+        string GetAllBlogs();
 
         [OperationContract]
         string GetBlogById(Guid id);
@@ -27,7 +27,7 @@ namespace WcfService
         List<BlogComment> GetCommentsForBlog(Blog blog);
 
         [OperationContract]
-        BlogComment GetCommentForId(Guid id);
+        string GetCommentForId(Guid id);
 
         [OperationContract]
         void NegativeVote(Guid CommentId);

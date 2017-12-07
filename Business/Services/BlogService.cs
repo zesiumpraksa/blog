@@ -22,12 +22,12 @@ namespace Business.Services
 
         public List<Blog> GetAllBlogs()
         {
-            var blogs = db.Blogs
-                 .Include(x => x.Author)
-                 .OrderBy(x => x.Titile)
-                 .ToList();
-            return blogs;
-            //return db.Blogs.OrderBy(x => x.Titile).ToList();
+            //var blogs = db.Blogs
+            //     .Include(x => x.Author)
+            //     .OrderBy(x => x.Titile)
+            //     .ToList();
+            //return blogs;
+            return db.Blogs.OrderBy(x => x.Titile).ToList();
         }
 
         public Blog GetById(Guid id)

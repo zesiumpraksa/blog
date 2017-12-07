@@ -20,6 +20,6 @@ namespace Models.Models
         [DataMember]
         public Guid AuthorId { get; set; }
         [DataMember]
-        public  Author Author { get; set; }
+        public virtual Author Author { get; set; }
     }
 }

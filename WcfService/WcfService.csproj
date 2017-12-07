@@ -68,6 +68,7 @@
     <Compile Include="IBlogWcfService.cs" />
     <Compile Include="IWcfService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestModel.cs" />
     <Compile Include="WcfBlog.cs" />
     <Compile Include="WcfAuthor.cs" />
     <Compile Include="WcfService.cs" />

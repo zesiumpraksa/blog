@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:8800/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Model.Models" />
   <xs:import schemaLocation="http://localhost:8800/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-  <xs:import schemaLocation="http://localhost:8800/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Models.Models" />
+  <xs:import schemaLocation="http://localhost:8800/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Models.Models" />
+  <xs:import schemaLocation="http://localhost:8800/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Model.Models" />
   <xs:element name="DoWork">
     <xs:complexType>
       <xs:sequence />
@@ -21,14 +21,14 @@
   <xs:element name="GetAllBlogsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Model.Models" minOccurs="0" name="GetAllBlogsResult" nillable="true" type="q1:ArrayOfBlog" />
+        <xs:element minOccurs="0" name="GetAllBlogsResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetBlogById">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q2:guid" />
+        <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q1:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -42,7 +42,7 @@
   <xs:element name="SaveComment">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Models.Models" minOccurs="0" name="blogComment" nillable="true" type="q3:BlogComment" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Models.Models" minOccurs="0" name="blogComment" nillable="true" type="q2:BlogComment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -54,35 +54,35 @@
   <xs:element name="GetCommentsForBlog">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Model.Models" minOccurs="0" name="blog" nillable="true" type="q4:Blog" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Model.Models" minOccurs="0" name="blog" nillable="true" type="q3:Blog" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetCommentsForBlogResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Models.Models" minOccurs="0" name="GetCommentsForBlogResult" nillable="true" type="q5:ArrayOfBlogComment" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Models.Models" minOccurs="0" name="GetCommentsForBlogResult" nillable="true" type="q4:ArrayOfBlogComment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetCommentForId">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q6:guid" />
+        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q5:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetCommentForIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Models.Models" minOccurs="0" name="GetCommentForIdResult" nillable="true" type="q7:BlogComment" />
+        <xs:element minOccurs="0" name="GetCommentForIdResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="NegativeVote">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="CommentId" type="q8:guid" />
+        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="CommentId" type="q6:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -94,7 +94,7 @@
   <xs:element name="PositiveVote">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="CommentId" type="q9:guid" />
+        <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="CommentId" type="q7:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -106,7 +106,7 @@
   <xs:element name="IsNewAuthor">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q10:guid" />
+        <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q8:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -120,7 +120,7 @@
   <xs:element name="Save">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Model.Models" minOccurs="0" name="blog" nillable="true" type="q11:Blog" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Model.Models" minOccurs="0" name="blog" nillable="true" type="q9:Blog" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -134,35 +134,35 @@
   <xs:element name="GetBlogByIdd">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q12:guid" />
+        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q10:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetBlogByIddResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Model.Models" minOccurs="0" name="GetBlogByIddResult" nillable="true" type="q13:Blog" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Model.Models" minOccurs="0" name="GetBlogByIddResult" nillable="true" type="q11:Blog" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetAllBlogsOfAuthor">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="authorId" type="q14:guid" />
+        <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="authorId" type="q12:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetAllBlogsOfAuthorResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Model.Models" minOccurs="0" name="GetAllBlogsOfAuthorResult" nillable="true" type="q15:ArrayOfBlog" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Model.Models" minOccurs="0" name="GetAllBlogsOfAuthorResult" nillable="true" type="q13:ArrayOfBlog" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateAuthor">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Models.Models" minOccurs="0" name="authorComment" nillable="true" type="q16:Author" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Models.Models" minOccurs="0" name="authorComment" nillable="true" type="q14:Author" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -174,22 +174,22 @@
   <xs:element name="GetById">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="userId" type="q17:guid" />
+        <xs:element xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="userId" type="q15:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Models.Models" minOccurs="0" name="GetByIdResult" nillable="true" type="q18:Author" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Models.Models" minOccurs="0" name="GetByIdResult" nillable="true" type="q16:Author" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="InsertPositiveVote">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Models.Models" minOccurs="0" name="commentar" nillable="true" type="q19:BlogComment" />
-        <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="userId" type="q20:guid" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Models.Models" minOccurs="0" name="commentar" nillable="true" type="q17:BlogComment" />
+        <xs:element xmlns:q18="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="userId" type="q18:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -201,8 +201,8 @@
   <xs:element name="InsertNegativeVote">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/Models.Models" minOccurs="0" name="commentar" nillable="true" type="q21:BlogComment" />
-        <xs:element xmlns:q22="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="userId" type="q22:guid" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Models.Models" minOccurs="0" name="commentar" nillable="true" type="q19:BlogComment" />
+        <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="userId" type="q20:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -214,8 +214,8 @@
   <xs:element name="IsNewPositiveVote">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="idBlogCommentar" type="q23:guid" />
-        <xs:element xmlns:q24="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="iDVoteAuthor" type="q24:guid" />
+        <xs:element xmlns:q21="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="idBlogCommentar" type="q21:guid" />
+        <xs:element xmlns:q22="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="iDVoteAuthor" type="q22:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -229,8 +229,8 @@
   <xs:element name="IsNewNegativeVote">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q25="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="idBlogCommentar" type="q25:guid" />
-        <xs:element xmlns:q26="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="iDVoteAuthor" type="q26:guid" />
+        <xs:element xmlns:q23="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="idBlogCommentar" type="q23:guid" />
+        <xs:element xmlns:q24="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="iDVoteAuthor" type="q24:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -249,7 +249,7 @@
   <xs:element name="GetAllAuthorsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/Models.Models" minOccurs="0" name="GetAllAuthorsResult" nillable="true" type="q27:ArrayOfAuthor" />
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/Models.Models" minOccurs="0" name="GetAllAuthorsResult" nillable="true" type="q25:ArrayOfAuthor" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

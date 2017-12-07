@@ -28,7 +28,7 @@ namespace Model.Models
         public Guid AuthorId { get; set; }
 
         [DataMember]
-        public  Author Author { get; set; }
+        public virtual Author Author { get; set; }
 
         [DataMember]
         public  List<BlogComment> BlogComments { get; set; }

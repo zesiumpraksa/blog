@@ -3,17 +3,16 @@ using Models.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace WcfService
 {
     public partial class WcfService : IBlogWcfService
     {
-        public List<Blog> GetAllBlogs()
+        public string GetAllBlogs()
         {
-            return (blogService.GetAllBlogs());
+            var blogs = blogService.GetAllBlogs();
+            return JsonConvert.SerializeObject(blogs, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
         }
 
         public Blog GetBlogByIdd(Guid id)
@@ -39,9 +38,12 @@ namespace WcfService
             return blogService.getCommentsForBlog(blog);
         }
 
-        public BlogComment GetCommentForId(Guid id)
+        public string GetCommentForId(Guid id)
         {
-            return blogService.getCommentForId(id);
+            BlogComment comment = blogService.getCommentForId(id);
+            string commentString = JsonConvert.SerializeObject(comment, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+
+            return commentString;
         }
 
         public void NegativeVote(Guid CommentId)

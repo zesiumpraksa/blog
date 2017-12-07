@@ -63,10 +63,10 @@ namespace StackOverflow.WcfService {
     public interface IBlogWcfService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/GetAllBlogs", ReplyAction="http://tempuri.org/IBlogWcfService/GetAllBlogsResponse")]
-        Model.Models.Blog[] GetAllBlogs();
+        string GetAllBlogs();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/GetAllBlogs", ReplyAction="http://tempuri.org/IBlogWcfService/GetAllBlogsResponse")]
-        System.Threading.Tasks.Task<Model.Models.Blog[]> GetAllBlogsAsync();
+        System.Threading.Tasks.Task<string> GetAllBlogsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/GetBlogById", ReplyAction="http://tempuri.org/IBlogWcfService/GetBlogByIdResponse")]
         string GetBlogById(System.Guid id);
@@ -87,10 +87,10 @@ namespace StackOverflow.WcfService {
         System.Threading.Tasks.Task<Models.Models.BlogComment[]> GetCommentsForBlogAsync(Model.Models.Blog blog);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/GetCommentForId", ReplyAction="http://tempuri.org/IBlogWcfService/GetCommentForIdResponse")]
-        Models.Models.BlogComment GetCommentForId(System.Guid id);
+        string GetCommentForId(System.Guid id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/GetCommentForId", ReplyAction="http://tempuri.org/IBlogWcfService/GetCommentForIdResponse")]
-        System.Threading.Tasks.Task<Models.Models.BlogComment> GetCommentForIdAsync(System.Guid id);
+        System.Threading.Tasks.Task<string> GetCommentForIdAsync(System.Guid id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/NegativeVote", ReplyAction="http://tempuri.org/IBlogWcfService/NegativeVoteResponse")]
         void NegativeVote(System.Guid CommentId);
@@ -156,11 +156,11 @@ namespace StackOverflow.WcfService {
                 base(binding, remoteAddress) {
         }
         
-        public Model.Models.Blog[] GetAllBlogs() {
+        public string GetAllBlogs() {
             return base.Channel.GetAllBlogs();
         }
         
-        public System.Threading.Tasks.Task<Model.Models.Blog[]> GetAllBlogsAsync() {
+        public System.Threading.Tasks.Task<string> GetAllBlogsAsync() {
             return base.Channel.GetAllBlogsAsync();
         }
         
@@ -188,11 +188,11 @@ namespace StackOverflow.WcfService {
             return base.Channel.GetCommentsForBlogAsync(blog);
         }
         
-        public Models.Models.BlogComment GetCommentForId(System.Guid id) {
+        public string GetCommentForId(System.Guid id) {
             return base.Channel.GetCommentForId(id);
         }
         
-        public System.Threading.Tasks.Task<Models.Models.BlogComment> GetCommentForIdAsync(System.Guid id) {
+        public System.Threading.Tasks.Task<string> GetCommentForIdAsync(System.Guid id) {
             return base.Channel.GetCommentForIdAsync(id);
         }
         
