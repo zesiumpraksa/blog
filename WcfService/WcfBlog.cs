@@ -66,9 +66,11 @@ namespace WcfService
             return blogService.Save(blog);
         }
 
-        public List<Blog> GetAllBlogsOfAuthor(Guid authorId)
+        public string GetAllBlogsOfAuthor(Guid authorId)
         {
-            return blogService.GetAllBlogsOfAuthor(authorId);
+            List<Blog>blogsOfAuthor = blogService.GetAllBlogsOfAuthor(authorId);
+            string blogsOfAuthorStr = JsonConvert.SerializeObject(blogsOfAuthor, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+            return blogsOfAuthorStr;
         }
     }
 }

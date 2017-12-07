@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Model.Models;
 using Models.Models;
+using Newtonsoft.Json;
 using StackOverflow.App_Start;
 using System;
 using System.Collections.Generic;
@@ -41,7 +42,11 @@ namespace StackOverflow.Controllers
             ViewBag.name = User.Identity.Name;
             Guid userId = new Guid(User.Identity.GetUserId());
             
-            return View(wcfBlogservice.GetAllBlogsOfAuthor(userId));
+            string blogsString = wcfBlogservice.GetAllBlogsOfAuthor(userId);
+
+            List<Blog> blogs = JsonConvert.DeserializeObject<List<Blog>>(blogsString);
+
+            return View(blogs);
             
         }
 

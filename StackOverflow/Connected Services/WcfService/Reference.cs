@@ -123,10 +123,10 @@ namespace StackOverflow.WcfService {
         System.Threading.Tasks.Task<Model.Models.Blog> GetBlogByIddAsync(System.Guid id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/GetAllBlogsOfAuthor", ReplyAction="http://tempuri.org/IBlogWcfService/GetAllBlogsOfAuthorResponse")]
-        Model.Models.Blog[] GetAllBlogsOfAuthor(System.Guid authorId);
+        string GetAllBlogsOfAuthor(System.Guid authorId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/GetAllBlogsOfAuthor", ReplyAction="http://tempuri.org/IBlogWcfService/GetAllBlogsOfAuthorResponse")]
-        System.Threading.Tasks.Task<Model.Models.Blog[]> GetAllBlogsOfAuthorAsync(System.Guid authorId);
+        System.Threading.Tasks.Task<string> GetAllBlogsOfAuthorAsync(System.Guid authorId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -236,11 +236,11 @@ namespace StackOverflow.WcfService {
             return base.Channel.GetBlogByIddAsync(id);
         }
         
-        public Model.Models.Blog[] GetAllBlogsOfAuthor(System.Guid authorId) {
+        public string GetAllBlogsOfAuthor(System.Guid authorId) {
             return base.Channel.GetAllBlogsOfAuthor(authorId);
         }
         
-        public System.Threading.Tasks.Task<Model.Models.Blog[]> GetAllBlogsOfAuthorAsync(System.Guid authorId) {
+        public System.Threading.Tasks.Task<string> GetAllBlogsOfAuthorAsync(System.Guid authorId) {
             return base.Channel.GetAllBlogsOfAuthorAsync(authorId);
         }
     }

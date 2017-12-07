@@ -45,7 +45,7 @@ namespace WcfService
         Blog GetBlogByIdd(Guid id);
 
         [OperationContract]
-        List<Blog> GetAllBlogsOfAuthor(Guid authorId);      
+        string GetAllBlogsOfAuthor(Guid authorId);      
 
     }
 }
