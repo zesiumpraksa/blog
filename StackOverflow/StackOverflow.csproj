@@ -255,6 +255,7 @@
     <Content Include="Properties\DataSources\Models.Models.BlogComment.datasource" />
     <Content Include="Properties\DataSources\Models.Models.Author.datasource" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Index.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -331,6 +332,7 @@
     <Content Include="Views\Blog\_ReplayButton.cshtml" />
     <Content Include="Views\Blog\_RaitingReplay.cshtml" />
     <Content Include="Views\Blog\_ReplayDate.cshtml" />
+    <Content Include="Views\Main\UserIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

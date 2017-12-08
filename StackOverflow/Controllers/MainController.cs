@@ -22,15 +22,20 @@ namespace StackOverflow.Controllers
             if (!userName.Equals(""))
             {
                 ViewBag.user = userName;
+                return View("UserIndex");
             }
             else
             {
-                ViewBag.msg = "Not logged in";
+                ViewBag.msg = "Not logged in";                
             }
             return View();
-        }
+        }      
         
-
+        public ActionResult UserIndex()
+        {
+            return View();
+        }
+      
         [HttpPost]
         public ActionResult Index(User user)
         {            
@@ -51,7 +56,7 @@ namespace StackOverflow.Controllers
                 return View("Index");
             }
 
-            Response.Cookies.Add(new HttpCookie("test", "test"));
+            //Response.Cookies.Add(new HttpCookie("test", "test"));
                     
             return RedirectToAction("Dashboard", "Author");           
         }
