@@ -12,10 +12,11 @@
             <div>
                 @Html.EditorFor(model => model.UserName)
             </div>
-                <div>
-                    @Html.EditorFor(model => model.Password)
-                </div>
+            <div>
+                @Html.EditorFor(model => model.Password)
+            </div>
         }
+
         @using (Html.BeginForm("LogOut", "Main"))
         {
             <div class="form-group">

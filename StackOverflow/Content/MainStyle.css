@@ -1,0 +1,20 @@
+﻿.tableBackground {
+    background-color: #bcbcbc;
+}
+
+.tableBackground tr:first-child {
+    background-color: darkgrey;
+}
+
+.tableBackground tr td:last-child {
+     background-color: lightgrey;
+}
+
+.secondHeader {
+    padding-bottom:7%;
+}
+
+.secondHeader>h2{
+    color:white;
+    margin-top:1px;
+}

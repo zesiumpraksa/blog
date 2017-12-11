@@ -1,0 +1,9 @@
+﻿.registerMargin{
+    margin-bottom:31px;
+}
+
+.imageBox {
+    margin-top: 20px;
+    height: 450px;
+    background-image: url("../../Images/coder.jpg");
+}

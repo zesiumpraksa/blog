@@ -22,7 +22,9 @@ namespace StackOverflow.App_Start
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
                 "~/Content/IndexStyle.css",
-                "~/Content/Site.css"));
+                "~/Content/Site.css",
+                "~/Content/MainStyle.css"
+                ));
         }
     }
 }

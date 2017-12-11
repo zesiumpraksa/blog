@@ -28,7 +28,7 @@ namespace Business.Services
         public List<Author> getAllAuthors()
         {
             return db.Authors.ToList();
-        }
+        }      
 
         public Author GetById(Guid id)
         {   

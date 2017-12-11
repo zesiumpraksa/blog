@@ -37,6 +37,9 @@ namespace Models.Models
         [DisplayName("Repeat Password")]
         public string RepeatPassword { get; set; }
 
+        [Display(Name ="User photo")]
+        public byte[] ImageFile { get; set; }
+
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {

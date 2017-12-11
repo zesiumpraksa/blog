@@ -5,6 +5,7 @@ using Models.Models;
 using StackOverflow.App_Start;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -15,7 +16,7 @@ namespace StackOverflow.Controllers
     
     public class UserController : Controller
     {
-
+       
 
         public UserController() { }             
 
@@ -26,10 +27,21 @@ namespace StackOverflow.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Register(User user)
+        public async Task<ActionResult> Register(User user, HttpPostedFileBase image)
         {
+
+            
             if (ModelState.IsValid)
             {
+                byte[] imageData = null; 
+                using(var binary = new BinaryReader(image.InputStream))
+                {
+                    imageData = binary.ReadBytes(image.ContentLength);
+                }
+
+
+                user.ImageFile = imageData;
+
                 var manager = HttpContext.GetOwinContext().GetUserManager<SOUserManager>();
                 var userResault = await manager.CreateAsync(user, user.Password);
                 
@@ -42,6 +54,11 @@ namespace StackOverflow.Controllers
             }
             return View();
 
+        }
+
+        public ActionResult Show()
+        {
+            return()
         }
 
         private void AddErrors(IdentityResult result)
