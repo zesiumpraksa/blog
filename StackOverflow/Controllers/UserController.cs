@@ -1,4 +1,5 @@
 ﻿using Business.Interfaces;
+using DAL.DBContext;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Models.Models;
@@ -56,10 +57,31 @@ namespace StackOverflow.Controllers
 
         }
 
-        public ActionResult Show()
+        public FileContentResult ShowUser()
         {
-            return()
+            var userId = User.Identity.GetUserId();
+            var bdUsers = HttpContext.GetOwinContext().Get<SOContext>();
+            var user = bdUsers.Users.Where(x => x.Id == userId).FirstOrDefault();
+
+            if (user.ImageFile == null)
+            {
+                string fileName = HttpContext.Server.MapPath(@"~/Images/coder.jpg");
+
+                byte[] imageData = null;
+                FileInfo fileInfo = new FileInfo(fileName);
+                long imageLength = fileInfo.Length;
+
+                FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fs);
+                imageData = br.ReadBytes((int)imageLength);
+
+                return File(imageData, "image/png");
+            }
+
+            return new FileContentResult(user.ImageFile, "image/jpg");
+
         }
+
 
         private void AddErrors(IdentityResult result)
         {
