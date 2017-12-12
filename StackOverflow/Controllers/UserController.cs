@@ -2,7 +2,9 @@
 using DAL.DBContext;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Model.Models;
 using Models.Models;
+using Newtonsoft.Json;
 using StackOverflow.App_Start;
 using System;
 using System.Collections.Generic;
@@ -17,7 +19,7 @@ namespace StackOverflow.Controllers
     
     public class UserController : Controller
     {
-       
+        WcfService.BlogWcfServiceClient wcfBlogservice = new WcfService.BlogWcfServiceClient();
 
         public UserController() { }             
 
@@ -79,6 +81,42 @@ namespace StackOverflow.Controllers
             }
 
             return new FileContentResult(user.ImageFile, "image/jpg");
+
+        }
+
+        public FileContentResult ShowAuthorDetails(Guid blogId)
+        {
+            string details = wcfBlogservice.GetBlogById(blogId);
+            var detailsBlog = JsonConvert.DeserializeObject<Blog>(details);
+
+            Guid authorOfBlogId = detailsBlog.AuthorId;
+            //var authorOfBlog = detailsBlog.Author;
+            //Author authorOfBlog = wcfAuthorService.GetById(authorOfBlogId);
+
+            var context = new SOContext();
+            List<User> listOfUser = context.Users.ToList();
+
+            User us = listOfUser.Find(x => x.Id == blogId.ToString());
+
+            User userAuthor = listOfUser.FirstOrDefault(x => x.Id == authorOfBlogId.ToString());
+
+
+            if (userAuthor.ImageFile == null)
+            {
+                string fileName = HttpContext.Server.MapPath(@"~/Images/coder.jpg");
+
+                byte[] imageData = null;
+                FileInfo fileInfo = new FileInfo(fileName);
+                long imageLength = fileInfo.Length;
+
+                FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fs);
+                imageData = br.ReadBytes((int)imageLength);
+
+                return File(imageData, "image/png");
+            }
+
+            return new FileContentResult(userAuthor.ImageFile, "image/jpg");
 
         }
 

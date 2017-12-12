@@ -10,41 +10,52 @@
 <div style="background-color:darkgray">
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Titile)
-        </dt>
-        <h2>
+                
+            
+            <img width="50" height="50" src="@Url.Action("ShowAuthorDetails", "User",new { blogId = Model.Id })"
             <dd>
-                @Html.DisplayFor(model => model.Titile)
+                @Html.DisplayFor(model => model.Author.Name)
             </dd>
-        </h2>
+            @*<img src="@Url.Action("ShowAuthorDetails", "User" ,new {id= })" height="50" width="50" />*@
+
+            @*<dt>
+                @Html.DisplayNameFor(model => model.Titile)
+            </dt>*@
+        <div style="margin-left:38px">
+            <div style="margin-top:-65px">
+                <h3>
+                    <dd>
+                        @Html.DisplayFor(model => model.Titile)
+                    </dd>
+                </h3>
+            </div>
+            @*<dt>
+                @Html.DisplayNameFor(model => model.Content)
+            </dt>*@
+
+            <h1>
+                <dd>
+                    @Html.DisplayFor(model => model.Content)
+                </dd>
+            </h1>
+        </div>
         
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-        <h1>
+
+            @*<dt>
+                @Html.DisplayNameFor(model => model.Author)
+            </dt>
+
+            
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Date)
+            </dt>
+
             <dd>
-                @Html.DisplayFor(model => model.Content)
-            </dd>
-        </h1>
+                @Html.DisplayFor(model => model.Date)
+            </dd>*@
 
-        @*<dt>
-            @Html.DisplayNameFor(model => model.Author)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Author.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Date)
-        </dd>*@
-
-    </dl>
+</dl>
 </div>
 
 <div class="detailsTablePosition">
