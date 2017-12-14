@@ -24,6 +24,7 @@
       <xs:element minOccurs="0" name="BlogComments" nillable="true" type="tns:ArrayOfBlogComment" />
       <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Model.Models" minOccurs="0" name="Blogs" nillable="true" type="q2:ArrayOfBlog" />
       <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="ImageFile" nillable="true" type="xs:base64Binary" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="NegativeVoters" nillable="true" type="tns:ArrayOfNegativeVoters" />
       <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />

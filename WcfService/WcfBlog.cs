@@ -72,5 +72,16 @@ namespace WcfService
             string blogsOfAuthorStr = JsonConvert.SerializeObject(blogsOfAuthor, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
             return blogsOfAuthorStr;
         }
+
+        public string GetAllComments()
+        {
+            List<BlogComment> comments = blogService.GetAllComments();
+            string commentsString = JsonConvert.SerializeObject(comments, Formatting.None,
+                new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+            return commentsString;
+        }
     }
 }

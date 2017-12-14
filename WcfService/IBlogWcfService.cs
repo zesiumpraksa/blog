@@ -45,7 +45,10 @@ namespace WcfService
         Blog GetBlogByIdd(Guid id);
 
         [OperationContract]
-        string GetAllBlogsOfAuthor(Guid authorId);      
+        string GetAllBlogsOfAuthor(Guid authorId);
+
+        [OperationContract]
+        string GetAllComments();
 
     }
 }

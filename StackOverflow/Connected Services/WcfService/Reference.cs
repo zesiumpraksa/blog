@@ -81,10 +81,10 @@ namespace StackOverflow.WcfService {
         System.Threading.Tasks.Task SaveCommentAsync(Models.Models.BlogComment blogComment);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/GetCommentsForBlog", ReplyAction="http://tempuri.org/IBlogWcfService/GetCommentsForBlogResponse")]
-        Models.Models.BlogComment[] GetCommentsForBlog(Model.Models.Blog blog);
+        System.Collections.Generic.List<Models.Models.BlogComment> GetCommentsForBlog(Model.Models.Blog blog);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/GetCommentsForBlog", ReplyAction="http://tempuri.org/IBlogWcfService/GetCommentsForBlogResponse")]
-        System.Threading.Tasks.Task<Models.Models.BlogComment[]> GetCommentsForBlogAsync(Model.Models.Blog blog);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<Models.Models.BlogComment>> GetCommentsForBlogAsync(Model.Models.Blog blog);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/GetCommentForId", ReplyAction="http://tempuri.org/IBlogWcfService/GetCommentForIdResponse")]
         string GetCommentForId(System.Guid id);
@@ -127,6 +127,12 @@ namespace StackOverflow.WcfService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/GetAllBlogsOfAuthor", ReplyAction="http://tempuri.org/IBlogWcfService/GetAllBlogsOfAuthorResponse")]
         System.Threading.Tasks.Task<string> GetAllBlogsOfAuthorAsync(System.Guid authorId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/GetAllComments", ReplyAction="http://tempuri.org/IBlogWcfService/GetAllCommentsResponse")]
+        string GetAllComments();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogWcfService/GetAllComments", ReplyAction="http://tempuri.org/IBlogWcfService/GetAllCommentsResponse")]
+        System.Threading.Tasks.Task<string> GetAllCommentsAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -180,11 +186,11 @@ namespace StackOverflow.WcfService {
             return base.Channel.SaveCommentAsync(blogComment);
         }
         
-        public Models.Models.BlogComment[] GetCommentsForBlog(Model.Models.Blog blog) {
+        public System.Collections.Generic.List<Models.Models.BlogComment> GetCommentsForBlog(Model.Models.Blog blog) {
             return base.Channel.GetCommentsForBlog(blog);
         }
         
-        public System.Threading.Tasks.Task<Models.Models.BlogComment[]> GetCommentsForBlogAsync(Model.Models.Blog blog) {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<Models.Models.BlogComment>> GetCommentsForBlogAsync(Model.Models.Blog blog) {
             return base.Channel.GetCommentsForBlogAsync(blog);
         }
         
@@ -243,6 +249,14 @@ namespace StackOverflow.WcfService {
         public System.Threading.Tasks.Task<string> GetAllBlogsOfAuthorAsync(System.Guid authorId) {
             return base.Channel.GetAllBlogsOfAuthorAsync(authorId);
         }
+        
+        public string GetAllComments() {
+            return base.Channel.GetAllComments();
+        }
+        
+        public System.Threading.Tasks.Task<string> GetAllCommentsAsync() {
+            return base.Channel.GetAllCommentsAsync();
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -286,10 +300,10 @@ namespace StackOverflow.WcfService {
         System.Threading.Tasks.Task<bool> IsNewNegativeVoteAsync(System.Guid idBlogCommentar, System.Guid iDVoteAuthor);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorWcfService/GetAllAuthors", ReplyAction="http://tempuri.org/IAuthorWcfService/GetAllAuthorsResponse")]
-        Models.Models.Author[] GetAllAuthors();
+        System.Collections.Generic.List<Models.Models.Author> GetAllAuthors();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorWcfService/GetAllAuthors", ReplyAction="http://tempuri.org/IAuthorWcfService/GetAllAuthorsResponse")]
-        System.Threading.Tasks.Task<Models.Models.Author[]> GetAllAuthorsAsync();
+        System.Threading.Tasks.Task<System.Collections.Generic.List<Models.Models.Author>> GetAllAuthorsAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -367,11 +381,11 @@ namespace StackOverflow.WcfService {
             return base.Channel.IsNewNegativeVoteAsync(idBlogCommentar, iDVoteAuthor);
         }
         
-        public Models.Models.Author[] GetAllAuthors() {
+        public System.Collections.Generic.List<Models.Models.Author> GetAllAuthors() {
             return base.Channel.GetAllAuthors();
         }
         
-        public System.Threading.Tasks.Task<Models.Models.Author[]> GetAllAuthorsAsync() {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<Models.Models.Author>> GetAllAuthorsAsync() {
             return base.Channel.GetAllAuthorsAsync();
         }
     }

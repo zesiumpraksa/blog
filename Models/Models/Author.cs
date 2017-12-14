@@ -22,6 +22,9 @@ namespace Models.Models
         public string Password { get; set; }
 
         [DataMember]
+        public byte[] ImageFile { get; set; }
+
+        [DataMember]
         public List<Blog> Blogs { get; set; }
         [DataMember]
         public  List<BlogComment> BlogComments { get; set; }

@@ -80,6 +80,12 @@
   <wsdl:message name="IBlogWcfService_GetAllBlogsOfAuthor_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllBlogsOfAuthorResponse" />
   </wsdl:message>
+  <wsdl:message name="IBlogWcfService_GetAllComments_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllComments" />
+  </wsdl:message>
+  <wsdl:message name="IBlogWcfService_GetAllComments_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCommentsResponse" />
+  </wsdl:message>
   <wsdl:message name="IAuthorWcfService_CreateAuthor_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateAuthor" />
   </wsdl:message>
@@ -172,6 +178,10 @@
     <wsdl:operation name="GetAllBlogsOfAuthor">
       <wsdl:input wsaw:Action="http://tempuri.org/IBlogWcfService/GetAllBlogsOfAuthor" message="tns:IBlogWcfService_GetAllBlogsOfAuthor_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBlogWcfService/GetAllBlogsOfAuthorResponse" message="tns:IBlogWcfService_GetAllBlogsOfAuthor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllComments">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogWcfService/GetAllComments" message="tns:IBlogWcfService_GetAllComments_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogWcfService/GetAllCommentsResponse" message="tns:IBlogWcfService_GetAllComments_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IAuthorWcfService">
@@ -310,6 +320,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllBlogsOfAuthor">
       <soap:operation soapAction="http://tempuri.org/IBlogWcfService/GetAllBlogsOfAuthor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllComments">
+      <soap:operation soapAction="http://tempuri.org/IBlogWcfService/GetAllComments" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

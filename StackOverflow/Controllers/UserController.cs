@@ -10,18 +10,20 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
 namespace StackOverflow.Controllers
 {
-    
+
     public class UserController : Controller
     {
         WcfService.BlogWcfServiceClient wcfBlogservice = new WcfService.BlogWcfServiceClient();
+        WcfService.AuthorWcfServiceClient wcfAuthorService = new WcfService.AuthorWcfServiceClient();
 
-        public UserController() { }             
+        public UserController() { }
 
         [HttpGet]
         public ActionResult Register()
@@ -32,24 +34,40 @@ namespace StackOverflow.Controllers
         [HttpPost]
         public async Task<ActionResult> Register(User user, HttpPostedFileBase image)
         {
-
-            
             if (ModelState.IsValid)
             {
-                byte[] imageData = null; 
-                using(var binary = new BinaryReader(image.InputStream))
+                if (image != null)
                 {
-                    imageData = binary.ReadBytes(image.ContentLength);
+                    byte[] imageData = null;
+                    
+                    using (var binary = new BinaryReader(image.InputStream))
+                    {
+                        imageData = binary.ReadBytes(image.ContentLength);
+                    }
+                    user.ImageFile = imageData;
                 }
-
-
-                user.ImageFile = imageData;
+                Author author = new Author()
+                {
+                    Id = new Guid(user.Id),
+                    Name = user.FirstName,
+                    Password = user.Password,
+                    ImageFile = user.ImageFile
+                };
 
                 var manager = HttpContext.GetOwinContext().GetUserManager<SOUserManager>();
-                var userResault = await manager.CreateAsync(user, user.Password);
-                
+                var userResault = await manager.CreateAsync(user, user.Password);                
+
                 if (userResault.Succeeded)
                 {
+                    try
+                    {
+                        wcfAuthorService.CreateAuthor(author);
+                    }
+                    catch (Exception e)
+                    {
+                        var msg = e.Message;
+                    }
+
                     return RedirectToAction("Index", "Main");
                 }
 
@@ -62,10 +80,11 @@ namespace StackOverflow.Controllers
         public FileContentResult ShowUser()
         {
             var userId = User.Identity.GetUserId();
-            var bdUsers = HttpContext.GetOwinContext().Get<SOContext>();
-            var user = bdUsers.Users.Where(x => x.Id == userId).FirstOrDefault();
 
-            if (user.ImageFile == null)
+
+            Author author = wcfAuthorService.GetById(new Guid(userId));
+
+            if (author.ImageFile == null)
             {
                 string fileName = HttpContext.Server.MapPath(@"~/Images/coder.jpg");
 
@@ -80,7 +99,7 @@ namespace StackOverflow.Controllers
                 return File(imageData, "image/png");
             }
 
-            return new FileContentResult(user.ImageFile, "image/jpg");
+            return new FileContentResult(author.ImageFile, "image/jpg");
 
         }
 
@@ -90,18 +109,11 @@ namespace StackOverflow.Controllers
             var detailsBlog = JsonConvert.DeserializeObject<Blog>(details);
 
             Guid authorOfBlogId = detailsBlog.AuthorId;
-            //var authorOfBlog = detailsBlog.Author;
-            //Author authorOfBlog = wcfAuthorService.GetById(authorOfBlogId);
 
-            var context = new SOContext();
-            List<User> listOfUser = context.Users.ToList();
+            List<Author> allAuthors = wcfAuthorService.GetAllAuthors();
+            Author author = allAuthors.FirstOrDefault(x => x.Id == authorOfBlogId);
 
-            User us = listOfUser.Find(x => x.Id == blogId.ToString());
-
-            User userAuthor = listOfUser.FirstOrDefault(x => x.Id == authorOfBlogId.ToString());
-
-
-            if (userAuthor.ImageFile == null)
+            if (author.ImageFile == null)
             {
                 string fileName = HttpContext.Server.MapPath(@"~/Images/coder.jpg");
 
@@ -116,7 +128,7 @@ namespace StackOverflow.Controllers
                 return File(imageData, "image/png");
             }
 
-            return new FileContentResult(userAuthor.ImageFile, "image/jpg");
+            return new FileContentResult(author.ImageFile, "image/jpg");
 
         }
 
@@ -129,6 +141,6 @@ namespace StackOverflow.Controllers
             }
         }
 
-      
+
     }
 }

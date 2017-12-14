@@ -39,16 +39,37 @@ namespace StackOverflow.Controllers
         [Authorize]
         public ActionResult Dashboard()
         {
-            ViewBag.name = User.Identity.Name;
-            Guid userId = new Guid(User.Identity.GetUserId());
-            
-            string blogsString = wcfBlogservice.GetAllBlogsOfAuthor(userId);
 
+            int numOfReplay;
+            ViewBag.name = User.Identity.Name;
+
+            Guid userId = new Guid(User.Identity.GetUserId());            
+
+            string blogsString = wcfBlogservice.GetAllBlogsOfAuthor(userId);
             List<Blog> blogs = JsonConvert.DeserializeObject<List<Blog>>(blogsString);
 
+
+            string commentsString = wcfBlogservice.GetAllComments();
+            List<BlogComment> comments = JsonConvert.DeserializeObject<List<BlogComment>>(commentsString);
+            
+
+            numOfReplay = comments.Count(x => x.IdAuthor == userId);
+            ViewBag.numOfReplays = numOfReplay;
+            //List<BlogComment> comments = JsonConvert.DeserializeObject<List<BlogComment>>(allBlogsString);
             return View(blogs);
             
         }
+
+        //public int NumOfReplayCommments(List<BlogComment>comments, Guid userId)
+        //{
+        //    int num = 0;
+        //    foreach(BlogComment replay in comments)
+        //    {
+        //        num = replay.ReplayComment.Count(x => x.Id == userId);
+        //        BlogComment replau
+        //    }
+        //    return num;
+        //}
 
         public ActionResult Details(Guid id)
         {

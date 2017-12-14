@@ -9,9 +9,9 @@ namespace Business.Interfaces
     [ServiceContract]
     public interface IBlogService
     {        
-        List<Blog> GetAllBlogs();//
+        List<Blog> GetAllBlogs();
         Blog GetFirstId();        
-        Blog GetById(Guid id);//
+        Blog GetById(Guid id);
         int Save(Blog blog);
         bool IsNewAuthor(Guid id);
         List<Blog> GetAllBlogsOfAuthor(Guid id);

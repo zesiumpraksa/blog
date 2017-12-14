@@ -42,7 +42,7 @@ namespace Models.Models
         [DataMember]
         public Guid BlogId { get; set; }
         [DataMember]
-        public  Blog Blog { get; set; }
+        public virtual Blog Blog { get; set; }
 
         [DataMember]
         public Guid IdAuthor { get; set; }

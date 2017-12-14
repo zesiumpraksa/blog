@@ -4,18 +4,25 @@
     ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link type="text/css" href="~/Content/Author/author_dashboard.css" rel="stylesheet" />
+
 
 <div class="imgBackground secondHeader" >
+    <div>
+
+    </div>
     <h2 id="Dashboard">Dashboard of @ViewBag.name</h2>
-    <img src="@Url.Action("ShowUser", "User" )" height="100" width="100" /> 
+    <h2 class="information">Number of replays:@ViewBag.numOfReplays</h2>
+    <img src="@Url.Action("ShowUser", "User" )" class="img-thumbnail" height="150" width="150" /> 
+    
 </div>
-
-
 
 
 <div>
     @Html.ActionLink("Make a question", "CreateBlog", "Blog", new { area = "" }, new { @class = "navbar-brand" })
 </div>
+
+
 
 <br />
 

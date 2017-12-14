@@ -22,7 +22,7 @@ namespace Business.Services
         public void CreateAuthor(Author author)
         {
             db.Authors.Add(author);
-            db.SaveChanges();
+            var x = db.SaveChanges();
         }
 
         public List<Author> getAllAuthors()
