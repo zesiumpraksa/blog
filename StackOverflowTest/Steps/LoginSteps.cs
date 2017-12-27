@@ -64,7 +64,7 @@ namespace StackOverflowTest.Login
         {
             var html = ScenarioContext.Current["html"] as HtmlDocument;
             var warningMsg = html.GetElementbyId("warning").InnerText;
-            Assert.AreEqual(" Bad username or password  ", warningMsg);
+            Assert.AreEqual("Bad username or password", warningMsg.Trim());
         }
 
         //    //warning2 scenario
@@ -73,8 +73,8 @@ namespace StackOverflowTest.Login
         public void ThenUserIsOnIndexPageWithSecondWarningInformation()
         {
             var htmlObject = ScenarioContext.Current["html"] as HtmlDocument;
-            var warningMsg = htmlObject.GetElementbyId("warning").InnerText;
-            Assert.AreEqual("Set username or password   ", warningMsg);
+            var warningMsg = htmlObject.GetElementbyId("warning").InnerText.Trim();
+            Assert.AreEqual("Set username or password", warningMsg);
         }
 
         //    //LogOut
@@ -101,7 +101,7 @@ namespace StackOverflowTest.Login
             Assert.IsNotNull(htmlIndex.DocumentNode.SelectNodes("//input[@id='Password']"), "Password not found :(");
             Assert.IsNotNull(htmlIndex.DocumentNode.SelectNodes("//input[@type='submit']"), "submit button not found :(");
 
-            Assert.AreEqual("  Not logged in ", warningMsg);
+            Assert.AreEqual("Not logged in", warningMsg.Trim());
         }
     }
 }

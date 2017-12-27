@@ -71,7 +71,7 @@ namespace StackOverflowTest.Steps
             //var index = FeatureContext.Current["Index"] as HtmlDocument;
             //var Title = ScenarioContext.Current["Titile"] as string;
             //var Content = ScenarioContext.Current["Content"] as string;
-            Assert.IsNotNull(htmlNewBlog.DocumentNode.SelectNodes("//table[@class='table']"), "table not found :(");
+            Assert.IsNotNull(htmlNewBlog.DocumentNode.SelectNodes("//table[@class='table tableBackground']"), "table not found :(");
         }
 
     }

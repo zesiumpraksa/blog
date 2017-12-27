@@ -7,7 +7,7 @@ Scenario: Succesful registration
 	Then Client go on Register page
 	When Client enter valid values and press Create
 	| Email     | UserName | FirstName | LastName | Password | RepeatPassword |
-	| Proba@gmail | Proba     | Proba      | Proba     | Proba1    | Proba1          |
+	| Toni111@gmail | Toni111     | Toni111      | Toni111     | Toni111    | Toni111          |
 	Then Client is on Index page
 	
 

@@ -39,10 +39,10 @@ namespace DAL.Initializer
             blogs.Add(B1); blogs.Add(B2); blogs.Add(B3); blogs.Add(B4); blogs.Add(B5); blogs.Add(B6); blogs.Add(B7);
 
 
-            BlogComment BC1 = new BlogComment() { Id = Guid.NewGuid(), BlogId = B1.Id, Commentar = "aaaaa" , IdAuthor=A1.Id ,AuthorName=A1.Name, Date = DateTime.Now};
-            BlogComment BC2 = new BlogComment() { Id = Guid.NewGuid(), BlogId = B2.Id, Commentar = "aaaaa" , IdAuthor = A2.Id,AuthorName=A2.Name, Date = DateTime.Now };
-            BlogComment BC3 = new BlogComment() { Id = Guid.NewGuid(), BlogId = B3.Id, Commentar = "aaaaa" , IdAuthor = A3.Id , AuthorName=A3.Name, Date = DateTime.Now };
-            BlogComment BC4 = new BlogComment() { Id = Guid.NewGuid(), BlogId = B3.Id, Commentar = "aaaaa" , IdAuthor = A1.Id , AuthorName=A1.Name, Date = DateTime.Now };
+            BlogComment BC1 = new BlogComment() { Id = Guid.NewGuid(), BlogId = B1.Id, Commentar = "Commentar1" , IdAuthor=A1.Id ,AuthorName=A1.Name, Date = DateTime.Now};
+            BlogComment BC2 = new BlogComment() { Id = Guid.NewGuid(), BlogId = B2.Id, Commentar = "Commentar2", IdAuthor = A2.Id,AuthorName=A2.Name, Date = DateTime.Now };
+            BlogComment BC3 = new BlogComment() { Id = Guid.NewGuid(), BlogId = B3.Id, Commentar = "Commentar3", IdAuthor = A3.Id , AuthorName=A3.Name, Date = DateTime.Now };
+            BlogComment BC4 = new BlogComment() { Id = Guid.NewGuid(), BlogId = B3.Id, Commentar = "Commentar4", IdAuthor = A1.Id , AuthorName=A1.Name, Date = DateTime.Now };
 
             var commentars = new List<BlogComment>();
             commentars.Add(BC1);   commentars.Add(BC2);  commentars.Add(BC3);     commentars.Add(BC4);
